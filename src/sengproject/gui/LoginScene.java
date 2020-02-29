@@ -24,7 +24,7 @@ public class LoginScene {
 		Label login_title = new Label("Login");
 		login_title.setFont(new Font("Arial", 30));
 		VBox title = new VBox(login_title);
-		title.setAlignment(Pos.TOP_CENTER);
+		title.setAlignment(Pos.CENTER);
 		title.setPadding(new Insets(75, 50, 50, 50));
 		title.setSpacing(40);
 		

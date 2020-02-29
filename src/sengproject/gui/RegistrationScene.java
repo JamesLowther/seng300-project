@@ -25,7 +25,7 @@ public class RegistrationScene {
 		Label register_title = new Label("User Registration");
 		register_title.setFont(new Font("Arial", 30));
 		VBox title = new VBox(register_title);
-		title.setAlignment(Pos.TOP_CENTER);
+		title.setAlignment(Pos.CENTER);
 		title.setPadding(new Insets(75, 50, 50, 50));
 		title.setSpacing(40);
 		
