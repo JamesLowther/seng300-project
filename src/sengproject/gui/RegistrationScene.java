@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -45,8 +46,11 @@ public class RegistrationScene {
 		
 		// role section
 		Label role_label = new Label("User Role");
-		TextField role_tf = new TextField();
-		HBox role = new HBox(role_label, role_tf);
+		ChoiceBox role_cb = new ChoiceBox();
+		role_cb.getItems().add("Researcher");
+		role_cb.getItems().add("Reviewer");
+		role_cb.getItems().add("Editor");
+		HBox role = new HBox(role_label, role_cb);
 		role.setSpacing(4);
 		role.setAlignment(Pos.CENTER);
 		
@@ -59,7 +63,7 @@ public class RegistrationScene {
 		register_button.setDefaultButton(true);
 		register_button.setOnAction(action -> {
 			
-			if (!RegistrationHandler.register(user_tf.getText(), pw_tf.getText(), role_tf.getText())) {
+			if (!RegistrationHandler.register(user_tf.getText(), pw_tf.getText(), (String) role_cb.getValue())) {
 				register_message.setText("Error registering user");
 			};
 		});
