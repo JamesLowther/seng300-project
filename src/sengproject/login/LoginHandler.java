@@ -13,26 +13,14 @@ public class LoginHandler {
 		// it will be replaced with code that parses the json to handle the login
 		System.out.println("Username: " + username + "\nPassword: " + password);
 		
-		if (username.equals("admin") && password.equals("root")) {
-			
-			Globals.username = username;
-			
-		}
-		
-		else if (username.equals("james") && password.equals("12345")) {
-			
-			Globals.username = username;
-
-		}
-		
-		else {
+		if (Globals.searchUser(username, password)) {
+			MenuScene.user = Globals.getUser(username, password);
+			GuiController.changeScene(MenuScene.getScene());
+			return true;
+		} else {
 			return false;
 		}
 		
-		
-		GuiController.changeScene(MenuScene.getScene());
-		
-		return true;
 	}
 	
 }

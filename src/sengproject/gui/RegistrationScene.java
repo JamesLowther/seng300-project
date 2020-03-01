@@ -65,7 +65,9 @@ public class RegistrationScene {
 			
 			if (!RegistrationHandler.register(user_tf.getText(), pw_tf.getText(), (String) role_cb.getValue())) {
 				register_message.setText("Error registering user");
-			};
+			} else {
+				GuiController.changeScene(LoginScene.getScene());
+			}
 		});
 		
 		// return button

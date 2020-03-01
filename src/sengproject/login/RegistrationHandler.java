@@ -1,13 +1,17 @@
 package sengproject.login;
 
+import sengproject.Globals;
+
 public class RegistrationHandler {
 
 	// returns true if registration successful
 	public static boolean register (String username, String password, String role) {
-		
-		// todo
-		
-		return false;
+		if (role == null) {return false;}
+		if (Globals.addUser(username, password, role)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }
