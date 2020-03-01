@@ -1,4 +1,5 @@
 package sengproject.gui;
+import sengproject.jsonparsing.JSONUserParser;
 
 import org.json.simple.JSONObject;
 
@@ -11,7 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import sengproject.gui.LoginScene;
-import sengproject.jsonparsing.JSONUserParser;
 import sengproject.Globals;
 
 public class MenuScene {
