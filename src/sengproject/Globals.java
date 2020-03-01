@@ -6,7 +6,6 @@ public class Globals {
 
 	private static JSONObject user = null;
 	
-	
 	public static void setUser (JSONObject u) {
 		user = u;
 	}

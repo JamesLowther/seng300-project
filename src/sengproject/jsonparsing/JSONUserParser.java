@@ -2,13 +2,18 @@ package sengproject.jsonparsing;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -37,17 +42,81 @@ public class JSONUserParser {
 		}
 	}
 	
-	private static void appendStrToFile(String fileName, String str) { 
-		try { 
-			BufferedWriter out = new BufferedWriter( 
-			new FileWriter(fileName, true)); 
-			out.write(str); 
-			out.newLine();
-			out.close();
-		} catch (IOException e) { 
-			System.out.println("exception occoured" + e); 
-		} 
-	} 
+	public static boolean removeUser(JSONObject user) {
+		String token1 = "";
+		Scanner inFile1;
+		JSONParser parser = new JSONParser();
+		try {
+			 inFile1 = new Scanner(new File("Users.json")).useDelimiter("\n");
+			 List<String> temps = new ArrayList<String>();
+			 while (inFile1.hasNext()) {
+			   token1 = inFile1.next();
+			   temps.add(token1);
+			 }
+			 inFile1.close();
+			 for (String s : temps) {
+				 JSONObject obj = (JSONObject) parser.parse(s);
+				 if (user.equals(obj)) {
+					 temps.remove(s);
+					 FileWriter writer;
+					 try {
+						 writer = new FileWriter("Users.json"); 
+						 for(String str: temps) {
+							   writer.write(str + System.lineSeparator());
+						}
+						 writer.close();
+					 } catch (IOException e) {
+						 System.out.println(e.getLocalizedMessage());
+						 return false;
+					 }
+					 return true;
+				 }
+			 }
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+			return false;
+		} catch (ParseException e) {
+			System.out.println(e.getLocalizedMessage());
+			return false;
+		}
+		return false;
+	}
+	
+	public static boolean updateUser(JSONObject user, String username, String password, Object messages, Object reviewerDue, int papersReviewed) {
+		if (removeUser(user)) {
+			JSONObject userObj = new JSONObject();
+			userObj.put("username", username);
+			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
+			userObj.put("uid",  random);
+			userObj.put("password", password);
+			userObj.put("role", user.get("role"));
+			userObj.put("messages", messages);
+			userObj.put("reviewer_due", reviewerDue);
+			userObj.put("papers_reviewed", papersReviewed);
+			appendStrToFile("Users.json", userObj.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean updateUser(JSONObject user, Object messages, Object reviewerDue, int papersReviewed) {
+		if (removeUser(user)) {
+			JSONObject userObj = new JSONObject();
+			userObj.put("username", user.get("username"));
+			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
+			userObj.put("uid",  random); // change this
+			userObj.put("password", user.get("password"));
+			userObj.put("role", user.get("role"));
+			userObj.put("messages", messages); // Possible JSONArray
+			userObj.put("reviewer_due", reviewerDue); // Possible JSONArray
+			userObj.put("papers_reviewed", papersReviewed); 
+			appendStrToFile("Users.json", userObj.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	private static JSONObject findUser(String username) {
 		JSONParser parser = new JSONParser();
@@ -120,10 +189,17 @@ public class JSONUserParser {
 		}
 	}
 	
-	// TODO: Update user information
-	public static void updateUser(String user) {
-		
-	}
+	private static void appendStrToFile(String fileName, String str) { 
+		try { 
+			BufferedWriter out = new BufferedWriter( 
+			new FileWriter(fileName, true)); 
+			out.write(str); 
+			out.newLine();
+			out.close();
+		} catch (IOException e) { 
+			System.out.println("exception occoured" + e); 
+		} 
+	} 
 	
 	public static void listUsersInDatabase() {
 		JSONParser parser = new JSONParser();
@@ -148,5 +224,5 @@ public class JSONUserParser {
         }
 	}
 	
-		
+	
 }
