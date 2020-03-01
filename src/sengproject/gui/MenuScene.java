@@ -1,5 +1,7 @@
 package sengproject.gui;
 
+import org.json.simple.JSONObject;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,11 +14,13 @@ import sengproject.Globals;
 import sengproject.gui.LoginScene;
 
 public class MenuScene {
+	
+	public static JSONObject user;
 
 	public static Scene getScene () {
 		
 		// pane text
-		Label scene_title = new Label("Welcome back " + Globals.username + "!");
+		Label scene_title = new Label("Welcome back " + (String) user.get("username") + "!");
 		scene_title.setFont(new Font("Arial", 30));
 		VBox title = new VBox(scene_title);
 		title.setAlignment(Pos.TOP_CENTER);
@@ -28,7 +32,7 @@ public class MenuScene {
 		return_button.setAlignment(Pos.CENTER);
 		return_button.setDefaultButton(true);
 		return_button.setOnAction(action ->{
-			
+
 			GuiController.changeScene(LoginScene.getScene());
 			
 		});
