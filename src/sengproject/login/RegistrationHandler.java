@@ -1,13 +1,13 @@
 package sengproject.login;
 
-import sengproject.Globals;
+import sengproject.jsonparsing.JSONUserParser;
 
 public class RegistrationHandler {
 
 	// returns true if registration successful
 	public static boolean register (String username, String password, String role) {
 		if (role == null) {return false;}
-		if (Globals.addUser(username, password, role)) {
+		if (JSONUserParser.addUser(username, password, role)) {
 			return true;
 		} else {
 			return false;

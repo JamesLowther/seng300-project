@@ -1,8 +1,9 @@
 package sengproject.login;
 
-import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.MenuScene;
+import sengproject.jsonparsing.JSONUserParser;
+import sengproject.Globals;
 
 public class LoginHandler {
 
@@ -13,8 +14,8 @@ public class LoginHandler {
 		// it will be replaced with code that parses the json to handle the login
 		System.out.println("Username: " + username + "\nPassword: " + password);
 		
-		if (Globals.searchUser(username, password)) {
-			MenuScene.user = Globals.getUser(username, password);
+		if (JSONUserParser.searchUser(username, password)) {
+			Globals.setUser(JSONUserParser.getUser(username, password));
 			GuiController.changeScene(MenuScene.getScene());
 			return true;
 		} else {
