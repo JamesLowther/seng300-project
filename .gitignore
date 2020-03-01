@@ -27,3 +27,6 @@ hs_err_pid*
 .project
 /bin
 /lib
+/.settings
+
+*.json

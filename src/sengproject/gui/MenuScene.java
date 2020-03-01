@@ -10,17 +10,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import sengproject.Globals;
 import sengproject.gui.LoginScene;
+import sengproject.jsonparsing.JSONUserParser;
+import sengproject.Globals;
 
 public class MenuScene {
-	
-	public static JSONObject user;
 
 	public static Scene getScene () {
 		
 		// pane text
-		Label scene_title = new Label("Welcome back " + (String) user.get("username") + "!");
+		Label scene_title = new Label("Welcome back " + (String) Globals.getUser().get("username") + "!");
 		scene_title.setFont(new Font("Arial", 30));
 		VBox title = new VBox(scene_title);
 		title.setAlignment(Pos.TOP_CENTER);
