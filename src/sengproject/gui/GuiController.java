@@ -21,7 +21,7 @@ public class GuiController extends Application {
 		s.setWidth(app_width);
 		s.setHeight(app_height);
 		s.setTitle(app_title);
-		
+
 		changeScene(LoginScene.getScene());
 		
 		s.show();

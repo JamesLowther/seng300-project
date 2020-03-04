@@ -1,9 +1,11 @@
 package sengproject.login;
 
 import sengproject.gui.GuiController;
-import sengproject.gui.MenuScene;
 import sengproject.jsonparsing.JSONUserParser;
 import sengproject.Globals;
+import sengproject.gui.researcher.ResearcherMenuScene;
+import sengproject.gui.reviewer.ReviewerMenuScene;
+import sengproject.gui.editor.EditorMenuScene;
 
 public class LoginHandler {
 
@@ -16,12 +18,27 @@ public class LoginHandler {
 		
 		if (JSONUserParser.searchUser(username, password)) {
 			Globals.setUser(JSONUserParser.getUser(username, password));
-			GuiController.changeScene(MenuScene.getScene());
+
+			String user_type = (String) Globals.getUser().get("role");
+			System.out.println(user_type);
+
+			if (user_type.equals("Researcher")) {
+				GuiController.changeScene(ResearcherMenuScene.getScene());
+			} else if (user_type.equals("Reviewer")) {
+				GuiController.changeScene(ReviewerMenuScene.getScene());
+			} else if (user_type.equals("Editor")) {
+				GuiController.changeScene(EditorMenuScene.getScene());
+			} else {
+				return false; // user type not recognized
+			}
+
 			return true;
 		} else {
 			return false;
 		}
 		
 	}
+
+	public static void logout() { Globals.setUser(null); }
 	
 }
