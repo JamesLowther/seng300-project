@@ -30,3 +30,7 @@ hs_err_pid*
 /.settings
 
 *.json
+
+#Intellij
+/.idea
+*.iml
