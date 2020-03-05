@@ -30,7 +30,7 @@ public class JSONUserParser {
 			userObj.put("username", username);
 			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
 			userObj.put("uid",  random); // change this
-			userObj.put("password", password);
+			userObj.put("password", Integer.toString(password.hashCode()));
 			userObj.put("role", role);
 			userObj.put("messages", null); // Possible JSONArray
 			userObj.put("reviewer_due", null); // Possible JSONArray
@@ -88,7 +88,7 @@ public class JSONUserParser {
 			userObj.put("username", username);
 			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
 			userObj.put("uid",  random);
-			userObj.put("password", password);
+			userObj.put("password", Integer.toString(password.hashCode()));
 			userObj.put("role", user.get("role"));
 			userObj.put("messages", messages);
 			userObj.put("reviewer_due", reviewerDue);
@@ -155,7 +155,7 @@ public class JSONUserParser {
 				JSONObject jsonObject = (JSONObject) parser.parse(line);
 	            String currentUsername = (String) jsonObject.get("username");
 	            String currentPassword = (String) jsonObject.get("password");
-	            if (currentUsername.equals(username) && currentPassword.equals(password)) {
+	            if (currentUsername.equals(username) && currentPassword.equals(Integer.toString(password.hashCode()))) {
 	            	reader.close();
 	            	return jsonObject;
 	            }
