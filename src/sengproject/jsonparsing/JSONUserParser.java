@@ -20,23 +20,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-//For Hashing
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 public class JSONUserParser {
-
-	public static String getHash(String input){
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		BigInteger number = new BigInteger(1, md.digest(input.getBytes(StandardCharsets.UTF_8)));
-		StringBuilder hash = new StringBuilder(number.toString(16));
-		while(hash.length()<32){
-			hash.insert(0, '0');
-		}
-		return hash.toString();
-	}
 	
 	@SuppressWarnings("unchecked")
 	public static boolean addUser(String username, String password, String role) {
