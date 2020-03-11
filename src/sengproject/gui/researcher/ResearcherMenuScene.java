@@ -1,12 +1,10 @@
 package sengproject.gui.researcher;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import sengproject.Globals;
@@ -73,7 +71,32 @@ public class ResearcherMenuScene {
         center_lb.setFont(new Font("Arial", 16));
 
         // table view
-        TableView papers_tv = new TableView();
+        TableView<ResearcherPaper> papers_tv = new TableView<ResearcherPaper>();
+
+        TableColumn<ResearcherPaper, String> title_column = new TableColumn<ResearcherPaper, String> ("Title");
+        title_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, String> ("title"));
+
+        TableColumn<ResearcherPaper, Button>  details_column = new TableColumn<ResearcherPaper, Button> ("");
+        details_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("details_b"));
+        details_column.setSortable(false);
+
+        TableColumn<ResearcherPaper, Button>  reviewers_column = new TableColumn<ResearcherPaper, Button> ("");
+        reviewers_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("reviewers_b"));
+        reviewers_column.setSortable(false);
+
+        TableColumn<ResearcherPaper, Button>  actions_column = new TableColumn<ResearcherPaper, Button> ("");
+        actions_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("actions_b"));
+        actions_column.setSortable(false);
+
+
+        papers_tv.getColumns().addAll(title_column, details_column, reviewers_column, actions_column);
+
+        // todo hardcoded papers (REMOVE LATER)
+        papers_tv.getItems().add(new ResearcherPaper("Test paper 1"));
+        papers_tv.getItems().add(new ResearcherPaper("Test paper 2"));
+        papers_tv.getItems().add(new ResearcherPaper("Test paper 3"));
+        papers_tv.getItems().add(new ResearcherPaper("Test paper 4"));
+        papers_tv.getItems().add(new ResearcherPaper("Test paper 5"));
 
         // center vbox
         VBox center_vb = new VBox();
@@ -90,8 +113,6 @@ public class ResearcherMenuScene {
 
         return new Scene(main_pane);
 
-
     }
-
 
 }
