@@ -12,8 +12,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
+import sengproject.jsonparsing.PaperHandler;
 
 import java.awt.*;
+import java.io.File;
 
 public class ResearcherNewPaperScene {
 
@@ -93,7 +95,7 @@ public class ResearcherNewPaperScene {
         Button file_b = new Button("Select File");
         file_b.setPrefSize(100, 35);
         file_b.setOnAction(action -> {
-            file_chooser.showOpenDialog(GuiController.getStage());
+            File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
         });
 
 
@@ -110,7 +112,7 @@ public class ResearcherNewPaperScene {
         Button submit_b = new Button("Submit");
         submit_b.setPrefSize(150, 40);
         submit_b.setOnAction(action -> {
-            // todo: call paper submission
+            //todo
         });
 
         // bottom spacer
@@ -127,7 +129,7 @@ public class ResearcherNewPaperScene {
         main_pane.setTop(top_hb);
         main_pane.setCenter(center_vb);
         main_pane.setBottom(bottom_hb);
-        
+
         return new Scene(main_pane);
 
     }
