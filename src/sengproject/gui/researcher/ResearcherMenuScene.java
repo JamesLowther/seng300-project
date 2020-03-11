@@ -47,7 +47,7 @@ public class ResearcherMenuScene {
         Button new_paper_b = new Button("Upload New Paper");
         new_paper_b.setPrefSize(150,40);
         new_paper_b.setOnAction(action ->{
-            // todo: call upload new paper scene
+            GuiController.changeScene(ResearcherNewPaperScene.getScene());
         });
 
         // browser reviewers button
