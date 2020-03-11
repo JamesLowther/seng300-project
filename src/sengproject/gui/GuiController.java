@@ -9,7 +9,7 @@ import sengproject.gui.LoginScene;
 public class GuiController extends Application {
 
 	private static double app_width = 600;
-	private static double app_height = 400;
+	private static double app_height = 500;
 	private static String app_title = "Journal Submission System";
 	
 	private static Stage s = null;
