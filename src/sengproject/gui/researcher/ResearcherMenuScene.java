@@ -10,7 +10,10 @@ import javafx.scene.text.Font;
 import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.LoginScene;
+import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.login.LoginHandler;
+
+import java.util.ArrayList;
 
 public class ResearcherMenuScene {
 
@@ -88,15 +91,9 @@ public class ResearcherMenuScene {
         actions_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("actions_b"));
         actions_column.setSortable(false);
 
-
         papers_tv.getColumns().addAll(title_column, details_column, reviewers_column, actions_column);
 
-        // todo hardcoded papers (REMOVE LATER)
-        papers_tv.getItems().add(new ResearcherPaper("Test paper 1"));
-        papers_tv.getItems().add(new ResearcherPaper("Test paper 2"));
-        papers_tv.getItems().add(new ResearcherPaper("Test paper 3"));
-        papers_tv.getItems().add(new ResearcherPaper("Test paper 4"));
-        papers_tv.getItems().add(new ResearcherPaper("Test paper 5"));
+        papers_tv.getItems().addAll(getResearcherPapers()); // add papers to tableview
 
         // center vbox
         VBox center_vb = new VBox();
@@ -112,6 +109,21 @@ public class ResearcherMenuScene {
 
 
         return new Scene(main_pane);
+
+    }
+
+    // returns an arraylist of all the ResearcherPaper objects to add to the main scene list
+    private static ArrayList<ResearcherPaper> getResearcherPapers () {
+
+        ArrayList<ResearcherPaper> papers = new ArrayList<ResearcherPaper>();
+        papers.add(new ResearcherPaper("Test paper 1"));
+        papers.add(new ResearcherPaper("Test paper 2"));
+        papers.add(new ResearcherPaper("Test paper 3"));
+        papers.add(new ResearcherPaper("Test paper 4"));
+        papers.add(new ResearcherPaper("Test paper 5"));
+
+        return papers;
+
 
     }
 

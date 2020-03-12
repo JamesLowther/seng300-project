@@ -8,13 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
-import sengproject.jsonparsing.PaperHandler;
 
-import java.awt.*;
 import java.io.File;
 
 public class ResearcherNewPaperScene {
@@ -52,7 +49,7 @@ public class ResearcherNewPaperScene {
         TextField title_tf = new TextField();
         HBox title_hb = new HBox();
         title_hb.getChildren().addAll(paper_title_lb, title_tf);
-        title_hb.setPadding(new Insets(0,0,20,0));
+        title_hb.setPadding(new Insets(10,0,20,0));
         title_hb.setSpacing(4);
         title_hb.setAlignment(Pos.CENTER);
 
@@ -79,7 +76,7 @@ public class ResearcherNewPaperScene {
         jv_hb.setPadding(new Insets(0,0,20,0));
         jv_hb.setAlignment(Pos.CENTER);
 
-        // reviewer lable and listview
+        // reviewer label and listview
         Label reviewer_lb = new Label("Preferred Reviewers");
         volume_lb.setFont(new Font("Arial", 20));
 
@@ -98,7 +95,6 @@ public class ResearcherNewPaperScene {
             File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
         });
 
-
         HBox file_hb = new HBox();
         file_hb.setAlignment(Pos.CENTER);
         file_hb.getChildren().addAll(file_b);
@@ -112,7 +108,7 @@ public class ResearcherNewPaperScene {
         Button submit_b = new Button("Submit");
         submit_b.setPrefSize(150, 40);
         submit_b.setOnAction(action -> {
-            //todo
+            //todo: implament submit button
         });
 
         // bottom spacer
