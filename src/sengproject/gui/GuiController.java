@@ -39,5 +39,9 @@ public class GuiController extends Application {
 	
 	}
 
+	public static Stage getStage () {
+		return s;
+	}
+
 }
 
