@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ResearcherReviewersScene {
 
-    public static Scene getScene (ResearcherPaper paper) {
+    public static Scene getScene (ResearcherPaper r_paper) {
 
         // details box
         Label details_lb = new Label("Reviewers");
@@ -47,10 +47,10 @@ public class ResearcherReviewersScene {
             TableColumn<ResearcherReviewer, String> name_column = new TableColumn<ResearcherReviewer, String>("Name");
             name_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("name"));
 
-            TableColumn<ResearcherReviewer, String> major_rev_column = new TableColumn<ResearcherReviewer, String>("Major Revisions");
+            TableColumn<ResearcherReviewer, String> major_rev_column = new TableColumn<ResearcherReviewer, String>("Major revisions");
             major_rev_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_major_rev"));
 
-            TableColumn<ResearcherReviewer, String> minor_rev_column = new TableColumn<ResearcherReviewer, String>("Minor Revisions");
+            TableColumn<ResearcherReviewer, String> minor_rev_column = new TableColumn<ResearcherReviewer, String>("Minor revisions");
             minor_rev_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_minor_rev"));
 
             TableColumn<ResearcherReviewer, String> publications_column = new TableColumn<ResearcherReviewer, String>("Total # of publications viewed");
@@ -94,7 +94,7 @@ public class ResearcherReviewersScene {
         }
 
         // add reviewers to table views
-        ArrayList<ResearcherReviewer> reviewers_array = getResearcherReviewers(paper);
+        ArrayList<ResearcherReviewer> reviewers_array = getResearcherReviewers(r_paper);
         current_rev_tv.getItems().addAll(reviewers_array);
         preferred_rev_tv.getItems().addAll(reviewers_array);
         interested_rev_tv.getItems().addAll(reviewers_array);

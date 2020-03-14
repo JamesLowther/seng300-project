@@ -3,6 +3,7 @@ package sengproject.gui.researcher.tvobjects;
 import javafx.scene.control.Button;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
+import sengproject.gui.researcher.ResearcherActionsScene;
 import sengproject.gui.researcher.ResearcherDetailsScene;
 import sengproject.gui.researcher.ResearcherReviewersScene;
 
@@ -60,7 +61,7 @@ public class ResearcherPaper {
 
         actions_b = new Button("Actions");
         actions_b.setOnAction(saction ->{
-            // todo: call action scene
+            GuiController.changeScene(ResearcherActionsScene.getScene(this));
         });
 
         System.out.println("paper created with title: " + title);

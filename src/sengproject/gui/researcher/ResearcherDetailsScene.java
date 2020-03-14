@@ -13,7 +13,7 @@ import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 
 public class ResearcherDetailsScene {
 
-    public static Scene getScene (ResearcherPaper paper) {
+    public static Scene getScene (ResearcherPaper r_paper) {
 
         // details box
         Label details_lb = new Label("Details");
@@ -63,15 +63,15 @@ public class ResearcherDetailsScene {
         bottom_hb.getChildren().addAll(new_version_b, bottom_spacer_r, download_b);
 
         //  'Title of Paper' label
-        Label paper_title_lb = new Label(paper.getTitle()); //todo
+        Label paper_title_lb = new Label(r_paper.getTitle()); //todo
         paper_title_lb.setFont(new Font("Arial", 20));
 
         // 'Paper ID' label
-        Label paper_id_lb = new Label(paper.getPaper_id()); //todo
+        Label paper_id_lb = new Label(r_paper.getPaper_id()); //todo
         paper_id_lb.setFont(new Font("Arial", 16));
 
         // 'Submission Date: ' label
-        Label submission_date_lb = new Label(paper.getSub_date()); //todo
+        Label submission_date_lb = new Label(r_paper.getSub_date()); //todo
         submission_date_lb.setFont(new Font("Arial", 16));
 
         // paper info vbox
@@ -81,11 +81,11 @@ public class ResearcherDetailsScene {
 
 
         // 'Author Name' label
-        Label author_name_lb = new Label(paper.getAuthor_name()); //todo
+        Label author_name_lb = new Label(r_paper.getAuthor_name()); //todo
         author_name_lb.setFont(new Font("Arial", 16));
 
         // 'Author ID' label
-        Label author_id_lb = new Label(paper.getAuthor_id()); //todo
+        Label author_id_lb = new Label(r_paper.getAuthor_id()); //todo
         author_id_lb.setFont(new Font("Arial", 16));
 
         // author info vbox
@@ -94,15 +94,15 @@ public class ResearcherDetailsScene {
         author_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'Journal Name' label
-        Label journal_name_lb = new Label(paper.getJournal_name()); //todo
+        Label journal_name_lb = new Label(r_paper.getJournal_name()); //todo
         journal_name_lb.setFont(new Font("Arial", 16));
 
         // 'Journal ID' label
-        Label journal_id_lb = new Label(paper.getJournal_id()); //todo
+        Label journal_id_lb = new Label(r_paper.getJournal_id()); //todo
         journal_id_lb.setFont(new Font("Arial", 16));
 
         // 'Volume ID' label
-        Label volume_id_lb = new Label(paper.getVolume_id()); //todo
+        Label volume_id_lb = new Label(r_paper.getVolume_id()); //todo
         volume_id_lb.setFont(new Font("Arial", 16));
 
         // journal_hbox
@@ -116,11 +116,11 @@ public class ResearcherDetailsScene {
         journal_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'File name of latest submission' label
-        Label latest_submission_lb = new Label(paper.getFile_name()); //todo
+        Label latest_submission_lb = new Label(r_paper.getFile_name()); //todo
         latest_submission_lb.setFont(new Font("Arial", 16));
 
         // 'Date of latest submission' label
-        Label latest_date_lb = new Label(paper.getLatest_date()); //todo
+        Label latest_date_lb = new Label(r_paper.getLatest_date()); //todo
         latest_date_lb.setFont(new Font("Arial", 16));
 
         // submission info vbox
@@ -129,11 +129,11 @@ public class ResearcherDetailsScene {
         submission_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'Deadline: ' label
-        Label deadline_lb = new Label("Deadline: " + paper.getDeadline()); //todo
+        Label deadline_lb = new Label("Deadline: " + r_paper.getDeadline()); //todo
         deadline_lb.setFont(new Font("Arial", 16));
 
         // 'Reviewers: ' label
-        Label reviewers_lb = new Label("Reviewers: " + paper.getReviewers()); //todo
+        Label reviewers_lb = new Label("Reviewers: " + r_paper.getReviewers()); //todo
         reviewers_lb.setFont(new Font("Arial", 16));
 
         // deadline info hbox
@@ -143,7 +143,7 @@ public class ResearcherDetailsScene {
         deadline_info_hb.setPadding(new Insets(0,0,20,0));
 
         // 'status' label
-        String status = paper.getStatus();
+        String status = r_paper.getStatus();
 
         Label status_lb = new Label("[" + status + "]"); //todo
         status_lb.setFont(new Font("Arial", 16));
