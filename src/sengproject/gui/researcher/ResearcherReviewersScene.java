@@ -129,9 +129,9 @@ public class ResearcherReviewersScene {
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
 
         // todo: this is just test data
-        reviewers.add(new ResearcherReviewer("Bob Barker"));
-        reviewers.add(new ResearcherReviewer("Adam Apple"));
-        reviewers.add(new ResearcherReviewer("Jack Joe"));
+        reviewers.add(new ResearcherReviewer("Bob Barker", 3, 2, 2, 12.5f));
+        reviewers.add(new ResearcherReviewer("Adam Apple", 2, 1, 2, 5.3f));
+        reviewers.add(new ResearcherReviewer("Jack Joe", 1, 0, 2, 30.1f));
 
         return reviewers;
 

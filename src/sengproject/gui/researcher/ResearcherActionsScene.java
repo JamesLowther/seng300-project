@@ -113,10 +113,10 @@ public class ResearcherActionsScene {
         ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
 
         // todo: this is just test data
-        actions.add(new ResearcherAction());
-        actions.add(new ResearcherAction());
-        actions.add(new ResearcherAction());
-        actions.add(new ResearcherAction());
+        actions.add(new ResearcherAction("Test Action 1", "1234", "01/01/2020", "02/02/2020"));
+        actions.add(new ResearcherAction("Test Action 2", "1234", "01/01/2020", "02/02/2020"));
+        actions.add(new ResearcherAction("Test Action 3", "1234", "01/01/2020", "02/02/2020"));
+        actions.add(new ResearcherAction("Test Action 4", "1234", "01/01/2020", "02/02/2020"));
 
         return actions;
 

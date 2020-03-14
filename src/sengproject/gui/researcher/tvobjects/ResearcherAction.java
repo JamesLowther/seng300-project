@@ -19,26 +19,28 @@ public class ResearcherAction {
 
     private VBox buttons_vb;
 
-    public ResearcherAction () {
+    public ResearcherAction (String ad, String ruid, String dr, String dc) {
 
-        //todo: this is just test data (remove later)
-
-        action_details = "Test detail";
-        rev_uid = "12345";
-        date_recommended = "2020/01/02";
-        date_completed = "2020/01/03";
+        action_details = ad;
+        rev_uid = ruid;
+        date_recommended = dr;
+        date_completed = dc;
 
 
         Button accept_b = new Button("Accept");
         accept_b.setPrefSize(80,3);
         accept_b.setOnAction(action ->{
-            //todo: accept action
+            System.out.println("Accepted action: " + action_details);
+
+            // todo: accept button
         });
 
         Button reject_b = new Button("Reject");
         reject_b.setPrefSize(80,3);
         reject_b.setOnAction(action ->{
-            //todo: accept action
+            System.out.println("Rejected action: " + action_details);
+
+            //todo: reject action
         });
 
         buttons_vb = new VBox();

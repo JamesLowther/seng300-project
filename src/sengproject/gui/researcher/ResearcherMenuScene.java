@@ -116,11 +116,26 @@ public class ResearcherMenuScene {
     private static ArrayList<ResearcherPaper> getResearcherPapers () {
 
         ArrayList<ResearcherPaper> papers = new ArrayList<ResearcherPaper>();
-        papers.add(new ResearcherPaper("Test paper 1"));
-        papers.add(new ResearcherPaper("Test paper 2"));
-        papers.add(new ResearcherPaper("Test paper 3"));
-        papers.add(new ResearcherPaper("Test paper 4"));
-        papers.add(new ResearcherPaper("Test paper 5"));
+        papers.add(new ResearcherPaper("Test paper 1", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "rejected"));
+        papers.add(new ResearcherPaper("Test paper 2", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "pending"));
+
+        papers.add(new ResearcherPaper("Test paper 3", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "accepted"));
+
+        papers.add(new ResearcherPaper("Test paper 4", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "rejected"));
+
+
 
         return papers;
 
