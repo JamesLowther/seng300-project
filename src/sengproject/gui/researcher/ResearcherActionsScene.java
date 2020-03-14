@@ -54,6 +54,7 @@ public class ResearcherActionsScene {
             date_recommended_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("date_recommended"));
 
             TableColumn<ResearcherAction, VBox> buttons_column = new TableColumn<ResearcherAction, VBox>("");
+            buttons_column.setStyle("-fx-alignment: CENTER;");
             buttons_column.setSortable(false);
             buttons_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, VBox>("buttons_vb"));
 

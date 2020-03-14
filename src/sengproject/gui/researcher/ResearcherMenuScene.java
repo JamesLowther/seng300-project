@@ -81,14 +81,17 @@ public class ResearcherMenuScene {
         title_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, String> ("title"));
 
         TableColumn<ResearcherPaper, Button>  details_column = new TableColumn<ResearcherPaper, Button> ("");
+        details_column.setStyle("-fx-alignment: CENTER;");
         details_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("details_b"));
         details_column.setSortable(false);
 
         TableColumn<ResearcherPaper, Button>  reviewers_column = new TableColumn<ResearcherPaper, Button> ("");
+        reviewers_column.setStyle("-fx-alignment: CENTER;");
         reviewers_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("reviewers_b"));
         reviewers_column.setSortable(false);
 
         TableColumn<ResearcherPaper, Button>  actions_column = new TableColumn<ResearcherPaper, Button> ("");
+        actions_column.setStyle("-fx-alignment: CENTER;");
         actions_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("actions_b"));
         actions_column.setSortable(false);
 
