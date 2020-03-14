@@ -58,6 +58,7 @@ public class ResearcherMenuScene {
         browser_reviewers_b.setPrefSize(150,40);
         browser_reviewers_b.setOnAction(action ->{
             // todo: call browse reviewer scene
+            GuiController.changeScene(ResearcherBrowseReviewersScene.getScene());
         });
 
         // bottom spacer

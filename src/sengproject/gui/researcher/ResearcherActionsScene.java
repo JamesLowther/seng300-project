@@ -26,9 +26,9 @@ public class ResearcherActionsScene {
         name_vb.setAlignment(Pos.TOP_LEFT);
 
         // return button
-        Button logout_b = new Button("Back");
-        logout_b.setPrefSize(70, 40);
-        logout_b.setOnAction(action -> {
+        Button back_b = new Button("Back");
+        back_b.setPrefSize(70, 40);
+        back_b.setOnAction(action -> {
             GuiController.changeScene(ResearcherMenuScene.getScene());
         });
 
@@ -39,7 +39,7 @@ public class ResearcherActionsScene {
         // top hbox
         HBox top_hb = new HBox();
         top_hb.setPadding(new Insets(10, 10, 10, 10));
-        top_hb.getChildren().addAll(name_vb, top_spacer_r, logout_b);
+        top_hb.getChildren().addAll(name_vb, top_spacer_r, back_b);
 
         // pending actions
         TableView<ResearcherAction> pending_action_tv = new TableView<ResearcherAction>();

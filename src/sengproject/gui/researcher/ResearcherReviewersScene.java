@@ -48,15 +48,19 @@ public class ResearcherReviewersScene {
             name_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("name"));
 
             TableColumn<ResearcherReviewer, String> major_rev_column = new TableColumn<ResearcherReviewer, String>("Major revisions");
+            major_rev_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             major_rev_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_major_rev"));
 
             TableColumn<ResearcherReviewer, String> minor_rev_column = new TableColumn<ResearcherReviewer, String>("Minor revisions");
+            minor_rev_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             minor_rev_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_minor_rev"));
 
             TableColumn<ResearcherReviewer, String> publications_column = new TableColumn<ResearcherReviewer, String>("Total # of publications viewed");
+            publications_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             publications_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_pub_rev"));
 
             TableColumn<ResearcherReviewer, String> average_column = new TableColumn<ResearcherReviewer, String>("Average review time (days)");
+            average_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             average_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("avg_rev_time"));
 
             current_rev_tv.getColumns().addAll(name_column, major_rev_column, minor_rev_column, publications_column, average_column);
@@ -69,9 +73,11 @@ public class ResearcherReviewersScene {
             name_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("name"));
 
             TableColumn<ResearcherReviewer, String> publications_column = new TableColumn<ResearcherReviewer, String>("Total # of publications viewed");
+            publications_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             publications_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_pub_rev"));
 
             TableColumn<ResearcherReviewer, String> average_column = new TableColumn<ResearcherReviewer, String>("Average review time (days)");
+            average_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             average_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("avg_rev_time"));
 
             preferred_rev_tv.getColumns().addAll(name_column, publications_column, average_column);
@@ -85,9 +91,11 @@ public class ResearcherReviewersScene {
             name_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("name"));
 
             TableColumn<ResearcherReviewer, String> publications_column = new TableColumn<ResearcherReviewer, String>("Total # of publications viewed");
+            publications_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             publications_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("num_pub_rev"));
 
             TableColumn<ResearcherReviewer, String> average_column = new TableColumn<ResearcherReviewer, String>("Average review time (days)");
+            average_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             average_column.setCellValueFactory(new PropertyValueFactory<ResearcherReviewer, String>("avg_rev_time"));
 
             interested_rev_tv.getColumns().addAll(name_column, publications_column, average_column);
