@@ -58,6 +58,7 @@ public class ResearcherMenuScene {
         browser_reviewers_b.setPrefSize(150,40);
         browser_reviewers_b.setOnAction(action ->{
             // todo: call browse reviewer scene
+            GuiController.changeScene(ResearcherBrowseReviewersScene.getScene());
         });
 
         // bottom spacer
@@ -80,14 +81,17 @@ public class ResearcherMenuScene {
         title_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, String> ("title"));
 
         TableColumn<ResearcherPaper, Button>  details_column = new TableColumn<ResearcherPaper, Button> ("");
+        details_column.setStyle("-fx-alignment: CENTER;");
         details_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("details_b"));
         details_column.setSortable(false);
 
         TableColumn<ResearcherPaper, Button>  reviewers_column = new TableColumn<ResearcherPaper, Button> ("");
+        reviewers_column.setStyle("-fx-alignment: CENTER;");
         reviewers_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("reviewers_b"));
         reviewers_column.setSortable(false);
 
         TableColumn<ResearcherPaper, Button>  actions_column = new TableColumn<ResearcherPaper, Button> ("");
+        actions_column.setStyle("-fx-alignment: CENTER;");
         actions_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("actions_b"));
         actions_column.setSortable(false);
 
@@ -116,11 +120,26 @@ public class ResearcherMenuScene {
     private static ArrayList<ResearcherPaper> getResearcherPapers () {
 
         ArrayList<ResearcherPaper> papers = new ArrayList<ResearcherPaper>();
-        papers.add(new ResearcherPaper("Test paper 1"));
-        papers.add(new ResearcherPaper("Test paper 2"));
-        papers.add(new ResearcherPaper("Test paper 3"));
-        papers.add(new ResearcherPaper("Test paper 4"));
-        papers.add(new ResearcherPaper("Test paper 5"));
+        papers.add(new ResearcherPaper("Test paper 1", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "rejected"));
+        papers.add(new ResearcherPaper("Test paper 2", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "pending"));
+
+        papers.add(new ResearcherPaper("Test paper 3", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "accepted"));
+
+        papers.add(new ResearcherPaper("Test paper 4", "21232", "01/01/2020", "John Doe",
+                "12319", "Journal of Smart", "123", "1231",
+                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
+                "rejected"));
+
+
 
         return papers;
 

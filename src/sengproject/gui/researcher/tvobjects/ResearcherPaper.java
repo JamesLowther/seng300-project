@@ -3,6 +3,7 @@ package sengproject.gui.researcher.tvobjects;
 import javafx.scene.control.Button;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
+import sengproject.gui.researcher.ResearcherActionsScene;
 import sengproject.gui.researcher.ResearcherDetailsScene;
 import sengproject.gui.researcher.ResearcherReviewersScene;
 
@@ -28,25 +29,21 @@ public class ResearcherPaper {
     private String reviewers;
     private String status;
 
-    // todo: replace string with JSONObject
-    public ResearcherPaper(String t) {
+    public ResearcherPaper(String t, String pi, String sd, String an, String aid, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String rej) {
 
         title = t;
-
-        //todo: this is all just test data
-        // it will need to be populated with data from the json paper object
-        paper_id = "paper id";
-        sub_date = "sub_date";
-        author_name = "author_name";
-        author_id = "author_id";
-        journal_name = "journal_name";
-        journal_id = "journal_id";
-        volume_id = "volume_id";
-        file_name = "file_name";
-        latest_date = "latest_date";
-        deadline = "deadline";
-        reviewers = "reviewers";
-        status = "rejected";
+        paper_id = pi;
+        sub_date = sd;
+        author_name = an;
+        author_id = aid;
+        journal_name = jn;
+        journal_id = jid;
+        volume_id = vid;
+        file_name = fn;
+        latest_date = ld;
+        deadline = dl;
+        reviewers = rev;
+        status = rej;
 
         details_b = new Button("Details");
         details_b.setOnAction(action ->{
@@ -59,8 +56,8 @@ public class ResearcherPaper {
         });
 
         actions_b = new Button("Actions");
-        actions_b.setOnAction(saction ->{
-            // todo: call action scene
+        actions_b.setOnAction(action ->{
+            GuiController.changeScene(ResearcherActionsScene.getScene(this));
         });
 
         System.out.println("paper created with title: " + title);

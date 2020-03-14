@@ -8,12 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 
+import java.io.File;
+
 public class ResearcherDetailsScene {
 
-    public static Scene getScene (ResearcherPaper paper) {
+    public static Scene getScene (ResearcherPaper r_paper) {
 
         // details box
         Label details_lb = new Label("Details");
@@ -24,9 +27,9 @@ public class ResearcherDetailsScene {
         name_vb.setAlignment(Pos.TOP_LEFT);
 
         // return button
-        Button logout_b = new Button("Back");
-        logout_b.setPrefSize(70,40);
-        logout_b.setOnAction(action ->{
+        Button back_b = new Button("Back");
+        back_b.setPrefSize(70,40);
+        back_b.setOnAction(action ->{
             GuiController.changeScene(ResearcherMenuScene.getScene());
         });
 
@@ -37,13 +40,17 @@ public class ResearcherDetailsScene {
         // top hbox
         HBox top_hb = new HBox();
         top_hb.setPadding(new Insets(10,10,10,10));
-        top_hb.getChildren().addAll(name_vb, top_spacer_r, logout_b);
+        top_hb.getChildren().addAll(name_vb, top_spacer_r, back_b);
 
         // upload new version button
+        FileChooser file_chooser = new FileChooser();
+
         Button new_version_b = new Button("Upload New Version");
         new_version_b.setPrefSize(150,40);
         new_version_b.setOnAction(action ->{
             // todo: call upload new version
+            File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
+
         });
 
         // browser reviewers button
@@ -63,15 +70,15 @@ public class ResearcherDetailsScene {
         bottom_hb.getChildren().addAll(new_version_b, bottom_spacer_r, download_b);
 
         //  'Title of Paper' label
-        Label paper_title_lb = new Label(paper.getTitle()); //todo
+        Label paper_title_lb = new Label(r_paper.getTitle());
         paper_title_lb.setFont(new Font("Arial", 20));
 
         // 'Paper ID' label
-        Label paper_id_lb = new Label(paper.getPaper_id()); //todo
+        Label paper_id_lb = new Label("Paper ID: " + r_paper.getPaper_id());
         paper_id_lb.setFont(new Font("Arial", 16));
 
         // 'Submission Date: ' label
-        Label submission_date_lb = new Label(paper.getSub_date()); //todo
+        Label submission_date_lb = new Label("Submission date: " + r_paper.getSub_date());
         submission_date_lb.setFont(new Font("Arial", 16));
 
         // paper info vbox
@@ -81,11 +88,11 @@ public class ResearcherDetailsScene {
 
 
         // 'Author Name' label
-        Label author_name_lb = new Label(paper.getAuthor_name()); //todo
+        Label author_name_lb = new Label(r_paper.getAuthor_name());
         author_name_lb.setFont(new Font("Arial", 16));
 
         // 'Author ID' label
-        Label author_id_lb = new Label(paper.getAuthor_id()); //todo
+        Label author_id_lb = new Label("Author ID: " + r_paper.getAuthor_id());
         author_id_lb.setFont(new Font("Arial", 16));
 
         // author info vbox
@@ -94,15 +101,15 @@ public class ResearcherDetailsScene {
         author_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'Journal Name' label
-        Label journal_name_lb = new Label(paper.getJournal_name()); //todo
+        Label journal_name_lb = new Label(r_paper.getJournal_name());
         journal_name_lb.setFont(new Font("Arial", 16));
 
         // 'Journal ID' label
-        Label journal_id_lb = new Label(paper.getJournal_id()); //todo
+        Label journal_id_lb = new Label("Journal ID: " + r_paper.getJournal_id());
         journal_id_lb.setFont(new Font("Arial", 16));
 
         // 'Volume ID' label
-        Label volume_id_lb = new Label(paper.getVolume_id()); //todo
+        Label volume_id_lb = new Label("Volume ID: " + r_paper.getVolume_id());
         volume_id_lb.setFont(new Font("Arial", 16));
 
         // journal_hbox
@@ -116,11 +123,11 @@ public class ResearcherDetailsScene {
         journal_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'File name of latest submission' label
-        Label latest_submission_lb = new Label(paper.getFile_name()); //todo
+        Label latest_submission_lb = new Label(r_paper.getFile_name());
         latest_submission_lb.setFont(new Font("Arial", 16));
 
         // 'Date of latest submission' label
-        Label latest_date_lb = new Label(paper.getLatest_date()); //todo
+        Label latest_date_lb = new Label("Latest Submission: " + r_paper.getLatest_date());
         latest_date_lb.setFont(new Font("Arial", 16));
 
         // submission info vbox
@@ -129,11 +136,11 @@ public class ResearcherDetailsScene {
         submission_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'Deadline: ' label
-        Label deadline_lb = new Label("Deadline: " + paper.getDeadline()); //todo
+        Label deadline_lb = new Label("Deadline: " + r_paper.getDeadline());
         deadline_lb.setFont(new Font("Arial", 16));
 
         // 'Reviewers: ' label
-        Label reviewers_lb = new Label("Reviewers: " + paper.getReviewers()); //todo
+        Label reviewers_lb = new Label("Reviewers: " + r_paper.getReviewers());
         reviewers_lb.setFont(new Font("Arial", 16));
 
         // deadline info hbox
@@ -143,9 +150,9 @@ public class ResearcherDetailsScene {
         deadline_info_hb.setPadding(new Insets(0,0,20,0));
 
         // 'status' label
-        String status = paper.getStatus();
+        String status = r_paper.getStatus();
 
-        Label status_lb = new Label("[" + status + "]"); //todo
+        Label status_lb = new Label("[" + status + "]");
         status_lb.setFont(new Font("Arial", 16));
 
         switch (status) {
@@ -167,6 +174,9 @@ public class ResearcherDetailsScene {
         VBox center_vb = new VBox();
         center_vb.setPadding(new Insets(10,10,10,10));
         center_vb.getChildren().addAll(paper_info_vb, author_info_vb, journal_info_vb, submission_info_vb, deadline_info_hb, status_lb);
+        center_vb.setStyle("-fx-padding: 5;" + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 3;" + "-fx-border-insets: 5;"
+                + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 
         BorderPane main_pane = new BorderPane();
 
