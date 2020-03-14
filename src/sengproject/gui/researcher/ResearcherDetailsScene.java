@@ -167,6 +167,9 @@ public class ResearcherDetailsScene {
         VBox center_vb = new VBox();
         center_vb.setPadding(new Insets(10,10,10,10));
         center_vb.getChildren().addAll(paper_info_vb, author_info_vb, journal_info_vb, submission_info_vb, deadline_info_hb, status_lb);
+        center_vb.setStyle("-fx-padding: 5;" + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 3;" + "-fx-border-insets: 5;"
+                + "-fx-border-radius: 5;" + "-fx-border-color: black;");
 
         BorderPane main_pane = new BorderPane();
 
