@@ -1,6 +1,7 @@
 package sengproject.gui.researcher.tvobjects;
 
 import javafx.scene.control.Button;
+import sengproject.jsonparsing.JSONPaperParser;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.ResearcherActionsScene;
@@ -9,7 +10,7 @@ import sengproject.gui.researcher.ResearcherReviewersScene;
 
 public class ResearcherPaper {
 
-    private JSONObject paper;
+    //private JSONObject paper;
 
     private Button details_b;
     private Button reviewers_b;
@@ -45,6 +46,9 @@ public class ResearcherPaper {
         reviewers = rev;
         status = rej;
 
+       JSONPaperParser.addPaper(t, pi, sd, jn, jid, vid, fn, ld, dl, rev, rej);
+        
+
         details_b = new Button("Details");
         details_b.setOnAction(action ->{
             GuiController.changeScene(ResearcherDetailsScene.getScene(this));
@@ -62,6 +66,39 @@ public class ResearcherPaper {
 
         System.out.println("paper created with title: " + title);
 
+    }
+    
+    public ResearcherPaper(JSONObject paper) {
+    	title = (String) paper.get("title");
+        paper_id = (String) paper.get("paper_id").toString();
+        sub_date = (String) paper.get("sub_date");
+        author_name = (String) paper.get("author_name");
+        author_id = (String) paper.get("author_id");
+        journal_name = (String) paper.get("journal_name");
+        journal_id = (String) paper.get("journal_id");
+        volume_id = (String) paper.get("volume_id");
+        file_name = (String) paper.get("file_name");
+        latest_date = (String) paper.get("latest_date");
+        deadline = (String) paper.get("deadline");
+        reviewers = (String) paper.get("reviewers");
+        status = (String) paper.get("status");
+        
+        details_b = new Button("Details");
+        details_b.setOnAction(action ->{
+            GuiController.changeScene(ResearcherDetailsScene.getScene(this));
+        });
+
+        reviewers_b = new Button("Reviewers");
+        reviewers_b.setOnAction(action ->{
+            GuiController.changeScene(ResearcherReviewersScene.getScene(this));
+        });
+
+        actions_b = new Button("Actions");
+        actions_b.setOnAction(action ->{
+            GuiController.changeScene(ResearcherActionsScene.getScene(this));
+        });
+
+        System.out.println("paper created with title: " + title);
     }
 
     public void setTitle (String t) {
@@ -121,3 +158,4 @@ public class ResearcherPaper {
     public String getStatus () {return status;}
 
 }
+
