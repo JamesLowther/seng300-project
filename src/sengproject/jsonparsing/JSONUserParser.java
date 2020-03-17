@@ -155,7 +155,7 @@ public class JSONUserParser {
 				JSONObject jsonObject = (JSONObject) parser.parse(line);
 	            String currentUsername = (String) jsonObject.get("username");
 	            String currentPassword = (String) jsonObject.get("password");
-	            int currentUserID = (int) jsonObject.get("uid");
+	            int currentUserID = ((Long)jsonObject.get("uid")).intValue();
 	            if (currentUsername.equals(username) && currentPassword.equals(MartinsHash.saltAndHash(password, currentUserID))) {
 	            	reader.close();
 	            	return jsonObject;
