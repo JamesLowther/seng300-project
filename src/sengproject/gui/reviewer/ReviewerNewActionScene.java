@@ -28,7 +28,7 @@ public class ReviewerNewActionScene {
 
         // top hbox
         HBox top_hb = new HBox();
-        top_hb.setPadding(new Insets(10,60,10,60));
+        top_hb.setPadding(new Insets(40,60,10,60));
         top_hb.getChildren().addAll(minor_rb, top_spacer_r, major_rb);
 
         // submit button
@@ -56,6 +56,7 @@ public class ReviewerNewActionScene {
 
         // main text area
         TextArea details_ta = new TextArea();
+        details_ta.setPromptText("Enter details here...");
 
         // center vbox
         VBox center_vb = new VBox();

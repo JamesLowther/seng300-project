@@ -31,7 +31,12 @@ public class ReviewerDetailsScene {
         Button back_b = new Button("Back");
         back_b.setPrefSize(70,40);
         back_b.setOnAction(action ->{
-            GuiController.changeScene(ReviewerMenuScene.getScene());
+            if (r_paper.getPrevious_menu().equals("menu")) {
+                GuiController.changeScene(ReviewerMenuScene.getScene());
+            }
+            else if (r_paper.getPrevious_menu().equals("browse")) {
+                GuiController.changeScene(ReviewerBrowsePapersScene.getScene());
+            }
         });
 
         // top spacer

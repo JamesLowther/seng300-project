@@ -1,6 +1,7 @@
 package sengproject.gui.reviewer.tvobjects;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import sengproject.gui.GuiController;
 import sengproject.gui.reviewer.ReviewerActionsScene;
 import sengproject.gui.reviewer.ReviewerDetailsScene;
@@ -9,6 +10,9 @@ public class ReviewerPaper {
 
     private Button details_b;
     private Button actions_b;
+    private CheckBox star_cb;
+
+    private String previous_menu = null;
 
     private String title;
     private String paper_id;
@@ -25,7 +29,7 @@ public class ReviewerPaper {
     private String revisions;
     private String status;
 
-    public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String revis, String rej) {
+    public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
 
         title = t;
         paper_id = pi;
@@ -42,6 +46,8 @@ public class ReviewerPaper {
         revisions = revis;
         status = rej;
 
+        previous_menu = prev;
+
         details_b = new Button("Details");
         details_b.setOnAction(action ->{
             GuiController.changeScene(ReviewerDetailsScene.getScene(this));
@@ -51,6 +57,8 @@ public class ReviewerPaper {
         actions_b.setOnAction(action ->{
             GuiController.changeScene(ReviewerActionsScene.getScene(this));
         });
+
+        star_cb = new CheckBox();
 
     }
 
@@ -77,6 +85,14 @@ public class ReviewerPaper {
     public Button getActions_b () {
         return actions_b;
     }
+
+    public void setStar_cb (CheckBox cb) { star_cb = cb; }
+
+    public CheckBox getStar_cb () { return star_cb; }
+
+    public void setPrevious_menu (String p) { previous_menu = p; }
+
+    public String getPrevious_menu () { return  previous_menu; }
 
     public String getPaper_id () {return paper_id;}
 
