@@ -92,7 +92,7 @@ public class ReviewerBrowsePapersScene {
                 "12319", "Journal of Smart", "123", "1231",
                 "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
                 "23", "accepted", "browse"));
-        
+
         papers.add(new ReviewerPaper("Test paper 2", "21232", "01/01/2020", "John Doe",
                 "12319", "Journal of Smart", "123", "1231",
                 "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
