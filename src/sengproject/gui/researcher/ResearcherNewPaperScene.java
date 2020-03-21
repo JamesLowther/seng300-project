@@ -97,6 +97,10 @@ public class ResearcherNewPaperScene {
         reviewer_vb.getChildren().addAll(reviewer_lb, reviewer_lv);
         reviewer_vb.setPadding(new Insets(0,30,30,30));
 
+        // error label
+        Label error_lb = new Label("");
+        error_lb.setFont(new Font("Arial", 16));
+
         // select file
         FileChooser file_chooser = new FileChooser();
 
@@ -104,6 +108,10 @@ public class ResearcherNewPaperScene {
         file_b.setPrefSize(100, 35);
         file_b.setOnAction(action -> {
             selected_file = file_chooser.showOpenDialog(GuiController.getStage());
+
+            if (selected_file != null) {
+                error_lb.setText(selected_file.getName());
+            }
         });
 
         HBox file_hb = new HBox();
@@ -112,7 +120,7 @@ public class ResearcherNewPaperScene {
 
         // center vbox
         VBox center_vb = new VBox();
-        center_vb.getChildren().addAll(title_hb, jv_hb, reviewer_vb, file_hb);
+        center_vb.getChildren().addAll(title_hb, jv_hb, reviewer_vb, file_hb, error_lb);
         center_vb.setAlignment(Pos.CENTER);
 
         // submit button
@@ -120,9 +128,14 @@ public class ResearcherNewPaperScene {
         submit_b.setPrefSize(150, 40);
         submit_b.setOnAction(action -> {
 
-            PaperFunctions.createNewPaper(title_tf.getText(), "TODO JID", "TODO VID", selected_file);
+            if (PaperFunctions.createNewPaper(title_tf.getText(), "TODO JID", "TODO VID", selected_file)) {
+                GuiController.changeScene(ResearcherMenuScene.getScene());
 
-            GuiController.changeScene(ResearcherMenuScene.getScene());
+            } else {
+                error_lb.setText("Error creating new paper");
+            }
+
+
         });
 
         // bottom spacer

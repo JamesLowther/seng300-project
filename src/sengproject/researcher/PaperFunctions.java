@@ -14,11 +14,16 @@ import java.util.ArrayList;
 
 public class PaperFunctions {
 
+    private static String base_path = "./submissions/";
+
+    // creates a new paper for a particular researcher
+    // returns true if paper sucessfully create
+    // returns false otherwise
     public static Boolean createNewPaper (String title, String jid, String vid, File selected_file) {
 
+        if (! checkValidity(selected_file)) {return false;}
+
         String todays_date = LocalDate.now().toString();
-
-
 
         JSONObject new_paper = JSONPaperParser.addPaper(title, "not_needed", todays_date,
                 "TODO J_NAME", jid, vid, selected_file.getName(), todays_date, "not set", "none", "pending");
@@ -27,7 +32,7 @@ public class PaperFunctions {
 
             String pid = new_paper.get("paper_id").toString();
 
-            File dest = new File("./submissions/" + Globals.getUser().get("uid").toString());
+            File dest = new File(base_path + Globals.getUser().get("uid").toString());
             if (!dest.exists()) {
                 dest.mkdirs();
             }
@@ -46,9 +51,12 @@ public class PaperFunctions {
         return true;
     }
 
-    public static void updatePaperFile (int pid, File selected_file) {
+    // updates the file associated with a paper's pid
+    // returns true if the paper is successfully submitted
+    // returns false otherwise
+    public static Boolean updatePaperFile (int pid, File selected_file) {
 
-        String base_path = "./submissions/";
+        if (! checkValidity(selected_file)) {return false;}
 
         String todays_date = LocalDate.now().toString();
 
@@ -74,7 +82,52 @@ public class PaperFunctions {
 
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
+            return false;
         }
+
+        return true;
+
+    }
+
+    // checks to make sure the file is valid
+    // not null and has a pdf extension
+    public static Boolean checkValidity (File file) {
+
+        // ensure file is selected
+        if (file == null) {
+            return false;
+        }
+
+        String fn = file.getName();
+        int dot_index = fn.indexOf('.');
+
+        // check if pdf file type
+        if (!".pdf".equals(fn.substring(dot_index, fn.length()))) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static Boolean downloadFile (int pid, File dest) {
+
+        String file_name = Integer.toString(pid) + ".pdf";
+        String src = base_path + Globals.getUser().get("uid").toString() + "/" + file_name;
+
+        if (src == null) {
+            return false;
+        }
+
+        try {
+
+            Files.copy(Paths.get(src), Paths.get(dest.getPath() + "/" + file_name));
+        } catch (IOException e) {
+            System.out.println(e.getLocalizedMessage());
+            return false;
+        }
+
+        return true;
 
     }
 
