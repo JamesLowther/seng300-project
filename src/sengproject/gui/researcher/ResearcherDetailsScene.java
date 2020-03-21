@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.researcher.PaperFunctions;
 
 import java.io.File;
 
@@ -50,6 +51,7 @@ public class ResearcherDetailsScene {
         new_version_b.setOnAction(action ->{
             // todo: call upload new version
             File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
+            PaperFunctions.updatePaperFile(Integer.parseInt(r_paper.getPaper_id()), selected_file);
 
         });
 

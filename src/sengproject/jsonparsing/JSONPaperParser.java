@@ -43,7 +43,7 @@ public class JSONPaperParser {
 //     File file, String[] pref_rev_uid
 	
     @SuppressWarnings("unchecked")
-	public static Boolean addPaper (String t, String pi, String sd, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String rej) {
+	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String rej) {
     	// TODO: Might need updating depending on Discord says
     	JSONObject paper = new JSONObject();
     	int rndPaperId = (int)(Math.random() * Integer.MAX_VALUE + 1);
@@ -63,9 +63,9 @@ public class JSONPaperParser {
     	paper.put("pref_rev_uid", null);
     	if (appendStrToFile("Papers.json", paper.toJSONString())) {
     		System.out.println("New paper created with title " + t);
-    		return true;
+    		return paper;
     	} else {
-    		return false;
+    		return null;
     	}
     }
 
@@ -90,8 +90,32 @@ public class JSONPaperParser {
 			System.out.println(e.getLocalizedMessage());
         }
         return null;
-
     }
+
+    public static ArrayList<JSONObject> getResearcherPapers (String uid) {
+		ArrayList<JSONObject> papers = new ArrayList<JSONObject>();
+		JSONParser parser = new JSONParser();
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"Papers.json"));
+			String line = reader.readLine();
+			while (line != null) {
+				JSONObject jsonObject = (JSONObject) parser.parse(line);
+				if ((String) jsonObject.get("author_id") == uid) {
+					papers.add(jsonObject);
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+			return papers;
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+		} catch (ParseException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		return null;
+	}
     
     public static JSONObject findPaper(int pid) {
     	ArrayList<JSONObject> papers = getResearcherPapers();
@@ -99,7 +123,7 @@ public class JSONPaperParser {
     		return null;
     	}
     	for (JSONObject p : papers) {
-    		if (pid == ((int) p.get("paper_id"))) {
+    		if (pid == ((long) p.get("paper_id"))) {
     			return p;
     		}
     	}
@@ -107,7 +131,7 @@ public class JSONPaperParser {
     }
 
     @SuppressWarnings("unchecked")
-	public static Boolean updatePaperFile (int pid, File file) {
+	public static Boolean updatePaperFile (int pid, String file) {
     	JSONObject paper = findPaper(pid);
     	if (paper != null) {
     		paper.put("title", paper.get("title"));
@@ -119,7 +143,7 @@ public class JSONPaperParser {
         	paper.put("journal_id", paper.get("journal_id"));
         	paper.put("volume_id", paper.get("volume_id"));
         	paper.put("file_name", file);
-        	paper.put("latest_data", paper.get("latest_data"));
+        	paper.put("latest_date", paper.get("latest_date"));
         	paper.put("deadline", paper.get("deadline"));
         	paper.put("reviewers", paper.get("reviewers"));
         	paper.put("status", paper.get("status"));
