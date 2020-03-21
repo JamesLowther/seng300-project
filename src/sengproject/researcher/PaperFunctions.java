@@ -1,7 +1,9 @@
 package sengproject.researcher;
 
+import javafx.stage.FileChooser;
 import org.json.simple.JSONObject;
 import sengproject.Globals;
+import sengproject.gui.GuiController;
 import sengproject.jsonparsing.JSONPaperParser;
 
 import java.io.File;
@@ -110,6 +112,8 @@ public class PaperFunctions {
 
     }
 
+    // downloads the document related to the pid
+    // returns true if file downloaded successfully
     public static Boolean downloadFile (int pid, File dest) {
 
         if (dest == null) { return false; }
