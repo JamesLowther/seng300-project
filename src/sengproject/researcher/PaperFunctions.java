@@ -112,6 +112,8 @@ public class PaperFunctions {
 
     public static Boolean downloadFile (int pid, File dest) {
 
+        if (dest == null) { return false; }
+
         String file_name = Integer.toString(pid) + ".pdf";
         String src = base_path + Globals.getUser().get("uid").toString() + "/" + file_name;
 
