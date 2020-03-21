@@ -56,7 +56,7 @@ public class JSONPaperParser {
     	paper.put("journal_id", jid);
     	paper.put("volume_id", vid);
     	paper.put("file_name", fn);
-    	paper.put("latest_data", ld);
+    	paper.put("latest_date", ld);
     	paper.put("deadline", dl);
     	paper.put("reviewers", rev);
     	paper.put("status", rej);

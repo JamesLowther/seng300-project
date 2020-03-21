@@ -18,6 +18,7 @@ import sengproject.jsonparsing.JSONPaperParser;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 import org.json.simple.JSONObject;
 
@@ -116,15 +117,10 @@ public class ResearcherNewPaperScene {
         submit_b.setPrefSize(150, 40);
         submit_b.setOnAction(action -> {
             //TODO: implement submit button
-        	if (ResearcherMenuScene.papers == null) {
-        		ResearcherMenuScene.papers = new ArrayList<ResearcherPaper>();
-        	} else {
-        		ResearcherMenuScene.papers.add(new ResearcherPaper(title_tf.getText(), "21232", "01/01/2020", (String)Globals.getUser().get("username"),
-                        (String) Globals.getUser().get("uid").toString(), "Journal of Smart", "123", "1231",
-                        "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                        "rejected"));
-        	}
-        	GuiController.changeScene(ResearcherMenuScene.getScene());
+            String todays_date = LocalDate.now().toString();
+            JSONPaperParser.addPaper(title_tf.getText(), "not_needed", todays_date, "TODO J_NAME", "TODO JID", "TODO VID", "file name", todays_date, "not set", "none", "pending");
+
+            GuiController.changeScene(ResearcherMenuScene.getScene());
         });
 
         // bottom spacer
