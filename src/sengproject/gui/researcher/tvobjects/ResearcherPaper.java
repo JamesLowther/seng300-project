@@ -29,44 +29,6 @@ public class ResearcherPaper {
     private String deadline;
     private String reviewers;
     private String status;
-
-    public ResearcherPaper(String t, String pi, String sd, String an, String aid, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String rej) {
-
-        title = t;
-        paper_id = pi;
-        sub_date = sd;
-        author_name = an;
-        author_id = aid;
-        journal_name = jn;
-        journal_id = jid;
-        volume_id = vid;
-        file_name = fn;
-        latest_date = ld;
-        deadline = dl;
-        reviewers = rev;
-        status = rej;
-
-       JSONPaperParser.addPaper(t, pi, sd, jn, jid, vid, fn, ld, dl, rev, rej);
-        
-
-        details_b = new Button("Details");
-        details_b.setOnAction(action ->{
-            GuiController.changeScene(ResearcherDetailsScene.getScene(this));
-        });
-
-        reviewers_b = new Button("Reviewers");
-        reviewers_b.setOnAction(action ->{
-            GuiController.changeScene(ResearcherReviewersScene.getScene(this));
-        });
-
-        actions_b = new Button("Actions");
-        actions_b.setOnAction(action ->{
-            GuiController.changeScene(ResearcherActionsScene.getScene(this));
-        });
-
-        System.out.println("paper created with title: " + title);
-
-    }
     
     public ResearcherPaper(JSONObject paper) {
     	title = (String) paper.get("title");
