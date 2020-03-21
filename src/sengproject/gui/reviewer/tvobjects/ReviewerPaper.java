@@ -29,6 +29,8 @@ public class ReviewerPaper {
     private String revisions;
     private String status;
 
+    // todo: 'previous_menu' is the previous menu to go back to. It is ether 'menu' or 'browse'
+    // this is a solution until I can think of a better way
     public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
 
         title = t;
@@ -119,5 +121,7 @@ public class ReviewerPaper {
     public String getRevisions () {return revisions;}
 
     public String getStatus () {return status;}
+
+    public boolean getCheckedStatus () { return star_cb.isSelected(); }
 
 }
