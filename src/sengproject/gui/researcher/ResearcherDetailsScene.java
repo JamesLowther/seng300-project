@@ -8,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.researcher.PaperFunctions;
 
 import java.io.File;
 
@@ -42,32 +44,55 @@ public class ResearcherDetailsScene {
         top_hb.setPadding(new Insets(10,10,10,10));
         top_hb.getChildren().addAll(name_vb, top_spacer_r, back_b);
 
+        // bottom spacers
+        Region bottom_spacer1_r = new Region();
+        HBox.setHgrow(bottom_spacer1_r, Priority.ALWAYS);
+
+        Region bottom_spacer2_r = new Region();
+        HBox.setHgrow(bottom_spacer2_r, Priority.ALWAYS);
+
+        // error label
+        Label error_lb = new Label ("");
+        error_lb.setFont(new Font("Arial", 16));
+
         // upload new version button
         FileChooser file_chooser = new FileChooser();
 
         Button new_version_b = new Button("Upload New Version");
         new_version_b.setPrefSize(150,40);
         new_version_b.setOnAction(action ->{
-            // todo: call upload new version
             File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
+            if (PaperFunctions.updatePaperFile(Integer.parseInt(r_paper.getPaper_id()), selected_file)) {
+
+                GuiController.changeScene(ResearcherMenuScene.getScene());
+
+                error_lb.setText("");
+            } else {
+                error_lb.setText("Error updating file");
+            }
 
         });
 
-        // browser reviewers button
+        // download button
+
+        DirectoryChooser dir_chooser = new DirectoryChooser();
+
         Button download_b = new Button("Download");
         download_b.setPrefSize(150,40);
         download_b.setOnAction(action ->{
             // todo: call download
+            File selected_path = dir_chooser.showDialog(GuiController.getStage());
+            if (PaperFunctions.downloadFile(Integer.parseInt(r_paper.getPaper_id()), selected_path)) {
+                error_lb.setText("");
+            } else {
+                error_lb.setText("Error downloading file");
+            }
         });
-
-        // bottom spacer
-        Region bottom_spacer_r = new Region();
-        HBox.setHgrow(bottom_spacer_r, Priority.ALWAYS);
 
         // bottom hbox
         HBox bottom_hb = new HBox();
         bottom_hb.setPadding(new Insets(10,50,10,50));
-        bottom_hb.getChildren().addAll(new_version_b, bottom_spacer_r, download_b);
+        bottom_hb.getChildren().addAll(new_version_b, bottom_spacer1_r, error_lb, bottom_spacer2_r, download_b);
 
         //  'Title of Paper' label
         Label paper_title_lb = new Label(r_paper.getTitle());

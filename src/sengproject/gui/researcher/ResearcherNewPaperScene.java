@@ -15,6 +15,7 @@ import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.jsonparsing.JSONPaperParser;
+import sengproject.researcher.PaperFunctions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ import java.time.LocalDate;
 import org.json.simple.JSONObject;
 
 public class ResearcherNewPaperScene {
+
+    private static File selected_file;
 	
     public static Scene getScene () {
 
@@ -94,13 +97,21 @@ public class ResearcherNewPaperScene {
         reviewer_vb.getChildren().addAll(reviewer_lb, reviewer_lv);
         reviewer_vb.setPadding(new Insets(0,30,30,30));
 
+        // error label
+        Label error_lb = new Label("");
+        error_lb.setFont(new Font("Arial", 16));
+
         // select file
         FileChooser file_chooser = new FileChooser();
 
         Button file_b = new Button("Select File");
         file_b.setPrefSize(100, 35);
         file_b.setOnAction(action -> {
-            File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
+            selected_file = file_chooser.showOpenDialog(GuiController.getStage());
+
+            if (selected_file != null) {
+                error_lb.setText(selected_file.getName());
+            }
         });
 
         HBox file_hb = new HBox();
@@ -109,18 +120,22 @@ public class ResearcherNewPaperScene {
 
         // center vbox
         VBox center_vb = new VBox();
-        center_vb.getChildren().addAll(title_hb, jv_hb, reviewer_vb, file_hb);
+        center_vb.getChildren().addAll(title_hb, jv_hb, reviewer_vb, file_hb, error_lb);
         center_vb.setAlignment(Pos.CENTER);
 
         // submit button
         Button submit_b = new Button("Submit");
         submit_b.setPrefSize(150, 40);
         submit_b.setOnAction(action -> {
-            //TODO: implement submit button
-            String todays_date = LocalDate.now().toString();
-            JSONPaperParser.addPaper(title_tf.getText(), "not_needed", todays_date, "TODO J_NAME", "TODO JID", "TODO VID", "file name", todays_date, "not set", "none", "pending");
 
-            GuiController.changeScene(ResearcherMenuScene.getScene());
+            if (PaperFunctions.createNewPaper(title_tf.getText(), "TODO JID", "TODO VID", selected_file)) {
+                GuiController.changeScene(ResearcherMenuScene.getScene());
+
+            } else {
+                error_lb.setText("Error creating new paper");
+            }
+
+
         });
 
         // bottom spacer

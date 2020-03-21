@@ -10,7 +10,7 @@ import sengproject.gui.researcher.ResearcherReviewersScene;
 
 public class ResearcherPaper {
 
-    //private JSONObject paper;
+    private JSONObject json_obj;
 
     private Button details_b;
     private Button reviewers_b;
@@ -31,6 +31,9 @@ public class ResearcherPaper {
     private String status;
     
     public ResearcherPaper(JSONObject paper) {
+
+        json_obj = paper;
+
     	title = (String) paper.get("title");
         paper_id = (String) paper.get("paper_id").toString();
         sub_date = (String) paper.get("sub_date");
@@ -62,6 +65,8 @@ public class ResearcherPaper {
 
         System.out.println("paper created with title: " + title);
     }
+
+    public JSONObject getJson_obj () { return json_obj; }
 
     public void setTitle (String t) {
         title = t;
