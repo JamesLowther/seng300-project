@@ -38,8 +38,12 @@ public class PaperFunctions {
                 Files.copy(Paths.get(selected_file.getPath()), Paths.get(dest.getPath() + "/" + file_name));
             } catch (IOException e) {
                 System.out.println(e.getLocalizedMessage());
+                return false;
             }
         }
+        else {return false;}
+
+        return true;
     }
 
     public static void updatePaperFile (int pid, File selected_file) {
