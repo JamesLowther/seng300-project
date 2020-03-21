@@ -63,6 +63,9 @@ public class ResearcherDetailsScene {
         new_version_b.setOnAction(action ->{
             File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
             if (PaperFunctions.updatePaperFile(Integer.parseInt(r_paper.getPaper_id()), selected_file)) {
+
+                GuiController.changeScene(ResearcherMenuScene.getScene());
+
                 error_lb.setText("");
             } else {
                 error_lb.setText("Error updating file");
