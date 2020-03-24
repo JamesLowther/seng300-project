@@ -23,7 +23,7 @@ public class PaperFunctions {
     // returns false otherwise
     public static Boolean createNewPaper (String title, String jid, String vid, ArrayList<JSONObject> pref_rev, File selected_file) {
 
-        if (! checkValidity(selected_file)) {return false;}
+        if (!checkValidity(selected_file) || title.equals("")) {return false;}
 
         String todays_date = LocalDate.now().toString();
         ArrayList<String> pref_rev_array = new ArrayList<String>();
