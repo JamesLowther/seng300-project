@@ -1,6 +1,7 @@
 package sengproject.gui.researcher.tvobjects;
 
 import javafx.scene.control.Button;
+import org.json.simple.JSONArray;
 import sengproject.jsonparsing.JSONPaperParser;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
@@ -45,7 +46,7 @@ public class ResearcherPaper {
         file_name = (String) paper.get("file_name");
         latest_date = (String) paper.get("latest_date");
         deadline = (String) paper.get("deadline");
-        reviewers = (String) paper.get("reviewers");
+        reviewers = Integer.toString(((JSONArray) paper.get("reviewers")).size());
         status = (String) paper.get("status");
         
         details_b = new Button("Details");

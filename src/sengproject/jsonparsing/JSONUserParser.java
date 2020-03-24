@@ -29,7 +29,7 @@ public class JSONUserParser {
 			JSONObject userObj = new JSONObject();
 			userObj.put("username", username);
 			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
-			userObj.put("uid",  random); // change this
+			userObj.put("uid",  Integer.toString(random)); // change this
 			userObj.put("password", Integer.toString(password.hashCode()));
 			userObj.put("role", role);
 			userObj.put("messages", null); // Possible JSONArray
@@ -143,6 +143,32 @@ public class JSONUserParser {
         }
 		return null;
 	}
+
+	private static JSONObject findUserUID(String uid) {
+		JSONParser parser = new JSONParser();
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"Users.json"));
+			String line = reader.readLine();
+			while (line != null) {
+				JSONObject jsonObject = (JSONObject) parser.parse(line);
+				String currentUsername = (String)jsonObject.get("uid");
+				if (currentUsername.equals(uid)) {
+					reader.close();
+					return jsonObject;
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+			return null;
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+		} catch (ParseException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		return null;
+	}
 	
 	private static JSONObject findUser(String username, String password) {
 		JSONParser parser = new JSONParser();
@@ -187,6 +213,42 @@ public class JSONUserParser {
 		} else {
 			return null;
 		}
+	}
+
+	public static JSONObject getUserUID(String uid) {
+		JSONObject currentUser = findUserUID(uid);
+		if (currentUser != null) {
+			return currentUser;
+		} else {
+			return null;
+		}
+	}
+
+	public static ArrayList<JSONObject> getUsersFromRole(String role) {
+		JSONParser parser = new JSONParser();
+		BufferedReader reader;
+		ArrayList<JSONObject> rev_array = new ArrayList<JSONObject>();
+		try {
+			reader = new BufferedReader(new FileReader(
+					"Users.json"));
+			String line = reader.readLine();
+			while (line != null) {
+				JSONObject jsonObject = (JSONObject) parser.parse(line);
+				String currentRole = (String) jsonObject.get("role");
+				if (currentRole.equals(role)) {
+					rev_array.add(jsonObject);
+				}
+				line = reader.readLine();
+			}
+			reader.close();
+			return rev_array;
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+		} catch (ParseException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		return null;
+
 	}
 	
 	private static void appendStrToFile(String fileName, String str) { 

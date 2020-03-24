@@ -1,5 +1,6 @@
 package sengproject.gui.researcher;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,16 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import jdk.nashorn.internal.scripts.JS;
-import sengproject.Globals;
 import sengproject.gui.GuiController;
-import sengproject.gui.researcher.tvobjects.ResearcherPaper;
-import sengproject.jsonparsing.JSONPaperParser;
+import sengproject.jsonparsing.JSONUserParser;
 import sengproject.researcher.PaperFunctions;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 import org.json.simple.JSONObject;
 
@@ -87,11 +84,14 @@ public class ResearcherNewPaperScene {
         jv_hb.setPadding(new Insets(0,0,20,0));
         jv_hb.setAlignment(Pos.CENTER);
 
-        // reviewer label and listview
+        // reviewer label
         Label reviewer_lb = new Label("Preferred Reviewers");
         volume_lb.setFont(new Font("Arial", 20));
 
+        // reviewer listview
         ListView<String> reviewer_lv = new ListView<String>();
+        reviewer_lv.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        reviewer_lv.getItems().addAll(getReviewerNames());
 
         VBox reviewer_vb = new VBox();
         reviewer_vb.getChildren().addAll(reviewer_lb, reviewer_lv);
@@ -128,14 +128,21 @@ public class ResearcherNewPaperScene {
         submit_b.setPrefSize(150, 40);
         submit_b.setOnAction(action -> {
 
-            if (PaperFunctions.createNewPaper(title_tf.getText(), "TODO JID", "TODO VID", selected_file)) {
+            ObservableList indicies = reviewer_lv.getSelectionModel().getSelectedIndices();
+            ArrayList<JSONObject> pref_rev = new ArrayList<JSONObject>();
+            ArrayList<JSONObject> all_rev = JSONUserParser.getUsersFromRole("Reviewer");
+
+            // add reviewer JSONObjects based off their indices
+            for (Object i : indicies) {
+                pref_rev.add(all_rev.get((int) i));
+            }
+
+            if (PaperFunctions.createNewPaper(title_tf.getText(), "TODO JID", "TODO VID", pref_rev, selected_file)) {
                 GuiController.changeScene(ResearcherMenuScene.getScene());
 
             } else {
                 error_lb.setText("Error creating new paper");
             }
-
-
         });
 
         // bottom spacer
@@ -155,6 +162,19 @@ public class ResearcherNewPaperScene {
 
         return new Scene(main_pane);
 
+    }
+
+    // returns an array of all reviewer usernames
+    public static ArrayList<String> getReviewerNames() {
+
+        ArrayList<JSONObject> reviewers = JSONUserParser.getUsersFromRole("Reviewer");
+        ArrayList<String> rev_strings = new ArrayList<String>();
+
+        for (JSONObject o : reviewers) {
+            rev_strings.add((String) o.get("username"));
+        }
+
+        return rev_strings;
     }
 
 }

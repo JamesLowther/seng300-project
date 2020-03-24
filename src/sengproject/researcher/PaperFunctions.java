@@ -21,14 +21,19 @@ public class PaperFunctions {
     // creates a new paper for a particular researcher
     // returns true if paper sucessfully create
     // returns false otherwise
-    public static Boolean createNewPaper (String title, String jid, String vid, File selected_file) {
+    public static Boolean createNewPaper (String title, String jid, String vid, ArrayList<JSONObject> pref_rev, File selected_file) {
 
         if (! checkValidity(selected_file)) {return false;}
 
         String todays_date = LocalDate.now().toString();
+        ArrayList<String> pref_rev_array = new ArrayList<String>();
+
+        for (JSONObject p : pref_rev) {
+            pref_rev_array.add((String) p.get("uid"));
+        }
 
         JSONObject new_paper = JSONPaperParser.addPaper(title, "not_needed", todays_date,
-                "TODO J_NAME", jid, vid, selected_file.getName(), todays_date, "not set", "none", "pending");
+                "TODO J_NAME", jid, vid, selected_file.getName(), todays_date, "not set", pref_rev_array, "pending");
 
         if (new_paper != null) {
 

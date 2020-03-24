@@ -7,9 +7,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
-import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.gui.researcher.tvobjects.ResearcherReviewer;
+import sengproject.jsonparsing.JSONUserParser;
 
 import java.util.ArrayList;
 
@@ -85,15 +86,21 @@ public class ResearcherBrowseReviewersScene {
     }
 
     private static ArrayList<ResearcherReviewer> getResearcherReviewers () {
-        // todo: get reviewers
-
 
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
+        ArrayList<JSONObject> all_reviewers = JSONUserParser.getUsersFromRole("Reviewer");
 
-        // todo: this is just test data
-        reviewers.add(new ResearcherReviewer("Bob Barker", 3, 2, 2, 12.5f));
-        reviewers.add(new ResearcherReviewer("Adam Apple", 2, 1, 2, 5.3f));
-        reviewers.add(new ResearcherReviewer("Jack Joe", 1, 0, 2, 30.1f));
+        for (JSONObject p : all_reviewers) {
+
+            //todo: calculate averages
+            reviewers.add(new ResearcherReviewer(
+                    (String) p.get("username"),
+                    1,
+                    2,
+                    3,
+                    4
+            ));
+        }
 
         return reviewers;
 
