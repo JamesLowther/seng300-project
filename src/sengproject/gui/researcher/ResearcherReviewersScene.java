@@ -7,10 +7,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.gui.researcher.tvobjects.ResearcherReviewer;
+import sengproject.jsonparsing.JSONUserParser;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ResearcherReviewersScene {
@@ -102,10 +106,9 @@ public class ResearcherReviewersScene {
         }
 
         // add reviewers to table views
-        ArrayList<ResearcherReviewer> reviewers_array = getResearcherReviewers(r_paper);
-        current_rev_tv.getItems().addAll(reviewers_array);
-        preferred_rev_tv.getItems().addAll(reviewers_array);
-        interested_rev_tv.getItems().addAll(reviewers_array);
+        current_rev_tv.getItems().addAll(getCurrentReviewers(r_paper));
+        preferred_rev_tv.getItems().addAll(getPreferredReviewers(r_paper));
+        interested_rev_tv.getItems().addAll(getInterestedReviewers(r_paper));
 
         // tab pane
         TabPane main_tp = new TabPane();
@@ -130,20 +133,70 @@ public class ResearcherReviewersScene {
 
     }
 
-    private static ArrayList<ResearcherReviewer> getResearcherReviewers (ResearcherPaper paper) {
-        // todo: get reviewers
-
+    private static ArrayList<ResearcherReviewer> getPreferredReviewers (ResearcherPaper paper) {
 
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
 
-        // todo: this is just test data
-        reviewers.add(new ResearcherReviewer("Bob Barker", 3, 2, 2, 12.5f));
-        reviewers.add(new ResearcherReviewer("Adam Apple", 2, 1, 2, 5.3f));
-        reviewers.add(new ResearcherReviewer("Jack Joe", 1, 0, 2, 30.1f));
+        JSONArray pref_rev_uid = (JSONArray) paper.getJson_obj().get("pref_rev_uid");
 
+        for (Object o : pref_rev_uid) {
+
+            JSONObject rev = JSONUserParser.getUserUID((String) o);
+
+            reviewers.add(new ResearcherReviewer(
+                    (String) rev.get("username"),
+                    1,
+                    2,
+                    3,
+                    4
+            ));
+
+        }
         return reviewers;
+    }
 
+    private static ArrayList<ResearcherReviewer> getCurrentReviewers (ResearcherPaper paper) {
 
+        ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
+
+        JSONArray pref_rev_uid = (JSONArray) paper.getJson_obj().get("reviewers");
+
+        for (Object o : pref_rev_uid) {
+
+            JSONObject rev = JSONUserParser.getUserUID((String) o);
+
+            reviewers.add(new ResearcherReviewer(
+                    (String) rev.get("username"),
+                    1,
+                    2,
+                    3,
+                    4
+            ));
+
+        }
+        return reviewers;
+    }
+
+    private static ArrayList<ResearcherReviewer> getInterestedReviewers (ResearcherPaper paper) {
+
+        ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
+
+        JSONArray pref_rev_uid = (JSONArray) paper.getJson_obj().get("inter_rev_uid");
+
+        for (Object o : pref_rev_uid) {
+
+            JSONObject rev = JSONUserParser.getUserUID((String) o);
+
+            reviewers.add(new ResearcherReviewer(
+                    (String) rev.get("username"),
+                    1,
+                    2,
+                    3,
+                    4
+            ));
+
+        }
+        return reviewers;
     }
 
 }

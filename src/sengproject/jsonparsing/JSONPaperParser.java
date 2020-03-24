@@ -43,10 +43,14 @@ public class JSONPaperParser {
 //     File file, String[] pref_rev_uid
 	
     @SuppressWarnings("unchecked")
-	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String rej) {
+	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vid, String fn, String ld, String dl, ArrayList<String> pref_rev, String rej) {
     	// TODO: Might need updating depending on Discord says
     	JSONObject paper = new JSONObject();
     	int rndPaperId = (int)(Math.random() * Integer.MAX_VALUE + 1);
+
+    	JSONArray pref_rev_array = new JSONArray();
+    	pref_rev_array.addAll(pref_rev);
+
     	paper.put("title", t);
     	paper.put("paper_id", rndPaperId);
     	paper.put("sub_date", sd);
@@ -58,9 +62,10 @@ public class JSONPaperParser {
     	paper.put("file_name", fn);
     	paper.put("latest_date", ld);
     	paper.put("deadline", dl);
-    	paper.put("reviewers", rev);
+    	paper.put("reviewers", new JSONArray());
     	paper.put("status", rej);
-    	paper.put("pref_rev_uid", null);
+    	paper.put("pref_rev_uid", pref_rev_array);
+    	paper.put("inter_rev_uid", new JSONArray());
     	if (appendStrToFile("Papers.json", paper.toJSONString())) {
     		System.out.println("New paper created with title " + t);
     		return paper;
