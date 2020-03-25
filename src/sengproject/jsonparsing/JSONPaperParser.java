@@ -135,10 +135,52 @@ public class JSONPaperParser {
     	return null;
     }
 
+	public static boolean removePaper(JSONObject paper) {
+		String token1 = "";
+		Scanner inFile1;
+		JSONParser parser = new JSONParser();
+		try {
+			inFile1 = new Scanner(new File("Papers.json")).useDelimiter("\n");
+			List<String> temps = new ArrayList<String>();
+			while (inFile1.hasNext()) {
+				token1 = inFile1.next();
+				temps.add(token1);
+			}
+			inFile1.close();
+			for (String s : temps) {
+				JSONObject obj = (JSONObject) parser.parse(s);
+				if (paper.equals(obj)) {
+					temps.remove(s);
+					FileWriter writer;
+					try {
+						writer = new FileWriter("Papers.json");
+						for(String str: temps) {
+							writer.write(str + System.lineSeparator());
+						}
+						writer.close();
+					} catch (IOException e) {
+						System.out.println(e.getLocalizedMessage());
+						return false;
+					}
+					return true;
+				}
+			}
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+			return false;
+		} catch (ParseException e) {
+			System.out.println(e.getLocalizedMessage());
+			return false;
+		}
+		return false;
+	}
+
     @SuppressWarnings("unchecked")
 	public static Boolean updatePaperFile (int pid, String file) {
+
     	JSONObject paper = findPaper(pid);
-    	if (paper != null) {
+    	
+    	if (paper != null && removePaper(paper)) {
     		paper.put("title", paper.get("title"));
     		paper.put("paper_id", pid);
         	paper.put("sub_date", paper.get("sub_date"));
@@ -158,6 +200,7 @@ public class JSONPaperParser {
     	} else {
     		return false;
     	}
+
     }
     
     private static boolean appendStrToFile(String fileName, String str) { 
