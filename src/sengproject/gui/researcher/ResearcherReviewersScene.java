@@ -145,10 +145,10 @@ public class ResearcherReviewersScene {
 
             reviewers.add(new ResearcherReviewer(
                     (String) rev.get("username"),
-                    1,
-                    2,
-                    3,
-                    4
+                    (long) rev.get("major_rev"),
+                    (long) rev.get("minor_rev"),
+                    (long) rev.get("papers_reviewed"),
+                    (double) ((JSONArray) rev.get("avg_time")).get(0)
             ));
 
         }
@@ -167,10 +167,10 @@ public class ResearcherReviewersScene {
 
             reviewers.add(new ResearcherReviewer(
                     (String) rev.get("username"),
-                    1,
-                    2,
-                    3,
-                    4
+                    (long) rev.get("major_rev"),
+                    (long) rev.get("minor_rev"),
+                    (long) rev.get("papers_reviewed"),
+                    (double) ((JSONArray) rev.get("avg_time")).get(0)
             ));
 
         }
@@ -189,10 +189,10 @@ public class ResearcherReviewersScene {
 
             reviewers.add(new ResearcherReviewer(
                     (String) rev.get("username"),
-                    1,
-                    2,
-                    3,
-                    4
+                    (long) rev.get("major_rev"),
+                    (long) rev.get("minor_rev"),
+                    (long) rev.get("papers_reviewed"),
+                    (double) ((JSONArray) rev.get("avg_time")).get(0)
             ));
 
         }

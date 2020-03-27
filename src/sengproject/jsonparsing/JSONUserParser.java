@@ -34,7 +34,13 @@ public class JSONUserParser {
 			userObj.put("role", role);
 			userObj.put("messages", null); // Possible JSONArray
 			userObj.put("reviewer_due", null); // Possible JSONArray
-			userObj.put("papers_reviewed", null); // int
+			userObj.put("papers_reviewed", 0); // int
+			userObj.put("major_rev", 0);
+			userObj.put("minor_rev", 0);
+			JSONArray avg_array = new JSONArray();
+			avg_array.add(0.0);
+			avg_array.add(0);
+			userObj.put("avg_time", avg_array);
 			appendStrToFile("Users.json", userObj.toJSONString());
 			return true;
 		} else {
@@ -86,13 +92,15 @@ public class JSONUserParser {
 		if (removeUser(user)) {
 			JSONObject userObj = new JSONObject();
 			userObj.put("username", username);
-			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
-			userObj.put("uid",  random);
+			userObj.put("uid",  user.get("uid"));
 			userObj.put("password", Integer.toString(password.hashCode()));
 			userObj.put("role", user.get("role"));
 			userObj.put("messages", messages);
 			userObj.put("reviewer_due", reviewerDue);
 			userObj.put("papers_reviewed", papersReviewed);
+			userObj.put("major_rev", user.get("major_rev"));
+			userObj.put("minor_rev", user.get("minor_rev"));
+			userObj.put("avg_time", user.get("avg_time"));
 			appendStrToFile("Users.json", userObj.toJSONString());
 			return true;
 		} else {
@@ -104,13 +112,115 @@ public class JSONUserParser {
 		if (removeUser(user)) {
 			JSONObject userObj = new JSONObject();
 			userObj.put("username", user.get("username"));
-			int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
-			userObj.put("uid",  random); // change this
+			userObj.put("uid",  user.get("uid"));
 			userObj.put("password", user.get("password"));
 			userObj.put("role", user.get("role"));
 			userObj.put("messages", messages); // Possible JSONArray
 			userObj.put("reviewer_due", reviewerDue); // Possible JSONArray
-			userObj.put("papers_reviewed", papersReviewed); 
+			userObj.put("papers_reviewed", papersReviewed);
+			userObj.put("major_rev", user.get("major_rev"));
+			userObj.put("minor_rev", user.get("minor_rev"));
+			userObj.put("avg_time", user.get("avg_time"));
+			appendStrToFile("Users.json", userObj.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean addMajorRev(String uid) {
+		JSONObject user = findUserUID(uid);
+
+		if (user != null && removeUser(user)) {
+			JSONObject userObj = new JSONObject();
+			userObj.put("username", user.get("username"));
+			userObj.put("uid",  user.get("uid"));
+			userObj.put("password", user.get("password"));
+			userObj.put("role", user.get("role"));
+			userObj.put("messages", user.get("messages"));
+			userObj.put("reviewer_due", user.get("reviewer_due"));
+			userObj.put("papers_reviewed", user.get("papers_reviewed"));
+			userObj.put("major_rev", (long) user.get("major_rev") + 1);
+			userObj.put("minor_rev", user.get("minor_rev"));
+			userObj.put("avg_time", user.get("avg_time"));
+			appendStrToFile("Users.json", userObj.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean addMinorRev(String uid) {
+		JSONObject user = findUserUID(uid);
+
+		if (user != null && removeUser(user)) {
+			JSONObject userObj = new JSONObject();
+			userObj.put("username", user.get("username"));
+			userObj.put("uid",  user.get("uid"));
+			userObj.put("password", user.get("password"));
+			userObj.put("role", user.get("role"));
+			userObj.put("messages", user.get("messages"));
+			userObj.put("reviewer_due", user.get("reviewer_due"));
+			userObj.put("papers_reviewed", user.get("papers_reviewed"));
+			userObj.put("major_rev", user.get("major_rev"));
+			userObj.put("minor_rev", (long) user.get("minor_rev") + 1);
+			userObj.put("avg_time", user.get("avg_time"));
+			appendStrToFile("Users.json", userObj.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean addPaperRev(String uid) {
+		JSONObject user = findUserUID(uid);
+
+		if (user != null && removeUser(user)) {
+			JSONObject userObj = new JSONObject();
+			userObj.put("username", user.get("username"));
+			userObj.put("uid",  user.get("uid"));
+			userObj.put("password", user.get("password"));
+			userObj.put("role", user.get("role"));
+			userObj.put("messages", user.get("messages"));
+			userObj.put("reviewer_due", user.get("reviewer_due"));
+			userObj.put("papers_reviewed", (long) user.get("papers_reviewed") + 1);
+			userObj.put("major_rev", user.get("major_rev"));
+			userObj.put("minor_rev", user.get("minor_rev"));
+			userObj.put("avg_time", user.get("avg_time"));
+			appendStrToFile("Users.json", userObj.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean addAvgTime(String uid, int days) {
+		JSONObject user = findUserUID(uid);
+
+		if (user != null && removeUser(user)) {
+			JSONObject userObj = new JSONObject();
+			userObj.put("username", user.get("username"));
+			userObj.put("uid",  user.get("uid"));
+			userObj.put("password", user.get("password"));
+			userObj.put("role", user.get("role"));
+			userObj.put("messages", user.get("messages"));
+			userObj.put("reviewer_due", user.get("reviewer_due"));
+			userObj.put("papers_reviewed", user.get("papers_reviewed"));
+			userObj.put("major_rev", user.get("major_rev"));
+			userObj.put("minor_rev", user.get("minor_rev"));
+
+			JSONArray array = (JSONArray) user.get("avg_time");
+			double mean = (double) array.get(0);
+			long count = (long) array.get(1) + 1;
+
+			double new_mean = mean + (days - mean)/count;
+
+			JSONArray new_array = new JSONArray();
+			new_array.add(new_mean);
+			new_array.add(count);
+
+			userObj.put("avg_time", new_array);
+
 			appendStrToFile("Users.json", userObj.toJSONString());
 			return true;
 		} else {
@@ -250,7 +360,7 @@ public class JSONUserParser {
 		return null;
 
 	}
-	
+
 	private static void appendStrToFile(String fileName, String str) { 
 		try { 
 			BufferedWriter out = new BufferedWriter( 

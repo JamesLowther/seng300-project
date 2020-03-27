@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherReviewer;
@@ -92,13 +93,12 @@ public class ResearcherBrowseReviewersScene {
 
         for (JSONObject p : all_reviewers) {
 
-            //todo: calculate averages
             reviewers.add(new ResearcherReviewer(
                     (String) p.get("username"),
-                    1,
-                    2,
-                    3,
-                    4
+                    (long) p.get("major_rev"),
+                    (long) p.get("minor_rev"),
+                    (long) p.get("papers_reviewed"),
+                    (double) ((JSONArray) p.get("avg_time")).get(0)
             ));
         }
 

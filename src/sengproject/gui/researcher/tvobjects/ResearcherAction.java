@@ -17,7 +17,7 @@ public class ResearcherAction {
     private String date_recommended;
     private String date_completed;
 
-    private VBox buttons_vb;
+    private Button done_b;
 
     public ResearcherAction (String ad, String ruid, String dr, String dc) {
 
@@ -26,25 +26,13 @@ public class ResearcherAction {
         date_recommended = dr;
         date_completed = dc;
 
+        done_b = new Button("Done");
+        //done_b.setPrefSize(80,3);
+        done_b.setOnAction(action ->{
+            System.out.println("Done action: " + action_details);
 
-        Button accept_b = new Button("Accept");
-        accept_b.setPrefSize(80,3);
-        accept_b.setOnAction(action ->{
-            System.out.println("Accepted action: " + action_details);
-
-            // todo: accept button
+            // todo: done button
         });
-
-        Button reject_b = new Button("Reject");
-        reject_b.setPrefSize(80,3);
-        reject_b.setOnAction(action ->{
-            System.out.println("Rejected action: " + action_details);
-
-            //todo: reject action
-        });
-
-        buttons_vb = new VBox();
-        buttons_vb.getChildren().addAll(accept_b, reject_b);
 
     }
 
@@ -64,9 +52,8 @@ public class ResearcherAction {
 
     public String getDate_completed () { return date_completed; }
 
-    public void setButtons_vb (VBox v) { buttons_vb = v; }
+    public void setDone_b (Button b) { done_b = b; }
 
-    public VBox getButtons_vb () { return buttons_vb; }
-
+    public Button getDone_b () { return done_b; }
 
 }
