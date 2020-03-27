@@ -2,6 +2,7 @@ package sengproject.gui.researcher;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -53,13 +54,12 @@ public class ResearcherActionsScene {
             TableColumn<ResearcherAction, String> date_recommended_column = new TableColumn<ResearcherAction, String>("Date recommended");
             date_recommended_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("date_recommended"));
 
-            TableColumn<ResearcherAction, VBox> buttons_column = new TableColumn<ResearcherAction, VBox>("");
-            buttons_column.setStyle("-fx-alignment: CENTER;");
-            buttons_column.setSortable(false);
-            buttons_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, VBox>("buttons_vb"));
+            TableColumn<ResearcherAction, Button>  done_column = new TableColumn<ResearcherAction, Button> ("");
+            done_column.setStyle("-fx-alignment: CENTER;");
+            done_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, Button> ("done_b"));
+            done_column.setSortable(false);
 
-
-            pending_action_tv.getColumns().addAll(name_column, rev_uid_column, date_recommended_column, buttons_column);
+            pending_action_tv.getColumns().addAll(name_column, rev_uid_column, date_recommended_column, done_column);
         }
 
         // action history
