@@ -15,6 +15,7 @@ import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.LoginScene;
 import sengproject.gui.editor.tvobjects.EditorPaper;
+import sengproject.jsonparsing.JSONJournalParser;
 import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.login.LoginHandler;
 
@@ -72,7 +73,15 @@ public class EditorMenuScene {
         //  'Journal Name' label
         //todo: journal name
         //  needs to get the journal associated in with the editor and set the label text
-        Label center_lb = new Label("TODO: JOURNAL NAME");
+        ArrayList<JSONObject> journals = JSONJournalParser.getJournals((String) Globals.getUser().get("uid"));
+        String journal_name;
+        try {
+            journal_name = (String) journals.get(0).get("title");
+        } catch (IndexOutOfBoundsException e) {
+            journal_name = "No Journal Associated With User";
+        }
+
+        Label center_lb = new Label(journal_name);
         center_lb.setFont(new Font("Arial", 16));
 
         // table view
@@ -116,6 +125,10 @@ public class EditorMenuScene {
         main_pane.setCenter(center_vb);
         main_pane.setBottom(bottom_hb);
 
+        // testing
+        //JSONJournalParser.addJournal("test", "1234");
+        JSONObject test = JSONJournalParser.findJournal("1117245929");
+        JSONJournalParser.addVolume((String) test.get("jid"), "volume 2");
 
         return new Scene(main_pane);
 
@@ -123,8 +136,17 @@ public class EditorMenuScene {
 
     private static ArrayList<EditorPaper> getEditorPapers () {
 
-        // todo: get all of the EditorPaper objects, add to ArrayList, and return
-        //  this code currently does not work
+        // get jid
+        ArrayList<JSONObject> journals = JSONJournalParser.getJournals((String) Globals.getUser().get("uid"));
+        String jid;
+        try {
+            jid = (String) journals.get(0).get("jid");
+        } catch (IndexOutOfBoundsException e) {
+            papers = new ArrayList<EditorPaper>();
+            return papers;
+        }
+
+        System.out.println(jid);
 
         ArrayList<JSONObject> paperJ = JSONPaperParser.getResearcherPapers();
         if (paperJ == null) {
@@ -133,14 +155,13 @@ public class EditorMenuScene {
         }
         ArrayList<EditorPaper> temp = new ArrayList<EditorPaper>();
         for (JSONObject pj : paperJ) {
-            String authorID = (String) pj.get("author_id");
-            String userID = (String) Globals.getUser().get("uid").toString();
-            if (authorID.equals("1638929064")) {
+            String journalID = (String) pj.get("journal_id");
+            if (journalID.equals(jid)) {
                 temp.add(new EditorPaper(pj));
             }
         }
-        papers = temp;
-        return papers;
+
+        return temp;
 
     }
 
