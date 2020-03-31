@@ -100,7 +100,8 @@ public class EditorBrowseReviewersScene {
                     (long) p.get("major_rev"),
                     (long) p.get("minor_rev"),
                     (long) p.get("papers_reviewed"),
-                    (double) ((JSONArray) p.get("avg_time")).get(0)
+                    (double) ((JSONArray) p.get("avg_time")).get(0),
+                    "TODO"
             ));
         }
 

@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.EditorActionsScene;
 import sengproject.gui.editor.EditorDetailsScene;
+import sengproject.gui.editor.EditorReviewersScene;
 import sengproject.gui.researcher.ResearcherActionsScene;
 import sengproject.gui.researcher.ResearcherDetailsScene;
 import sengproject.gui.researcher.ResearcherReviewersScene;
@@ -58,7 +59,7 @@ public class EditorPaper {
 
         reviewers_b = new Button("Reviewers");
         reviewers_b.setOnAction(action ->{
-            //todo: call reviewers scene
+            GuiController.changeScene(EditorReviewersScene.getScene(this));
         });
 
         actions_b = new Button("Actions");
