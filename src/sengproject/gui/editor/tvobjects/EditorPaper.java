@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
+import sengproject.gui.editor.EditorActionsScene;
+import sengproject.gui.editor.EditorDetailsScene;
 import sengproject.gui.researcher.ResearcherActionsScene;
 import sengproject.gui.researcher.ResearcherDetailsScene;
 import sengproject.gui.researcher.ResearcherReviewersScene;
@@ -28,6 +30,7 @@ public class EditorPaper {
     private String latest_date;
     private String deadline;
     private String reviewers;
+
     private String status;
 
     public EditorPaper(JSONObject paper) {
@@ -50,7 +53,7 @@ public class EditorPaper {
 
         details_b = new Button("Details");
         details_b.setOnAction(action ->{
-            //todo: call details scene
+            GuiController.changeScene(EditorDetailsScene.getScene(this));
         });
 
         reviewers_b = new Button("Reviewers");
@@ -60,7 +63,7 @@ public class EditorPaper {
 
         actions_b = new Button("Actions");
         actions_b.setOnAction(action ->{
-            //todo: call actions scene
+            GuiController.changeScene(EditorActionsScene.getScene(this));
         });
 
         System.out.println("paper created with title: " + title);

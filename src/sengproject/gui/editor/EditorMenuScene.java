@@ -71,6 +71,7 @@ public class EditorMenuScene {
 
         //  'Journal Name' label
         //todo: journal name
+        //  needs to get the journal associated in with the editor and set the label text
         Label center_lb = new Label("TODO: JOURNAL NAME");
         center_lb.setFont(new Font("Arial", 16));
 
@@ -95,13 +96,13 @@ public class EditorMenuScene {
         actions_column.setCellValueFactory(new PropertyValueFactory<EditorPaper, Button> ("actions_b"));
         actions_column.setSortable(false);
 
-        TableColumn<EditorPaper, String>  due_date_column = new TableColumn<EditorPaper, String> ("");
+        TableColumn<EditorPaper, String>  due_date_column = new TableColumn<EditorPaper, String> ("Deadline");
         due_date_column.setStyle("-fx-alignment: CENTER;");
         due_date_column.setCellValueFactory(new PropertyValueFactory<EditorPaper, String> ("deadline"));
 
         papers_tv.getColumns().addAll(title_column, details_column, reviewers_column, actions_column, due_date_column);
 
-        //papers_tv.getItems().addAll(getResearcherPapers()); // add papers to tableview
+        papers_tv.getItems().addAll(getEditorPapers()); // add papers to tableview
 
         // center vbox
         VBox center_vb = new VBox();
@@ -123,6 +124,7 @@ public class EditorMenuScene {
     private static ArrayList<EditorPaper> getEditorPapers () {
 
         // todo: get all of the EditorPaper objects, add to ArrayList, and return
+        //  this code currently does not work
 
         ArrayList<JSONObject> paperJ = JSONPaperParser.getResearcherPapers();
         if (paperJ == null) {
@@ -133,13 +135,12 @@ public class EditorMenuScene {
         for (JSONObject pj : paperJ) {
             String authorID = (String) pj.get("author_id");
             String userID = (String) Globals.getUser().get("uid").toString();
-            if (authorID.equals(userID)) {
+            if (authorID.equals("1638929064")) {
                 temp.add(new EditorPaper(pj));
             }
         }
         papers = temp;
         return papers;
-
 
     }
 
