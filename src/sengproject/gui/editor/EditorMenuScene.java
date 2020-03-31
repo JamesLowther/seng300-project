@@ -125,11 +125,6 @@ public class EditorMenuScene {
         main_pane.setCenter(center_vb);
         main_pane.setBottom(bottom_hb);
 
-        // testing
-        //JSONJournalParser.addJournal("test", "1234");
-        JSONObject test = JSONJournalParser.findJournal("1117245929");
-        JSONJournalParser.addVolume((String) test.get("jid"), "volume 2");
-
         return new Scene(main_pane);
 
     }
