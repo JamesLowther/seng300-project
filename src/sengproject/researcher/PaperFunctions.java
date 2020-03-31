@@ -123,8 +123,12 @@ public class PaperFunctions {
 
         if (dest == null) { return false; }
 
+        JSONObject paper = JSONPaperParser.findPaper(pid);
+
         String file_name = Integer.toString(pid) + ".pdf";
-        String src = base_path + Globals.getUser().get("uid").toString() + "/" + file_name;
+        String src = base_path + paper.get("author_id") + "/" + file_name;
+
+        System.out.println(src);
 
         if (src == null) {
             return false;
