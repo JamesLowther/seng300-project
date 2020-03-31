@@ -3,6 +3,7 @@ package sengproject.gui.editor.tvobjects;
 import javafx.scene.control.Button;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.EditorDetailsScene;
+import sengproject.gui.editor.EditorManageReviewerScene;
 
 public class EditorReviewer {
 
@@ -23,11 +24,11 @@ public class EditorReviewer {
         num_minor_rev = min_r;
         num_pub_rev = pub_r;
         avg_rev_time = avg_t;
-        deadline = deadline;
+        deadline = dl;
 
         manage_b = new Button("Manage");
         manage_b.setOnAction(action ->{
-            //todo: call manage scene
+            GuiController.changeScene(EditorManageReviewerScene.getScene(this));
         });
 
         add_b = new Button("Add");

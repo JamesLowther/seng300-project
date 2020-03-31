@@ -65,9 +65,9 @@ public class EditorReviewersScene {
             deadline_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             deadline_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("num_pub_rev"));
 
-            TableColumn<EditorReviewer, String> manage_column = new TableColumn<EditorReviewer, String>("");
-            manage_column.setStyle("-fx-alignment: CENTER-RIGHT;");
-            manage_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("avg_rev_time"));
+            TableColumn<EditorReviewer, Button> manage_column = new TableColumn<EditorReviewer, Button>("");
+            manage_column.setStyle("-fx-alignment: CENTER;");
+            manage_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, Button>("manage_b"));
             manage_column.setSortable(false);
 
             current_rev_tv.getColumns().addAll(name_column, major_rev_column, minor_rev_column, deadline_column, manage_column);
@@ -87,9 +87,9 @@ public class EditorReviewersScene {
             average_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             average_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("avg_rev_time"));
 
-            TableColumn<EditorReviewer, String> add_column = new TableColumn<EditorReviewer, String>("");
-            add_column.setStyle("-fx-alignment: CENTER-RIGHT;");
-            add_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("add_b"));
+            TableColumn<EditorReviewer, Button> add_column = new TableColumn<EditorReviewer, Button>("");
+            add_column.setStyle("-fx-alignment: CENTER;");
+            add_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, Button>("add_b"));
             add_column.setSortable(false);
 
             preferred_rev_tv.getColumns().addAll(name_column, publications_column, average_column, add_column);
@@ -110,9 +110,9 @@ public class EditorReviewersScene {
             average_column.setStyle("-fx-alignment: CENTER-RIGHT;");
             average_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("avg_rev_time"));
 
-            TableColumn<EditorReviewer, String> add_column = new TableColumn<EditorReviewer, String>("");
-            add_column.setStyle("-fx-alignment: CENTER-RIGHT;");
-            add_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("add_b"));
+            TableColumn<EditorReviewer, Button> add_column = new TableColumn<EditorReviewer, Button>("");
+            add_column.setStyle("-fx-alignment: CENTER;");
+            add_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, Button>("add_b"));
             add_column.setSortable(false);
 
             interested_rev_tv.getColumns().addAll(name_column, publications_column, average_column, add_column);
