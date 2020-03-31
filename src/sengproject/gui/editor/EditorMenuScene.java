@@ -15,9 +15,6 @@ import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.LoginScene;
 import sengproject.gui.editor.tvobjects.EditorPaper;
-import sengproject.gui.researcher.ResearcherBrowseReviewersScene;
-import sengproject.gui.researcher.ResearcherNewPaperScene;
-import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.login.LoginHandler;
 
