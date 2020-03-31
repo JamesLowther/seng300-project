@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import org.json.simple.JSONArray;
 import sengproject.gui.GuiController;
 import sengproject.jsonparsing.JSONUserParser;
 import sengproject.researcher.PaperFunctions;

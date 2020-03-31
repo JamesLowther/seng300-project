@@ -108,8 +108,6 @@ public class ResearcherActionsScene {
     }
 
     private static ArrayList<ResearcherAction> getResearcherActions (ResearcherPaper r_paper) {
-        // todo: get reviewers
-
 
         ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
 
@@ -120,8 +118,6 @@ public class ResearcherActionsScene {
         actions.add(new ResearcherAction("Test Action 4", "1234", "01/01/2020", "02/02/2020"));
 
         return actions;
-
-
     }
 
 
