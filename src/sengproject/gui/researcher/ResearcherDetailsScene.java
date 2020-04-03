@@ -62,7 +62,7 @@ public class ResearcherDetailsScene {
         new_version_b.setPrefSize(150,40);
         new_version_b.setOnAction(action ->{
             File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
-            if (PaperFunctions.updatePaperFile(Integer.parseInt(r_paper.getPaper_id()), selected_file)) {
+            if (PaperFunctions.updatePaperFile(r_paper.getPaper_id(), selected_file)) {
 
                 GuiController.changeScene(ResearcherMenuScene.getScene());
 
@@ -82,7 +82,7 @@ public class ResearcherDetailsScene {
         download_b.setOnAction(action ->{
             // todo: call download
             File selected_path = dir_chooser.showDialog(GuiController.getStage());
-            if (PaperFunctions.downloadFile(Integer.parseInt(r_paper.getPaper_id()), selected_path)) {
+            if (PaperFunctions.downloadFile(r_paper.getPaper_id(), selected_path)) {
                 error_lb.setText("");
             } else {
                 error_lb.setText("Error downloading file");

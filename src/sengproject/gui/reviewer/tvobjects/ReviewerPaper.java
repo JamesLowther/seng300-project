@@ -2,6 +2,8 @@ package sengproject.gui.reviewer.tvobjects;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.reviewer.ReviewerActionsScene;
 import sengproject.gui.reviewer.ReviewerDetailsScene;
@@ -32,23 +34,24 @@ public class ReviewerPaper {
 
     // todo: 'previous_menu' is the previous menu to go back to. It is ether 'menu' or 'browse'
     // this is a solution until I can think of a better way
-    public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vn, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
+    //public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vn, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
+    public ReviewerPaper (JSONObject paper, String prev) {
 
-        title = t;
-        paper_id = pi;
-        sub_date = sd;
-        author_name = an;
-        author_id = aid;
-        journal_name = jn;
-        journal_id = jid;
-        volume_name = vn;
-        volume_id = vid;
-        file_name = fn;
-        latest_date = ld;
-        deadline = dl;
-        reviewers = rev;
-        revisions = revis;
-        status = rej;
+        title = (String) paper.get("title");
+        paper_id = (String) paper.get("paper_id");
+        sub_date = (String) paper.get("sub_date");
+        author_name = (String) paper.get("author_name");
+        author_id = (String) paper.get("author_id");
+        journal_name = (String) paper.get("journal_name");
+        journal_id = (String) paper.get("journal_id");
+        volume_name = (String) paper.get("volume_name");
+        volume_id = (String) paper.get("volume_id");
+        file_name = (String) paper.get("file_name");
+        latest_date = (String) paper.get("latest_date");
+        deadline = (String) paper.get("deadline");
+        reviewers = Integer.toString(((JSONArray) paper.get("reviewers")).size());
+        revisions = "TODO";
+        status = (String) paper.get("status");
 
         previous_menu = prev;
 

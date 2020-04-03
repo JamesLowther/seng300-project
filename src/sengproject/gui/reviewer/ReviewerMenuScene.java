@@ -10,10 +10,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.LoginScene;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
+import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.login.LoginHandler;
 
 import java.util.ArrayList;
@@ -112,28 +115,18 @@ public class ReviewerMenuScene {
 
     private static ArrayList<ReviewerPaper> getReviewerPapers () {
 
-        //todo: this will all be replaced
         ArrayList<ReviewerPaper> papers = new ArrayList<ReviewerPaper>();
+        ArrayList<JSONObject> all_papers = JSONPaperParser.getResearcherPapers();
 
-        papers.add(new ReviewerPaper("Test paper 1", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "menu"));
-        papers.add(new ReviewerPaper("Test paper 2", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "menu"));
+        for (JSONObject p : all_papers) {
+            ArrayList<String> reviewers = (JSONArray) p.get("reviewers");
 
-        papers.add(new ReviewerPaper("Test paper 3", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "menu"));
-
-        papers.add(new ReviewerPaper("Test paper 4", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "menu"));
-
+            for (String s : reviewers) {
+                if(s.equals(Globals.getUser().get("uid"))) {
+                    papers.add(new ReviewerPaper(p, "menu"));
+                }
+            }
+        }
 
         return papers;
 

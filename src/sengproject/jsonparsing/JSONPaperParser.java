@@ -46,7 +46,7 @@ public class JSONPaperParser {
 	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vn, String vid, String fn, String ld, String dl, ArrayList<String> pref_rev, String rej) {
     	// TODO: Might need updating depending on Discord says
     	JSONObject paper = new JSONObject();
-    	int rndPaperId = (int)(Math.random() * Integer.MAX_VALUE + 1);
+		String rndPaperId = Long.toString((long) (Math.random() * Integer.MAX_VALUE) + 1);
 
     	JSONArray pref_rev_array = new JSONArray();
     	pref_rev_array.addAll(pref_rev);
@@ -55,7 +55,7 @@ public class JSONPaperParser {
     	paper.put("paper_id", rndPaperId);
     	paper.put("sub_date", sd);
     	paper.put("author_name", (String) Globals.getUser().get("username"));
-    	paper.put("author_id", (String) Globals.getUser().get("uid").toString());
+    	paper.put("author_id", (String) Globals.getUser().get("uid"));
     	paper.put("journal_name", jn);
     	paper.put("journal_id", jid);
     	paper.put("volume_name", vn);
@@ -123,13 +123,13 @@ public class JSONPaperParser {
 		return null;
 	}
     
-    public static JSONObject findPaper(int pid) {
+    public static JSONObject findPaper(String pid) {
     	ArrayList<JSONObject> papers = getResearcherPapers();
     	if (papers.isEmpty()) {
     		return null;
     	}
     	for (JSONObject p : papers) {
-    		if (pid == ((long) p.get("paper_id"))) {
+    		if (pid.equals(p.get("paper_id"))) {
     			return p;
     		}
     	}
@@ -177,7 +177,7 @@ public class JSONPaperParser {
 	}
 
     @SuppressWarnings("unchecked")
-	public static Boolean updatePaperFile (int pid, String file) {
+	public static Boolean updatePaperFile (String pid, String file) {
 
     	JSONObject paper = findPaper(pid);
     	

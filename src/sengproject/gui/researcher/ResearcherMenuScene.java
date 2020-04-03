@@ -132,7 +132,7 @@ public class ResearcherMenuScene {
     	ArrayList<ResearcherPaper> temp = new ArrayList<ResearcherPaper>();
     	for (JSONObject pj : paperJ) {
         	String authorID = (String) pj.get("author_id");
-        	String userID = (String) Globals.getUser().get("uid").toString();
+        	String userID = Globals.getUser().get("uid").toString();
         	if (authorID.equals(userID)) {
         		temp.add(new ResearcherPaper(pj));
         	}
