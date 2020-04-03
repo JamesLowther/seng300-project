@@ -7,11 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.ResearcherMenuScene;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.gui.researcher.tvobjects.ResearcherReviewer;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
+import sengproject.jsonparsing.JSONPaperParser;
 
 import java.util.ArrayList;
 
@@ -85,8 +87,15 @@ public class ReviewerBrowsePapersScene {
 
     private static ArrayList<ReviewerPaper> getReviewerPapers () {
 
-        //todo: this will all be replaced
         ArrayList<ReviewerPaper> papers = new ArrayList<ReviewerPaper>();
+
+        ArrayList<JSONObject> all_papers = JSONPaperParser.getResearcherPapers();
+
+        for (JSONObject p : all_papers) {
+            papers.add(new ReviewerPaper(p, "browse"));
+        }
+
+        /*
 
         papers.add(new ReviewerPaper("Test paper 1", "21232", "01/01/2020", "John Doe",
                 "12319", "Journal of Smart", "123", "1", "1231",
@@ -107,6 +116,9 @@ public class ReviewerBrowsePapersScene {
                 "12319", "Journal of Smart", "123", "1", "1231",
                 "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
                 "23", "accepted", "browse"));
+
+
+         */
 
         return papers;
 
