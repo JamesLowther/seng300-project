@@ -26,6 +26,7 @@ public class EditorPaper {
     private String author_id;
     private String journal_name;
     private String journal_id;
+    private String volume_name;
     private String volume_id;
     private String file_name;
     private String latest_date;
@@ -45,6 +46,7 @@ public class EditorPaper {
         author_id = (String) paper.get("author_id");
         journal_name = (String) paper.get("journal_name");
         journal_id = (String) paper.get("journal_id");
+        volume_name = (String) paper.get("volume_name");
         volume_id = (String) paper.get("volume_id");
         file_name = (String) paper.get("file_name");
         latest_date = (String) paper.get("latest_date");
@@ -115,6 +117,8 @@ public class EditorPaper {
     public String getJournal_name () {return journal_name;}
 
     public String getJournal_id () {return journal_id;}
+
+    public String getVolume_name () {return volume_name;}
 
     public String getVolume_id () {return volume_id;}
 

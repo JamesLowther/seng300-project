@@ -21,6 +21,7 @@ public class ReviewerPaper {
     private String author_id;
     private String journal_name;
     private String journal_id;
+    private String volume_name;
     private String volume_id;
     private String file_name;
     private String latest_date;
@@ -31,7 +32,7 @@ public class ReviewerPaper {
 
     // todo: 'previous_menu' is the previous menu to go back to. It is ether 'menu' or 'browse'
     // this is a solution until I can think of a better way
-    public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
+    public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vn, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
 
         title = t;
         paper_id = pi;
@@ -40,6 +41,7 @@ public class ReviewerPaper {
         author_id = aid;
         journal_name = jn;
         journal_id = jid;
+        volume_name = vn;
         volume_id = vid;
         file_name = fn;
         latest_date = ld;
@@ -107,6 +109,8 @@ public class ReviewerPaper {
     public String getJournal_name () {return journal_name;}
 
     public String getJournal_id () {return journal_id;}
+
+    public String getVolume_name () {return volume_name;}
 
     public String getVolume_id () {return volume_id;}
 

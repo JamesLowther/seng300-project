@@ -122,7 +122,7 @@ public class EditorDetailsScene {
 
 
         // 'Author Name' label
-        Label author_name_lb = new Label(r_paper.getAuthor_name());
+        Label author_name_lb = new Label("Author: " + r_paper.getAuthor_name());
         author_name_lb.setFont(new Font("Arial", 16));
 
         // 'Author ID' label
@@ -135,26 +135,34 @@ public class EditorDetailsScene {
         author_info_vb.setPadding(new Insets(0,0,20,0));
 
         // 'Journal Name' label
-        Label journal_name_lb = new Label(r_paper.getJournal_name());
+        Label journal_name_lb = new Label("Journal: " + r_paper.getJournal_name());
         journal_name_lb.setFont(new Font("Arial", 16));
 
         // 'Journal ID' label
         Label journal_id_lb = new Label("Journal ID: " + r_paper.getJournal_id());
         journal_id_lb.setFont(new Font("Arial", 16));
 
+        // journal vbox
+        VBox journal_vb = new VBox();
+        journal_vb.getChildren().addAll(journal_name_lb, journal_id_lb);
+
+        // 'Volume Name' label
+        Label volume_name_lb = new Label("Volume: " + r_paper.getVolume_name());
+        volume_name_lb.setFont(new Font("Arial", 16));
+
         // 'Volume ID' label
         Label volume_id_lb = new Label("Volume ID: " + r_paper.getVolume_id());
         volume_id_lb.setFont(new Font("Arial", 16));
 
+        // volume vbox
+        VBox volume_vb = new VBox();
+        volume_vb.getChildren().addAll(volume_name_lb, volume_id_lb);
+
         // journal_hbox
         HBox journal_hb = new HBox();
-        journal_hb.getChildren().addAll(journal_id_lb, volume_id_lb);
+        journal_hb.getChildren().addAll(journal_vb, volume_vb);
         journal_hb.setSpacing(80);
-
-        // journal info vbox
-        VBox journal_info_vb = new VBox();
-        journal_info_vb.getChildren().addAll(journal_name_lb, journal_hb);
-        journal_info_vb.setPadding(new Insets(0,0,20,0));
+        journal_hb.setPadding(new Insets(0,0,20,0));
 
         // 'File name of latest submission' label
         Label latest_submission_lb = new Label(r_paper.getFile_name());
@@ -207,7 +215,7 @@ public class EditorDetailsScene {
         // center vbox
         VBox center_vb = new VBox();
         center_vb.setPadding(new Insets(10,10,10,10));
-        center_vb.getChildren().addAll(paper_info_vb, author_info_vb, journal_info_vb, submission_info_vb, deadline_info_hb, status_lb);
+        center_vb.getChildren().addAll(paper_info_vb, author_info_vb, journal_hb, submission_info_vb, deadline_info_hb, status_lb);
         center_vb.setStyle("-fx-padding: 5;" + "-fx-border-style: solid inside;"
                 + "-fx-border-width: 3;" + "-fx-border-insets: 5;"
                 + "-fx-border-radius: 5;" + "-fx-border-color: black;");
