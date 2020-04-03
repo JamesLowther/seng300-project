@@ -43,7 +43,7 @@ public class JSONPaperParser {
 //     File file, String[] pref_rev_uid
 	
     @SuppressWarnings("unchecked")
-	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vid, String fn, String ld, String dl, ArrayList<String> pref_rev, String rej) {
+	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vn, String vid, String fn, String ld, String dl, ArrayList<String> pref_rev, String rej) {
     	// TODO: Might need updating depending on Discord says
     	JSONObject paper = new JSONObject();
     	int rndPaperId = (int)(Math.random() * Integer.MAX_VALUE + 1);
@@ -58,6 +58,7 @@ public class JSONPaperParser {
     	paper.put("author_id", (String) Globals.getUser().get("uid").toString());
     	paper.put("journal_name", jn);
     	paper.put("journal_id", jid);
+    	paper.put("volume_name", vn);
     	paper.put("volume_id", vid);
     	paper.put("file_name", fn);
     	paper.put("latest_date", ld);
@@ -188,6 +189,7 @@ public class JSONPaperParser {
         	paper.put("author_id", paper.get("author_id"));
         	paper.put("journal_name", paper.get("journal_name"));
         	paper.put("journal_id", paper.get("journal_id"));
+        	paper.put("volume_name", paper.get("volume_name"));
         	paper.put("volume_id", paper.get("volume_id"));
         	paper.put("file_name", file);
         	paper.put("latest_date", paper.get("latest_date"));

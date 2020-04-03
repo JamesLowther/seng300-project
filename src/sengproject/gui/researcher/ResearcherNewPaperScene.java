@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import org.json.simple.JSONArray;
 import sengproject.gui.GuiController;
+import sengproject.gui.researcher.tvobjects.ResearcherJournal;
+import sengproject.jsonparsing.JSONJournalParser;
 import sengproject.jsonparsing.JSONUserParser;
 import sengproject.researcher.PaperFunctions;
 
@@ -65,29 +67,26 @@ public class ResearcherNewPaperScene {
         // 'Journal'
         Label journal_lb = new Label("Journal");
         journal_lb.setFont(new Font("Arial", 20));
-        ComboBox<String> journal_cb = new ComboBox<String>();
+
+        // Journal combobox
+        ComboBox<ResearcherJournal> journal_cb = new ComboBox<ResearcherJournal>();
+
+        journal_cb.getItems().addAll(getJournals());
+
         HBox journal_hb = new HBox();
         journal_hb.setSpacing(4);
         journal_hb.getChildren().addAll(journal_lb, journal_cb);
 
-        // 'Volume'
-        Label volume_lb = new Label("Volume");
-        volume_lb.setFont(new Font("Arial", 20));
-        ComboBox<String> volume_cb = new ComboBox<String>();
-        HBox volume_hb = new HBox();
-        volume_hb.setSpacing(4);
-        volume_hb.getChildren().addAll(volume_lb, volume_cb);
-
         // journal/volume vbox
         HBox jv_hb = new HBox();
-        jv_hb.getChildren().addAll(journal_hb, volume_hb);
+        jv_hb.getChildren().addAll(journal_hb);//, volume_hb);
         jv_hb.setSpacing(50);
         jv_hb.setPadding(new Insets(0,0,20,0));
         jv_hb.setAlignment(Pos.CENTER);
 
         // reviewer label
         Label reviewer_lb = new Label("Preferred Reviewers");
-        volume_lb.setFont(new Font("Arial", 20));
+        //volume_lb.setFont(new Font("Arial", 20));
 
         // reviewer listview
         ListView<String> reviewer_lv = new ListView<String>();
@@ -133,12 +132,14 @@ public class ResearcherNewPaperScene {
             ArrayList<JSONObject> pref_rev = new ArrayList<JSONObject>();
             ArrayList<JSONObject> all_rev = JSONUserParser.getUsersFromRole("Reviewer");
 
+            ResearcherJournal j = journal_cb.getValue();
+
             // add reviewer JSONObjects based off their indices
             for (Object i : indicies) {
                 pref_rev.add(all_rev.get((int) i));
             }
 
-            if (PaperFunctions.createNewPaper(title_tf.getText(), "TODO JID", "TODO VID", pref_rev, selected_file)) {
+            if (j != null && PaperFunctions.createNewPaper(title_tf.getText(), j.getJ_title(), j.getJid(), j.getV_title(), j.getVid(), pref_rev, selected_file)) {
                 GuiController.changeScene(ResearcherMenuScene.getScene());
 
             } else {
@@ -166,7 +167,7 @@ public class ResearcherNewPaperScene {
     }
 
     // returns an array of all reviewer usernames
-    public static ArrayList<String> getReviewerNames() {
+    private static ArrayList<String> getReviewerNames() {
 
         ArrayList<JSONObject> reviewers = JSONUserParser.getUsersFromRole("Reviewer");
         ArrayList<String> rev_strings = new ArrayList<String>();
@@ -176,6 +177,29 @@ public class ResearcherNewPaperScene {
         }
 
         return rev_strings;
+    }
+
+    private static ArrayList<ResearcherJournal> getJournals() {
+
+        ArrayList<JSONObject> journals = JSONJournalParser.getJournals();
+        ArrayList<ResearcherJournal> j_strings = new ArrayList<ResearcherJournal>();
+
+        for (JSONObject j : journals) {
+            ArrayList<JSONObject> volumes = (JSONArray) j.get("volumes");
+
+            for (JSONObject v : volumes) {
+
+                j_strings.add(new ResearcherJournal(
+                        (String) j.get("title"),
+                        (String) v.get("volume_title"),
+                        (String) j.get("jid"),
+                        (String) v.get("vid")
+                ));
+            }
+        }
+
+        return j_strings;
+
     }
 
 }

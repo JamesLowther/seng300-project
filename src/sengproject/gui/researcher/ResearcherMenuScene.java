@@ -11,6 +11,7 @@ import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.LoginScene;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.jsonparsing.JSONJournalParser;
 import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.login.LoginHandler;
 
@@ -109,13 +110,11 @@ public class ResearcherMenuScene {
         center_vb.setPadding(new Insets(10,10,10,10));
         center_vb.getChildren().addAll(center_lb, papers_tv);
 
-
         BorderPane main_pane = new BorderPane();
 
         main_pane.setTop(top_hb);
         main_pane.setCenter(center_vb);
         main_pane.setBottom(bottom_hb);
-
 
         return new Scene(main_pane);
 
