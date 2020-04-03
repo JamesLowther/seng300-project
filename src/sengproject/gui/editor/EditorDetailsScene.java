@@ -85,7 +85,7 @@ public class EditorDetailsScene {
         download_b.setOnAction(action ->{
 
             File selected_path = dir_chooser.showDialog(GuiController.getStage());
-            if (PaperFunctions.downloadFile(Integer.parseInt(r_paper.getPaper_id()), selected_path)) {
+            if (PaperFunctions.downloadFile(r_paper.getPaper_id(), selected_path)) {
                 error_lb.setText("");
             } else {
                 error_lb.setText("Error downloading file");

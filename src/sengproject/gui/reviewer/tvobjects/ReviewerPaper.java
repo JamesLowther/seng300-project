@@ -38,7 +38,7 @@ public class ReviewerPaper {
     public ReviewerPaper (JSONObject paper, String prev) {
 
         title = (String) paper.get("title");
-        paper_id = (String) paper.get("paper_id").toString();;
+        paper_id = (String) paper.get("paper_id");
         sub_date = (String) paper.get("sub_date");
         author_name = (String) paper.get("author_name");
         author_id = (String) paper.get("author_id");

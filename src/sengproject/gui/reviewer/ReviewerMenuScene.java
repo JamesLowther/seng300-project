@@ -114,7 +114,7 @@ public class ReviewerMenuScene {
     }
 
     private static ArrayList<ReviewerPaper> getReviewerPapers () {
-        
+
         ArrayList<ReviewerPaper> papers = new ArrayList<ReviewerPaper>();
         ArrayList<JSONObject> all_papers = JSONPaperParser.getResearcherPapers();
 

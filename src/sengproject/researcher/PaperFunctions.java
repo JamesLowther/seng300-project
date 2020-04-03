@@ -37,7 +37,7 @@ public class PaperFunctions {
 
         if (new_paper != null) {
 
-            String pid = new_paper.get("paper_id").toString();
+            String pid = (String) new_paper.get("paper_id");
 
             File dest = new File(base_path + Globals.getUser().get("uid").toString());
             if (!dest.exists()) {
@@ -61,7 +61,7 @@ public class PaperFunctions {
     // updates the file associated with a paper's pid
     // returns true if the paper is successfully submitted
     // returns false otherwise
-    public static Boolean updatePaperFile (int pid, File selected_file) {
+    public static Boolean updatePaperFile (String pid, File selected_file) {
 
         if (! checkValidity(selected_file)) {return false;}
 
@@ -74,14 +74,14 @@ public class PaperFunctions {
             dest.mkdirs();
         }
 
-        File temp = new File(dest.getPath() + "/" + Integer.toString(pid) + ".pdf");
+        File temp = new File(dest.getPath() + "/" + pid + ".pdf");
         if (temp.exists()) {
             temp.delete();
             System.out.println("Deleted existing file");
         }
 
         try {
-            String file_name = Integer.toString(pid) + ".pdf";
+            String file_name = pid + ".pdf";
 
             Files.copy(Paths.get(selected_file.getPath()), Paths.get(dest.getPath() + "/" + file_name));
 
@@ -119,13 +119,13 @@ public class PaperFunctions {
 
     // downloads the document related to the pid
     // returns true if file downloaded successfully
-    public static Boolean downloadFile (int pid, File dest) {
+    public static Boolean downloadFile (String pid, File dest) {
 
         if (dest == null) { return false; }
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
 
-        String file_name = Integer.toString(pid) + ".pdf";
+        String file_name = pid + ".pdf";
         String src = base_path + paper.get("author_id") + "/" + file_name;
 
         System.out.println(src);
