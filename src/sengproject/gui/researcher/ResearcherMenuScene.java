@@ -116,15 +116,6 @@ public class ResearcherMenuScene {
         main_pane.setCenter(center_vb);
         main_pane.setBottom(bottom_hb);
 
-        //JSONJournalParser.addJournal("Journal 1", "124368013");
-        //JSONJournalParser.addJournal("Journal 2", "1959243873");
-
-        //JSONJournalParser.addVolume("325564695", "Volume 1");
-        //JSONJournalParser.addVolume("325564695", "Volume 2");
-
-        //JSONJournalParser.addVolume("2068229765", "Moleum 1");
-        //JSONJournalParser.addVolume("2068229765", "Moleum 3");
-
         return new Scene(main_pane);
 
     }
