@@ -7,12 +7,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.tvobjects.EditorAction;
 import sengproject.gui.editor.tvobjects.EditorPaper;
 import sengproject.gui.researcher.ResearcherMenuScene;
 import sengproject.gui.researcher.tvobjects.ResearcherAction;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.gui.reviewer.tvobjects.ReviewerAction;
 
 import java.util.ArrayList;
 
@@ -50,6 +53,9 @@ public class EditorActionsScene {
             TableColumn<EditorAction, String> name_column = new TableColumn<EditorAction, String>("Action details");
             name_column.setCellValueFactory(new PropertyValueFactory<EditorAction, String>("action_details"));
 
+            TableColumn<EditorAction, String> type_column = new TableColumn<EditorAction, String>("Type");
+            type_column.setCellValueFactory(new PropertyValueFactory<EditorAction, String>("type"));
+
             TableColumn<EditorAction, String> rev_uid_column = new TableColumn<EditorAction, String>("Reviewer name/UID");
             rev_uid_column.setCellValueFactory(new PropertyValueFactory<EditorAction, String>("rev_uid"));
 
@@ -61,7 +67,7 @@ public class EditorActionsScene {
             buttons_column.setCellValueFactory(new PropertyValueFactory<EditorAction, VBox> ("buttons_vb"));
             buttons_column.setSortable(false);
 
-            pending_action_tv.getColumns().addAll(name_column, rev_uid_column, date_recommended_column, buttons_column);
+            pending_action_tv.getColumns().addAll(name_column, type_column, rev_uid_column, date_recommended_column, buttons_column);
         }
 
         // action history
@@ -113,11 +119,11 @@ public class EditorActionsScene {
 
         ArrayList<EditorAction> actions = new ArrayList<EditorAction>();
 
-        // todo: this is just test data
-        actions.add(new EditorAction("Test Action 1", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new EditorAction("Test Action 2", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new EditorAction("Test Action 3", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new EditorAction("Test Action 4", "1234", "01/01/2020", "02/02/2020"));
+        JSONArray paper_actions = (JSONArray) r_paper.getJson_obj().get("pending_actions");
+
+        for (Object a : paper_actions) {
+            actions.add(new EditorAction((JSONObject) a, r_paper.getPaper_id()));
+        }
 
         return actions;
     }

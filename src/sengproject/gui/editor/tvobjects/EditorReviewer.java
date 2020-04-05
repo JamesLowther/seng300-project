@@ -1,9 +1,15 @@
 package sengproject.gui.editor.tvobjects;
 
 import javafx.scene.control.Button;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.EditorDetailsScene;
 import sengproject.gui.editor.EditorManageReviewerScene;
+import sengproject.gui.editor.EditorReviewersScene;
+import sengproject.gui.researcher.ResearcherReviewersScene;
+import sengproject.jsonparsing.JSONPaperParser;
+import sengproject.researcher.ReviewerFunctions;
 
 public class EditorReviewer {
 
@@ -14,17 +20,25 @@ public class EditorReviewer {
     private double avg_rev_time;
     private String deadline;
 
+    private JSONObject reviewer;
+    private String pid;
+    private String type;
+
     private Button manage_b;
     private Button add_b;
 
-    public EditorReviewer (String n, long maj_r, long min_r, long pub_r, double avg_t, String dl) {
+    public EditorReviewer (JSONObject rev, String p, String t) {
 
-        name = n;
-        num_major_rev = maj_r;
-        num_minor_rev = min_r;
-        num_pub_rev = pub_r;
-        avg_rev_time = avg_t;
-        deadline = dl;
+        name = (String) rev.get("username");
+        num_major_rev = (long) rev.get("major_rev");
+        num_minor_rev = (long) rev.get("minor_rev");
+        num_pub_rev = (long) rev.get("papers_reviewed");
+        avg_rev_time = (double) ((JSONArray) rev.get("avg_time")).get(0);
+        deadline = "TODO";
+
+        reviewer = rev;
+        pid = p;
+        type = t;
 
         manage_b = new Button("Manage");
         manage_b.setOnAction(action ->{
@@ -33,7 +47,9 @@ public class EditorReviewer {
 
         add_b = new Button("Add");
         add_b.setOnAction(action ->{
-            //todo: add reviewer to paper
+            if (ReviewerFunctions.addReviewer(pid, (String) rev.get("uid"), type)) {
+                GuiController.changeScene(EditorReviewersScene.getScene(new EditorPaper((JSONObject) JSONPaperParser.findPaper(p))));
+            }
             System.out.println("TODO: add reviewer to the paper");
         });
 
@@ -42,6 +58,10 @@ public class EditorReviewer {
     public void setName (String n) {name = n;}
 
     public String getName () {return name;}
+
+    public JSONObject getReviewer () {return reviewer;}
+
+    public String getPid () {return pid;}
 
     public void setNum_major_rev (long n) {num_major_rev = n;}
 

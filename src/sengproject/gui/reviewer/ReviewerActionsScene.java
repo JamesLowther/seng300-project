@@ -7,10 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.ResearcherMenuScene;
 import sengproject.gui.researcher.tvobjects.ResearcherAction;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.gui.reviewer.tvobjects.ReviewerAction;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
 
 import java.util.ArrayList;
@@ -44,41 +47,44 @@ public class ReviewerActionsScene {
         top_hb.getChildren().addAll(name_vb, top_spacer_r, back_b);
 
         // pending actions
-        TableView<ResearcherAction> pending_action_tv = new TableView<ResearcherAction>();
+        TableView<ReviewerAction> pending_action_tv = new TableView<ReviewerAction>();
         {
-            TableColumn<ResearcherAction, String> name_column = new TableColumn<ResearcherAction, String>("Action details");
-            name_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("action_details"));
+            TableColumn<ReviewerAction, String> name_column = new TableColumn<ReviewerAction, String>("Action details");
+            name_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("action_details"));
 
-            TableColumn<ResearcherAction, String> rev_uid_column = new TableColumn<ResearcherAction, String>("Reviewer name/UID");
-            rev_uid_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("rev_uid"));
+            TableColumn<ReviewerAction, String> type_column = new TableColumn<ReviewerAction, String>("Type");
+            type_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("type"));
 
-            TableColumn<ResearcherAction, String> date_recommended_column = new TableColumn<ResearcherAction, String>("Date recommended");
-            date_recommended_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("date_recommended"));
+            TableColumn<ReviewerAction, String> rev_uid_column = new TableColumn<ReviewerAction, String>("Reviewer name/UID");
+            rev_uid_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("rev_uid"));
+
+            TableColumn<ReviewerAction, String> date_recommended_column = new TableColumn<ReviewerAction, String>("Date recommended");
+            date_recommended_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("date_recommended"));
 
 
-            pending_action_tv.getColumns().addAll(name_column, rev_uid_column, date_recommended_column);
+            pending_action_tv.getColumns().addAll(name_column, type_column, rev_uid_column, date_recommended_column);
         }
 
         // action history
-        TableView<ResearcherAction> action_history_tv = new TableView<ResearcherAction>();
+        TableView<ReviewerAction> action_history_tv = new TableView<ReviewerAction>();
         {
-            TableColumn<ResearcherAction, String> name_column = new TableColumn<ResearcherAction, String>("Action details");
-            name_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("action_details"));
+            TableColumn<ReviewerAction, String> name_column = new TableColumn<ReviewerAction, String>("Action details");
+            name_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("action_details"));
 
-            TableColumn<ResearcherAction, String> rev_uid_column = new TableColumn<ResearcherAction, String>("Reviewer name/UID");
-            rev_uid_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("rev_uid"));
+            TableColumn<ReviewerAction, String> rev_uid_column = new TableColumn<ReviewerAction, String>("Reviewer name/UID");
+            rev_uid_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("rev_uid"));
 
-            TableColumn<ResearcherAction, String> date_recommended_column = new TableColumn<ResearcherAction, String>("Date recommended");
-            date_recommended_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("date_recommended"));
+            TableColumn<ReviewerAction, String> date_recommended_column = new TableColumn<ReviewerAction, String>("Date recommended");
+            date_recommended_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("date_recommended"));
 
-            TableColumn<ResearcherAction, String> date_complete_column = new TableColumn<ResearcherAction, String>("Date completed");
-            date_complete_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("date_completed"));
+            TableColumn<ReviewerAction, String> date_complete_column = new TableColumn<ReviewerAction, String>("Date completed");
+            date_complete_column.setCellValueFactory(new PropertyValueFactory<ReviewerAction, String>("date_completed"));
 
             action_history_tv.getColumns().addAll(name_column, rev_uid_column, date_recommended_column, date_complete_column);
         }
 
         // add reviewers to table views
-        ArrayList<ResearcherAction> actions_array = getReviewerActions(r_paper);
+        ArrayList<ReviewerAction> actions_array = getReviewerActions(r_paper);
         pending_action_tv.getItems().addAll(actions_array);
         action_history_tv.getItems().addAll(actions_array);
 
@@ -98,7 +104,6 @@ public class ReviewerActionsScene {
         Button new_action_b = new Button("Add New Action");
         new_action_b.setPrefSize(150, 40);
         new_action_b.setOnAction(action -> {
-            // todo: call new action
             GuiController.changeScene(ReviewerNewActionScene.getScene(r_paper));
         });
 
@@ -135,20 +140,17 @@ public class ReviewerActionsScene {
 
     }
 
-    private static ArrayList<ResearcherAction> getReviewerActions(ReviewerPaper r_paper) {
-        // todo: get reviewers
+    private static ArrayList<ReviewerAction> getReviewerActions(ReviewerPaper r_paper) {
 
+        ArrayList<ReviewerAction> actions = new ArrayList<ReviewerAction>();
 
-        ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
+        JSONArray paper_actions = (JSONArray) r_paper.getPaper().get("pending_actions");
 
-        // todo: this is just test data
-        actions.add(new ResearcherAction("Test Action 1", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new ResearcherAction("Test Action 2", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new ResearcherAction("Test Action 3", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new ResearcherAction("Test Action 4", "1234", "01/01/2020", "02/02/2020"));
+        for (Object a : paper_actions) {
+            actions.add(new ReviewerAction((JSONObject) a));
+        }
 
         return actions;
-
 
     }
 }

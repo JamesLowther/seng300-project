@@ -95,14 +95,7 @@ public class EditorBrowseReviewersScene {
 
         for (JSONObject p : all_reviewers) {
 
-            reviewers.add(new EditorReviewer(
-                    (String) p.get("username"),
-                    (long) p.get("major_rev"),
-                    (long) p.get("minor_rev"),
-                    (long) p.get("papers_reviewed"),
-                    (double) ((JSONArray) p.get("avg_time")).get(0),
-                    "TODO"
-            ));
+            reviewers.add(new EditorReviewer(p, null, null));
         }
 
         return reviewers;
