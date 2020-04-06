@@ -38,6 +38,32 @@ public class ReviewerFunctions {
 
     }
 
+    public static boolean addInterestedReviewer (String pid, String rid) {
+
+        JSONObject paper =  JSONPaperParser.findPaper(pid);
+        JSONArray inter_rev = (JSONArray) paper.get("inter_rev_uid");
+
+        if (!inter_rev.contains(rid)) {
+            inter_rev.add(rid);
+        }
+
+        return JSONPaperParser.addNewInterRev(pid, inter_rev);
+
+    }
+
+    public static boolean removeInterestedReviewer (String pid, String rid) {
+
+        JSONObject paper =  JSONPaperParser.findPaper(pid);
+        JSONArray inter_rev = (JSONArray) paper.get("inter_rev_uid");
+
+        if (inter_rev.contains(rid)) {
+            inter_rev.remove(rid);
+        }
+
+        return JSONPaperParser.addNewInterRev(pid, inter_rev);
+
+    }
+
     public static boolean removeReviewer (String pid, String rid) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);

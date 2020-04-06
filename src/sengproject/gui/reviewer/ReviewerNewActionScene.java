@@ -58,7 +58,7 @@ public class ReviewerNewActionScene {
                 ActionFunctions.addNewAction(r_paper.getPaper_id(), details_ta.getText(), "major");
             }
 
-            GuiController.changeScene(ReviewerActionsScene.getScene(new ReviewerPaper(JSONPaperParser.findPaper(r_paper.getPaper_id()), "menu")));
+            GuiController.changeScene(ReviewerActionsScene.getScene(new ReviewerPaper(JSONPaperParser.findPaper(r_paper.getPaper_id()), "menu", false)));
         });
 
         // cancel button
