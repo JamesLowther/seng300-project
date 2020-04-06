@@ -1,15 +1,12 @@
-package sengproject.researcher;
+package sengproject.shared;
 
-import javafx.stage.FileChooser;
 import org.json.simple.JSONObject;
 import sengproject.Globals;
-import sengproject.gui.GuiController;
 import sengproject.jsonparsing.JSONPaperParser;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package sengproject.researcher;
+package sengproject.shared;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

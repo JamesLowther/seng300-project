@@ -9,11 +9,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
-import sengproject.gui.researcher.ResearcherMenuScene;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
-import sengproject.researcher.PaperFunctions;
+import sengproject.shared.PaperFunctions;
 
 import java.io.File;
 
