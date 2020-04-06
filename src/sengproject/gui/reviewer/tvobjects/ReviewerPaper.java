@@ -35,10 +35,12 @@ public class ReviewerPaper {
     private String revisions;
     private String status;
 
+    private String rev_deadline;
+
     // todo: 'previous_menu' is the previous menu to go back to. It is ether 'menu' or 'browse'
     // this is a solution until I can think of a better way
     //public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vn, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
-    public ReviewerPaper (JSONObject p, String prev) {
+    public ReviewerPaper (JSONObject p, String prev, boolean checked) {
 
         paper = p;
 
@@ -53,6 +55,7 @@ public class ReviewerPaper {
         volume_id = (String) p.get("volume_id");
         file_name = (String) p.get("file_name");
         latest_date = (String) p.get("latest_date");
+        deadline = (String) p.get("deadline");
         reviewers = Integer.toString(((JSONArray) p.get("reviewers")).size());
         revisions = "TODO";
         status = (String) p.get("status");
@@ -61,7 +64,7 @@ public class ReviewerPaper {
         JSONArray revs = (JSONArray) p.get("reviewers");
         for (Object r : revs) {
             if (((JSONObject) r).get("rid").equals((String) Globals.getUser().get("uid"))) {
-                deadline = (String) ((JSONObject) r).get("deadline");
+                rev_deadline = (String) ((JSONObject) r).get("deadline");
             }
         }
 
@@ -78,6 +81,7 @@ public class ReviewerPaper {
         });
 
         star_cb = new CheckBox();
+        star_cb.setSelected(checked);
 
     }
 
@@ -142,6 +146,8 @@ public class ReviewerPaper {
     public String getRevisions () {return revisions;}
 
     public String getStatus () {return status;}
+
+    public String getRev_deadline () {return rev_deadline;}
 
     public boolean getCheckedStatus () { return star_cb.isSelected(); }
 

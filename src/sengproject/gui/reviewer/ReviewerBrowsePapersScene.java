@@ -7,43 +7,23 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.ResearcherMenuScene;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.gui.researcher.tvobjects.ResearcherReviewer;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
 import sengproject.jsonparsing.JSONPaperParser;
+import sengproject.researcher.ReviewerFunctions;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ReviewerBrowsePapersScene {
 
     public static Scene getScene () {
-
-        // details box
-        Label details_lb = new Label("Browse Papers");
-        details_lb.setFont(new Font("Arial", 24));
-
-        VBox name_vb = new VBox();
-        name_vb.getChildren().addAll(details_lb);
-        name_vb.setAlignment(Pos.TOP_LEFT);
-
-        // return button
-        Button logout_b = new Button("Back");
-        logout_b.setPrefSize(70, 40);
-        logout_b.setOnAction(action -> {
-            GuiController.changeScene(ReviewerMenuScene.getScene());
-        });
-
-        // top spacer
-        Region top_spacer_r = new Region();
-        HBox.setHgrow(top_spacer_r, Priority.ALWAYS);
-
-        // top hbox
-        HBox top_hb = new HBox();
-        top_hb.setPadding(new Insets(10, 10, 10, 10));
-        top_hb.getChildren().addAll(name_vb, top_spacer_r, logout_b);
 
         // available papers
         TableView<ReviewerPaper> available_papers_tv = new TableView<ReviewerPaper>();
@@ -69,12 +49,35 @@ public class ReviewerBrowsePapersScene {
         ArrayList<ReviewerPaper> papers_array = getReviewerPapers();
         available_papers_tv.getItems().addAll(papers_array);
 
-
         // center vbox
         VBox center_vb = new VBox();
         center_vb.setPadding(new Insets(10,10,10,10));
         center_vb.getChildren().addAll(available_papers_tv);
 
+        // details box
+        Label details_lb = new Label("Browse Papers");
+        details_lb.setFont(new Font("Arial", 24));
+
+        VBox name_vb = new VBox();
+        name_vb.getChildren().addAll(details_lb);
+        name_vb.setAlignment(Pos.TOP_LEFT);
+
+        // return button
+        Button back_b = new Button("Back");
+        back_b.setPrefSize(70, 40);
+        back_b.setOnAction(action -> {
+            updateStatus(papers_array);
+            GuiController.changeScene(ReviewerMenuScene.getScene());
+        });
+
+        // top spacer
+        Region top_spacer_r = new Region();
+        HBox.setHgrow(top_spacer_r, Priority.ALWAYS);
+
+        // top hbox
+        HBox top_hb = new HBox();
+        top_hb.setPadding(new Insets(10, 10, 10, 10));
+        top_hb.getChildren().addAll(name_vb, top_spacer_r, back_b);
 
         BorderPane main_pane = new BorderPane();
 
@@ -92,35 +95,27 @@ public class ReviewerBrowsePapersScene {
         ArrayList<JSONObject> all_papers = JSONPaperParser.getResearcherPapers();
 
         for (JSONObject p : all_papers) {
-            papers.add(new ReviewerPaper(p, "browse"));
+
+            JSONArray int_rev = (JSONArray) p.get("inter_rev_uid");
+
+            papers.add(new ReviewerPaper(p, "browse", int_rev.contains((String) Globals.getUser().get("uid"))));
         }
 
-        /*
-
-        papers.add(new ReviewerPaper("Test paper 1", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "browse"));
-
-        papers.add(new ReviewerPaper("Test paper 2", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "1", "123", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "browse"));
-
-        papers.add(new ReviewerPaper("Test paper 3", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "browse"));
-
-        papers.add(new ReviewerPaper("Test paper 4", "21232", "01/01/2020", "John Doe",
-                "12319", "Journal of Smart", "123", "1", "1231",
-                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-                "23", "accepted", "browse"));
-
-
-         */
-
         return papers;
+
+    }
+
+    private static void updateStatus(ArrayList<ReviewerPaper> arr) {
+
+        for (ReviewerPaper r : arr) {
+
+            if (r.getCheckedStatus()) {
+                ReviewerFunctions.addInterestedReviewer(r.getPaper_id(), (String) Globals.getUser().get("uid"));
+            } else {
+                ReviewerFunctions.removeInterestedReviewer(r.getPaper_id(), (String) Globals.getUser().get("uid"));
+            }
+
+        }
 
     }
 
