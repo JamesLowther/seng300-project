@@ -7,7 +7,7 @@ import sengproject.gui.GuiController;
 import sengproject.gui.editor.EditorActionsScene;
 import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.jsonparsing.JSONUserParser;
-import sengproject.researcher.ActionFunctions;
+import sengproject.shared.ActionFunctions;
 
 public class EditorAction {
 

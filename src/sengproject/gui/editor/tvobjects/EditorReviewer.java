@@ -4,13 +4,11 @@ import javafx.scene.control.Button;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
-import sengproject.gui.editor.EditorDetailsScene;
 import sengproject.gui.editor.EditorManageReviewerScene;
 import sengproject.gui.editor.EditorReviewersScene;
-import sengproject.gui.researcher.ResearcherReviewersScene;
 import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.jsonparsing.JSONUserParser;
-import sengproject.researcher.ReviewerFunctions;
+import sengproject.shared.ReviewerFunctions;
 
 public class EditorReviewer {
 

@@ -63,7 +63,6 @@ public class ResearcherMenuScene {
         Button browser_reviewers_b = new Button("Browse Reviewers");
         browser_reviewers_b.setPrefSize(150,40);
         browser_reviewers_b.setOnAction(action ->{
-            // todo: call browse reviewer scene
             GuiController.changeScene(ResearcherBrowseReviewersScene.getScene());
         });
 
@@ -126,7 +125,6 @@ public class ResearcherMenuScene {
     // returns an arraylist of all the ResearcherPaper objects to add to the main scene list
     private static ArrayList<ResearcherPaper> getResearcherPapers () {
 
-    	// TODO: load paper objects from Papers.json
     	ArrayList<JSONObject> paperJ = JSONPaperParser.getResearcherPapers();
     	if (paperJ == null) {
     		papers = new ArrayList<ResearcherPaper>();
@@ -144,52 +142,5 @@ public class ResearcherMenuScene {
     	return papers;
     	
     }
-    	
-//    	if (papers == null) {
-//    		papers = new ArrayList<ResearcherPaper>();
-//    		return papers;
-//    	} else {
-//    		if (paperJ != null) {
-//                for (JSONObject pj : paperJ) {
-//                	String authorID = (String) pj.get("author_id");
-//                	String userID = (String) Globals.getUser().get("uid").toString();
-//                	if (authorID.equals(userID)) {
-//                		ResearcherPaper researcherPaper = new ResearcherPaper(pj);
-//                		if (!papers.contains(researcherPaper)) {
-//                			papers.add(researcherPaper);
-//                			papers.remove(researcherPaper);
-//                		}
-//                	}
-//                }
-//        	}
-//        	return papers;
-//    	}
-    	
-/*
- * 
- * if lenfth of get JSON papers is not empty, then:
- * 		for each JSON Paper Object p
- * 			if author id of Paper object == uid of user:
- * 				papers.add(new ResearcherPaper(p))
- */
-//        papers.add(new ResearcherPaper("Test paper 1", "21232", "01/01/2020", (String)Globals.getUser().get("username"),
-//                (String) Globals.getUser().get("uid").toString(), "Journal of Smart", "123", "1231",
-//                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-//                "rejected"));
-//        papers.add(new ResearcherPaper("Test paper 2", "21232", "01/01/2020", "John Doe",
-//                "12319", "Journal of Smart", "123", "1231",
-//                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-//                "pending"));
-//
-//        papers.add(new ResearcherPaper("Test paper 3", "21232", "01/01/2020", "John Doe",
-//                "12319", "Journal of Smart", "123", "1231",
-//                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-//                "accepted"));
-//
-//        papers.add(new ResearcherPaper("Test paper 4", "21232", "01/01/2020", "John Doe",
-//                "12319", "Journal of Smart", "123", "1231",
-//                "test_2121.pdf", "02/02/2020", "03/03/2020", "3",
-//                "rejected"));
-
 
 }

@@ -9,16 +9,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.tvobjects.EditorPaper;
-import sengproject.gui.researcher.ResearcherMenuScene;
-import sengproject.gui.researcher.tvobjects.ResearcherPaper;
-import sengproject.gui.reviewer.ReviewerBrowsePapersScene;
-import sengproject.gui.reviewer.ReviewerMenuScene;
-import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
 import sengproject.jsonparsing.JSONPaperParser;
-import sengproject.researcher.PaperFunctions;
+import sengproject.shared.PaperFunctions;
 
 import java.io.File;
 

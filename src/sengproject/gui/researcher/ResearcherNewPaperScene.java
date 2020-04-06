@@ -16,7 +16,7 @@ import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherJournal;
 import sengproject.jsonparsing.JSONJournalParser;
 import sengproject.jsonparsing.JSONUserParser;
-import sengproject.researcher.PaperFunctions;
+import sengproject.shared.PaperFunctions;
 
 import java.io.File;
 import java.util.ArrayList;

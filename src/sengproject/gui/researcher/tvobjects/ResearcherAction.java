@@ -1,20 +1,11 @@
 package sengproject.gui.researcher.tvobjects;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.ResearcherActionsScene;
-import sengproject.gui.researcher.ResearcherDetailsScene;
 import sengproject.jsonparsing.JSONPaperParser;
-import sengproject.researcher.ActionFunctions;
-
-import javax.swing.*;
+import sengproject.shared.ActionFunctions;
 
 public class ResearcherAction {
 
