@@ -38,7 +38,7 @@ public class ResearcherAction {
         //done_b.setPrefSize(80,3);
         done_b.setOnAction(action ->{
             System.out.println("Done action: " + action_details);
-            ActionFunctions.deleteAction(pid, (String) a.get("aid"));
+            ActionFunctions.completeAction(pid, (String) a.get("aid"));
             GuiController.changeScene(ResearcherActionsScene.getScene(new ResearcherPaper(JSONPaperParser.findPaper(pid))));
         });
 
