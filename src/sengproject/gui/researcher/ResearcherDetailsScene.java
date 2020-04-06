@@ -11,11 +11,9 @@ import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
-import sengproject.gui.editor.EditorDetailsScene;
-import sengproject.gui.editor.tvobjects.EditorPaper;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.jsonparsing.JSONPaperParser;
-import sengproject.researcher.PaperFunctions;
+import sengproject.shared.PaperFunctions;
 
 import java.io.File;
 

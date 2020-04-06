@@ -8,12 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.tvobjects.EditorPaper;
 import sengproject.gui.editor.tvobjects.EditorReviewer;
 import sengproject.jsonparsing.JSONPaperParser;
-import sengproject.researcher.ReviewerFunctions;
+import sengproject.shared.ReviewerFunctions;
 
 public class EditorManageReviewerScene {
 

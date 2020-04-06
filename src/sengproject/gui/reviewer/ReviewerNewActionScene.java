@@ -4,14 +4,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import org.json.simple.JSONObject;
-import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
 import sengproject.jsonparsing.JSONPaperParser;
-import sengproject.researcher.ActionFunctions;
-
-import java.time.LocalDate;
+import sengproject.shared.ActionFunctions;
 
 public class ReviewerNewActionScene {
 

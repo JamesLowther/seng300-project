@@ -11,14 +11,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import sengproject.Globals;
 import sengproject.gui.GuiController;
-import sengproject.gui.researcher.ResearcherMenuScene;
-import sengproject.gui.researcher.tvobjects.ResearcherPaper;
-import sengproject.gui.researcher.tvobjects.ResearcherReviewer;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
 import sengproject.jsonparsing.JSONPaperParser;
-import sengproject.researcher.ReviewerFunctions;
+import sengproject.shared.ReviewerFunctions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ReviewerBrowsePapersScene {
