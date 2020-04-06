@@ -63,7 +63,7 @@ public class EditorReviewersScene {
 
             TableColumn<EditorReviewer, String> deadline_column = new TableColumn<EditorReviewer, String>("Deadline");
             deadline_column.setStyle("-fx-alignment: CENTER-RIGHT;");
-            deadline_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("num_pub_rev"));
+            deadline_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("deadline"));
 
             TableColumn<EditorReviewer, Button> manage_column = new TableColumn<EditorReviewer, Button>("");
             manage_column.setStyle("-fx-alignment: CENTER;");
