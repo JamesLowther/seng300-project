@@ -91,7 +91,8 @@ public class EditorActionsScene {
         // add reviewers to table views
         ArrayList<EditorAction> actions_array = getEditorActions(r_paper);
         pending_action_tv.getItems().addAll(actions_array);
-        action_history_tv.getItems().addAll(actions_array);
+        ArrayList<EditorAction> completed_array = getCompletedActions(r_paper);
+        action_history_tv.getItems().addAll(completed_array);
 
         // tab pane
         TabPane main_tp = new TabPane();
@@ -127,5 +128,19 @@ public class EditorActionsScene {
 
         return actions;
     }
+
+    private static ArrayList<EditorAction> getCompletedActions (EditorPaper r_paper) {
+
+        ArrayList<EditorAction> actions = new ArrayList<EditorAction>();
+
+        JSONArray paper_actions = (JSONArray) r_paper.getJson_obj().get("complete_actions");
+
+        for (Object a : paper_actions) {
+            actions.add(new EditorAction((JSONObject) a, r_paper.getPaper_id()));
+        }
+
+        return actions;
+    }
+
 
 }

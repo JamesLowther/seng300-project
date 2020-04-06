@@ -19,7 +19,7 @@ public class ActionFunctions {
         new_action.put("rid", (String) Globals.getUser().get("uid"));
         new_action.put("details", details);
         new_action.put("date_recommended", LocalDate.now().toString());
-        new_action.put("date_completed", "");
+        new_action.put("date_completed", "pending");
 
         JSONPaperParser.addPendingAction(pid, new_action);
     }
@@ -47,10 +47,11 @@ public class ActionFunctions {
 
     }
 
-    public static void deleteAction (String pid, String aid) {
+    public static void completeAction (String pid, String aid) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
         JSONArray actions = (JSONArray) paper.get("actions");
+        JSONArray complete_actions = (JSONArray) paper.get("complete_actions");
 
         JSONArray new_actions = (JSONArray) actions.clone();
 
@@ -58,10 +59,21 @@ public class ActionFunctions {
 
             if (((String) ((JSONObject) a).get("aid")).equals(aid)) {
                 new_actions.remove(a);
+
+                JSONObject temp = new JSONObject();
+                temp.put("details", ((JSONObject) a).get("details"));
+                temp.put("date_recommended", ((JSONObject) a).get("date_recommended"));
+                temp.put("date_completed", LocalDate.now().toString());
+                temp.put("type", ((JSONObject) a).get("type"));
+                temp.put("rid", ((JSONObject) a).get("rid"));
+                temp.put("aid", ((JSONObject) a).get("aid"));
+
+                complete_actions.add(temp);
             }
         }
 
         JSONPaperParser.updateActions(pid, new_actions);
+        JSONPaperParser.addCompleteAction(pid, complete_actions);
 
     }
 

@@ -89,7 +89,8 @@ public class ResearcherActionsScene {
         // add reviewers to table views
         ArrayList<ResearcherAction> actions_array = getResearcherActions(r_paper);
         pending_action_tv.getItems().addAll(actions_array);
-        action_history_tv.getItems().addAll(actions_array);
+        ArrayList<ResearcherAction> completed_array = getCompletedActions(r_paper);
+        action_history_tv.getItems().addAll(completed_array);
 
         // tab pane
         TabPane main_tp = new TabPane();
@@ -118,6 +119,19 @@ public class ResearcherActionsScene {
         ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
 
         JSONArray paper_actions = (JSONArray) r_paper.getJson_obj().get("actions");
+
+        for (Object a : paper_actions) {
+            actions.add(new ResearcherAction((JSONObject) a, r_paper.getPaper_id()));
+        }
+
+        return actions;
+    }
+
+    private static ArrayList<ResearcherAction> getCompletedActions (ResearcherPaper r_paper) {
+
+        ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
+
+        JSONArray paper_actions = (JSONArray) r_paper.getJson_obj().get("complete_actions");
 
         for (Object a : paper_actions) {
             actions.add(new ResearcherAction((JSONObject) a, r_paper.getPaper_id()));

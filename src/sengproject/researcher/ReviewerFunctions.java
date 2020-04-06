@@ -23,12 +23,16 @@ public class ReviewerFunctions {
         if (type.equals("pref")) {
             pref_rev.remove(rid);
             curr_rev.add(reviewer_obj);
+            if (inter_rev.contains(rid)) { inter_rev.remove(rid); }
             JSONPaperParser.addPrefRev(pid, pref_rev, curr_rev);
+            JSONPaperParser.updateInterRev(pid, inter_rev);
 
         } else if (type.equals("int")) {
             inter_rev.remove(rid);
             curr_rev.add(reviewer_obj);
+            if (pref_rev.contains(rid)) { pref_rev.remove(rid); }
             JSONPaperParser.addInterRev(pid, inter_rev, curr_rev);
+            JSONPaperParser.updatePrefRev(pid, pref_rev);
 
         } else {
             return false;
@@ -47,7 +51,7 @@ public class ReviewerFunctions {
             inter_rev.add(rid);
         }
 
-        return JSONPaperParser.addNewInterRev(pid, inter_rev);
+        return JSONPaperParser.updateInterRev(pid, inter_rev);
 
     }
 
@@ -60,7 +64,7 @@ public class ReviewerFunctions {
             inter_rev.remove(rid);
         }
 
-        return JSONPaperParser.addNewInterRev(pid, inter_rev);
+        return JSONPaperParser.updateInterRev(pid, inter_rev);
 
     }
 

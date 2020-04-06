@@ -62,6 +62,7 @@ public class JSONPaperParser {
     	paper.put("volume_id", vid);
     	paper.put("pending_actions", new JSONArray());
 		paper.put("actions", new JSONArray());
+		paper.put("complete_actions", new JSONArray());
     	paper.put("file_name", fn);
     	paper.put("latest_date", ld);
     	paper.put("deadline", dl);
@@ -195,6 +196,7 @@ public class JSONPaperParser {
         	paper.put("volume_id", paper.get("volume_id"));
         	paper.put("pending_actions", paper.get("pending_actions"));
         	paper.put("actions", paper.get("actions"));
+        	paper.put("complete_actions", paper.get("complete_actions"));
         	paper.put("file_name", file);
         	paper.put("latest_date", paper.get("latest_date"));
         	paper.put("deadline", paper.get("deadline"));
@@ -209,36 +211,6 @@ public class JSONPaperParser {
     	}
 
     }
-
-	public static Boolean addNewInterRev (String pid, JSONArray int_rev) {
-
-		JSONObject paper = findPaper(pid);
-
-		if (paper != null && removePaper(paper)) {
-			paper.put("title", paper.get("title"));
-			paper.put("paper_id", pid);
-			paper.put("sub_date", paper.get("sub_date"));
-			paper.put("author_name", paper.get("author_name"));
-			paper.put("author_id", paper.get("author_id"));
-			paper.put("journal_name", paper.get("journal_name"));
-			paper.put("journal_id", paper.get("journal_id"));
-			paper.put("volume_name", paper.get("volume_name"));
-			paper.put("volume_id", paper.get("volume_id"));
-			paper.put("pending_actions", paper.get("pending_actions"));
-			paper.put("actions", paper.get("actions"));
-			paper.put("file_name", paper.get("file_name"));
-			paper.put("latest_date", paper.get("latest_date"));
-			paper.put("deadline", paper.get("deadline"));
-			paper.put("reviewers", paper.get("reviewers"));
-			paper.put("status", paper.get("status"));
-			paper.put("pref_rev_uid", paper.get("pref_rev_uid"));
-			paper.put("inter_rev_uid", int_rev);
-			appendStrToFile("Papers.json", paper.toJSONString());
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	public static Boolean addPrefRev (String pid, JSONArray pref_rev, JSONArray rev) {
 
@@ -256,6 +228,7 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", paper.get("pending_actions"));
 			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -286,6 +259,7 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", paper.get("pending_actions"));
 			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -293,6 +267,70 @@ public class JSONPaperParser {
 			paper.put("status", paper.get("status"));
 			paper.put("pref_rev_uid", paper.get("pref_rev_uid"));
 			paper.put("inter_rev_uid", inter_rev);
+			appendStrToFile("Papers.json", paper.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public static Boolean updateInterRev (String pid, JSONArray new_inter_rev) {
+
+		JSONObject paper = findPaper(pid);
+
+		if (paper != null && removePaper(paper)) {
+			paper.put("title", paper.get("title"));
+			paper.put("paper_id", pid);
+			paper.put("sub_date", paper.get("sub_date"));
+			paper.put("author_name", paper.get("author_name"));
+			paper.put("author_id", paper.get("author_id"));
+			paper.put("journal_name", paper.get("journal_name"));
+			paper.put("journal_id", paper.get("journal_id"));
+			paper.put("volume_name", paper.get("volume_name"));
+			paper.put("volume_id", paper.get("volume_id"));
+			paper.put("pending_actions", paper.get("pending_actions"));
+			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
+			paper.put("file_name", paper.get("file_name"));
+			paper.put("latest_date", paper.get("latest_date"));
+			paper.put("deadline", paper.get("deadline"));
+			paper.put("reviewers", paper.get("reviewers"));
+			paper.put("status", paper.get("status"));
+			paper.put("pref_rev_uid", paper.get("pref_rev_uid"));
+			paper.put("inter_rev_uid", new_inter_rev);
+			appendStrToFile("Papers.json", paper.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public static Boolean updatePrefRev (String pid, JSONArray new_pref_rev) {
+
+		JSONObject paper = findPaper(pid);
+
+		if (paper != null && removePaper(paper)) {
+			paper.put("title", paper.get("title"));
+			paper.put("paper_id", pid);
+			paper.put("sub_date", paper.get("sub_date"));
+			paper.put("author_name", paper.get("author_name"));
+			paper.put("author_id", paper.get("author_id"));
+			paper.put("journal_name", paper.get("journal_name"));
+			paper.put("journal_id", paper.get("journal_id"));
+			paper.put("volume_name", paper.get("volume_name"));
+			paper.put("volume_id", paper.get("volume_id"));
+			paper.put("pending_actions", paper.get("pending_actions"));
+			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
+			paper.put("file_name", paper.get("file_name"));
+			paper.put("latest_date", paper.get("latest_date"));
+			paper.put("deadline", paper.get("deadline"));
+			paper.put("reviewers", paper.get("reviewers"));
+			paper.put("status", paper.get("status"));
+			paper.put("pref_rev_uid", new_pref_rev);
+			paper.put("inter_rev_uid", paper.get("inter_rev_uid"));
 			appendStrToFile("Papers.json", paper.toJSONString());
 			return true;
 		} else {
@@ -317,6 +355,7 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", paper.get("pending_actions"));
 			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -349,6 +388,7 @@ public class JSONPaperParser {
 			act.add(new_action);
 			paper.put("pending_actions", act);
 			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -379,6 +419,38 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", new_pending_action);
 			paper.put("actions", new_action);
+			paper.put("complete_actions", paper.get("complete_actions"));
+			paper.put("file_name", paper.get("file_name"));
+			paper.put("latest_date", paper.get("latest_date"));
+			paper.put("deadline", paper.get("deadline"));
+			paper.put("reviewers", paper.get("reviewers"));
+			paper.put("status", paper.get("status"));
+			paper.put("pref_rev_uid", paper.get("pref_rev_uid"));
+			paper.put("inter_rev_uid", paper.get("inter_rev_uid"));
+			appendStrToFile("Papers.json", paper.toJSONString());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static Boolean addCompleteAction (String pid, JSONArray new_complete_actions) {
+
+		JSONObject paper = findPaper(pid);
+
+		if (paper != null && removePaper(paper)) {
+			paper.put("title", paper.get("title"));
+			paper.put("paper_id", pid);
+			paper.put("sub_date", paper.get("sub_date"));
+			paper.put("author_name", paper.get("author_name"));
+			paper.put("author_id", paper.get("author_id"));
+			paper.put("journal_name", paper.get("journal_name"));
+			paper.put("journal_id", paper.get("journal_id"));
+			paper.put("volume_name", paper.get("volume_name"));
+			paper.put("volume_id", paper.get("volume_id"));
+			paper.put("pending_actions", paper.get("pending_actions"));
+			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", new_complete_actions);
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -409,6 +481,7 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", paper.get("pending_actions"));
 			paper.put("actions", new_actions);
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -439,6 +512,7 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", new_pending_actions);
 			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
@@ -469,6 +543,7 @@ public class JSONPaperParser {
 			paper.put("volume_id", paper.get("volume_id"));
 			paper.put("pending_actions", paper.get("pending_actions"));
 			paper.put("actions", paper.get("actions"));
+			paper.put("complete_actions", paper.get("complete_actions"));
 			paper.put("file_name", paper.get("file_name"));
 			paper.put("latest_date", paper.get("latest_date"));
 			paper.put("deadline", paper.get("deadline"));
