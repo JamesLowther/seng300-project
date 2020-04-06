@@ -77,7 +77,7 @@ public class EditorMenuScene {
         String journal_name;
         try {
             journal_name = (String) journals.get(0).get("title");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             journal_name = "No Journal Associated With User";
         }
 
@@ -136,7 +136,7 @@ public class EditorMenuScene {
         String jid;
         try {
             jid = (String) journals.get(0).get("jid");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             papers = new ArrayList<EditorPaper>();
             return papers;
         }
