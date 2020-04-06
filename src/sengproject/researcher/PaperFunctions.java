@@ -21,7 +21,7 @@ public class PaperFunctions {
     // creates a new paper for a particular researcher
     // returns true if paper sucessfully create
     // returns false otherwise
-    public static Boolean createNewPaper (String title, String j_title, String jid, String v_title, String vid, ArrayList<JSONObject> pref_rev, File selected_file) {
+    public static Boolean createNewPaper (String title, String j_title, String jid, String v_title, String vid, String deadline, ArrayList<JSONObject> pref_rev, File selected_file) {
 
         if (!checkValidity(selected_file) || title.equals("")) {return false;}
 
@@ -33,7 +33,7 @@ public class PaperFunctions {
         }
 
         JSONObject new_paper = JSONPaperParser.addPaper(title, "not_needed", todays_date,
-                j_title, jid, v_title, vid, selected_file.getName(), todays_date, "not set", pref_rev_array, "pending");
+                j_title, jid, v_title, vid, selected_file.getName(), todays_date, deadline, pref_rev_array, "pending");
 
         if (new_paper != null) {
 

@@ -63,7 +63,7 @@ public class EditorReviewersScene {
 
             TableColumn<EditorReviewer, String> deadline_column = new TableColumn<EditorReviewer, String>("Deadline");
             deadline_column.setStyle("-fx-alignment: CENTER-RIGHT;");
-            deadline_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("num_pub_rev"));
+            deadline_column.setCellValueFactory(new PropertyValueFactory<EditorReviewer, String>("deadline"));
 
             TableColumn<EditorReviewer, Button> manage_column = new TableColumn<EditorReviewer, Button>("");
             manage_column.setStyle("-fx-alignment: CENTER;");
@@ -156,14 +156,7 @@ public class EditorReviewersScene {
 
             JSONObject rev = JSONUserParser.getUserUID((String) o);
 
-            reviewers.add(new EditorReviewer(
-                    (String) rev.get("username"),
-                    (long) rev.get("major_rev"),
-                    (long) rev.get("minor_rev"),
-                    (long) rev.get("papers_reviewed"),
-                    (double) ((JSONArray) rev.get("avg_time")).get(0),
-                    "TODO"
-            ));
+            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), "pref"));
 
         }
         return reviewers;
@@ -179,14 +172,7 @@ public class EditorReviewersScene {
 
             JSONObject rev = JSONUserParser.getUserUID((String) o);
 
-            reviewers.add(new EditorReviewer(
-                    (String) rev.get("username"),
-                    (long) rev.get("major_rev"),
-                    (long) rev.get("minor_rev"),
-                    (long) rev.get("papers_reviewed"),
-                    (double) ((JSONArray) rev.get("avg_time")).get(0),
-                    "TODO"
-            ));
+            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), "curr"));
 
         }
         return reviewers;
@@ -202,14 +188,7 @@ public class EditorReviewersScene {
 
             JSONObject rev = JSONUserParser.getUserUID((String) o);
 
-            reviewers.add(new EditorReviewer(
-                    (String) rev.get("username"),
-                    (long) rev.get("major_rev"),
-                    (long) rev.get("minor_rev"),
-                    (long) rev.get("papers_reviewed"),
-                    (double) ((JSONArray) rev.get("avg_time")).get(0),
-                    "TODO"
-            ));
+            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), "int"));
 
         }
         return reviewers;

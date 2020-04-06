@@ -8,9 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.researcher.tvobjects.ResearcherAction;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.gui.reviewer.tvobjects.ReviewerAction;
 
 import java.util.ArrayList;
 
@@ -48,6 +51,9 @@ public class ResearcherActionsScene {
             TableColumn<ResearcherAction, String> name_column = new TableColumn<ResearcherAction, String>("Action details");
             name_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("action_details"));
 
+            TableColumn<ResearcherAction, String> type_column = new TableColumn<ResearcherAction, String>("Type");
+            type_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("type"));
+
             TableColumn<ResearcherAction, String> rev_uid_column = new TableColumn<ResearcherAction, String>("Reviewer name/UID");
             rev_uid_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, String>("rev_uid"));
 
@@ -59,7 +65,7 @@ public class ResearcherActionsScene {
             done_column.setCellValueFactory(new PropertyValueFactory<ResearcherAction, Button> ("done_b"));
             done_column.setSortable(false);
 
-            pending_action_tv.getColumns().addAll(name_column, rev_uid_column, date_recommended_column, done_column);
+            pending_action_tv.getColumns().addAll(name_column, type_column, rev_uid_column, date_recommended_column, done_column);
         }
 
         // action history
@@ -111,11 +117,11 @@ public class ResearcherActionsScene {
 
         ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
 
-        // todo: this is just test data
-        actions.add(new ResearcherAction("Test Action 1", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new ResearcherAction("Test Action 2", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new ResearcherAction("Test Action 3", "1234", "01/01/2020", "02/02/2020"));
-        actions.add(new ResearcherAction("Test Action 4", "1234", "01/01/2020", "02/02/2020"));
+        JSONArray paper_actions = (JSONArray) r_paper.getJson_obj().get("actions");
+
+        for (Object a : paper_actions) {
+            actions.add(new ResearcherAction((JSONObject) a, r_paper.getPaper_id()));
+        }
 
         return actions;
     }

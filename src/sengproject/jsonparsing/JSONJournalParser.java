@@ -77,7 +77,7 @@ public class JSONJournalParser {
         return null;
     }
 
-    public static boolean addVolume (String jid, String title) {
+    public static boolean addVolume (String jid, String title, String deadline) {
         JSONObject journal = findJournal(jid);
         JSONObject new_journal = new JSONObject();
 
@@ -93,6 +93,7 @@ public class JSONJournalParser {
             JSONObject new_volume = new JSONObject();
             new_volume.put("volume_title", title);
             new_volume.put("vid", rndVolumeId);
+            new_volume.put("deadline", deadline);
             volumes.add(new_volume);
 
             new_journal.put("volumes", volumes);
@@ -115,6 +116,28 @@ public class JSONJournalParser {
             }
         }
         return null;
+    }
+
+    public static JSONObject findVolume(String pid) {
+
+        JSONObject p = JSONPaperParser.findPaper(pid);
+        String p_vid = (String) p.get("volume_id");
+
+        JSONObject journal = findJournal((String) p.get("journal_id"));
+
+        JSONArray volumes = (JSONArray) journal.get("volumes");
+
+        for (Object v : volumes) {
+            if (p_vid.equals(((JSONObject) v).get("vid"))) {
+
+                return (JSONObject) v;
+
+            }
+
+        }
+
+        return null;
+
     }
 
     public static boolean removeJournal(JSONObject journal) {

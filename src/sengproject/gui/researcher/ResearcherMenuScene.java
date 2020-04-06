@@ -101,7 +101,10 @@ public class ResearcherMenuScene {
         actions_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, Button> ("actions_b"));
         actions_column.setSortable(false);
 
-        papers_tv.getColumns().addAll(title_column, details_column, reviewers_column, actions_column);
+        TableColumn<ResearcherPaper, String>  deadline_column = new TableColumn<ResearcherPaper, String> ("Deadline");
+        deadline_column.setCellValueFactory(new PropertyValueFactory<ResearcherPaper, String> ("deadline"));
+
+        papers_tv.getColumns().addAll(title_column, details_column, reviewers_column, actions_column, deadline_column);
 
         papers_tv.getItems().addAll(getResearcherPapers()); // add papers to tableview
 

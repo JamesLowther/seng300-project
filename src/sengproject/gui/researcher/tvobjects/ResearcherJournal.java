@@ -8,13 +8,15 @@ public class ResearcherJournal {
     private String v_title;
     private String jid;
     private String vid;
+    private String deadline;
 
-    public ResearcherJournal (String jt, String vt, String jd, String vd) {
+    public ResearcherJournal (String jt, String vt, String jd, String vd, String dead) {
 
         j_title = jt;
         v_title = vt;
         jid = jd;
         vid = vd;
+        deadline = dead;
     }
 
     @Override
@@ -39,6 +41,8 @@ public class ResearcherJournal {
     public String getVid() {
         return vid;
     }
+
+    public String getDeadline () { return deadline; }
 
 
 }

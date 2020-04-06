@@ -10,6 +10,7 @@ import sengproject.gui.editor.EditorReviewersScene;
 import sengproject.gui.researcher.ResearcherActionsScene;
 import sengproject.gui.researcher.ResearcherDetailsScene;
 import sengproject.gui.researcher.ResearcherReviewersScene;
+import sengproject.jsonparsing.JSONJournalParser;
 
 public class EditorPaper {
 

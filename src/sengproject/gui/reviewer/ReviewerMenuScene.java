@@ -90,7 +90,10 @@ public class ReviewerMenuScene {
             actions_column.setCellValueFactory(new PropertyValueFactory<ReviewerPaper, Button>("actions_b"));
             actions_column.setSortable(false);
 
-            papers_tv.getColumns().addAll(title_column, details_column, actions_column);
+            TableColumn<ReviewerPaper, String> deadline_column = new TableColumn<ReviewerPaper, String>("Deadline");
+            deadline_column.setCellValueFactory(new PropertyValueFactory<ReviewerPaper, String>("deadline"));
+
+            papers_tv.getColumns().addAll(title_column, details_column, actions_column, deadline_column);
 
         }
 

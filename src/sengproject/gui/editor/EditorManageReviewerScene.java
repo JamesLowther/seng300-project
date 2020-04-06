@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.tvobjects.EditorReviewer;
+import sengproject.researcher.ReviewerFunctions;
 
 public class EditorManageReviewerScene {
 
@@ -43,7 +44,7 @@ public class EditorManageReviewerScene {
         Button remove_b = new Button("Remove");
         remove_b.setPrefSize(150,40);
         remove_b.setOnAction(action ->{
-            // todo: remove the reviewer
+            ReviewerFunctions.removeReviewer(reviewer.getPid(), (String) reviewer.getReviewer().get("uid"));
             GuiController.changeScene(EditorMenuScene.getScene());
         });
 

@@ -139,7 +139,7 @@ public class ResearcherNewPaperScene {
                 pref_rev.add(all_rev.get((int) i));
             }
 
-            if (j != null && PaperFunctions.createNewPaper(title_tf.getText(), j.getJ_title(), j.getJid(), j.getV_title(), j.getVid(), pref_rev, selected_file)) {
+            if (j != null && PaperFunctions.createNewPaper(title_tf.getText(), j.getJ_title(), j.getJid(), j.getV_title(), j.getVid(), j.getDeadline(), pref_rev, selected_file)) {
                 GuiController.changeScene(ResearcherMenuScene.getScene());
 
             } else {
@@ -193,7 +193,8 @@ public class ResearcherNewPaperScene {
                         (String) j.get("title"),
                         (String) v.get("volume_title"),
                         (String) j.get("jid"),
-                        (String) v.get("vid")
+                        (String) v.get("vid"),
+                        (String) v.get("deadline")
                 ));
             }
         }

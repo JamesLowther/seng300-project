@@ -14,6 +14,8 @@ public class ReviewerPaper {
     private Button actions_b;
     private CheckBox star_cb;
 
+    private JSONObject paper;
+
     private String previous_menu = null;
 
     private String title;
@@ -35,23 +37,25 @@ public class ReviewerPaper {
     // todo: 'previous_menu' is the previous menu to go back to. It is ether 'menu' or 'browse'
     // this is a solution until I can think of a better way
     //public ReviewerPaper (String t, String pi, String sd, String an, String aid, String jn, String jid, String vn, String vid, String fn, String ld, String dl, String rev, String revis, String rej, String prev) {
-    public ReviewerPaper (JSONObject paper, String prev) {
+    public ReviewerPaper (JSONObject p, String prev) {
 
-        title = (String) paper.get("title");
-        paper_id = (String) paper.get("paper_id");
-        sub_date = (String) paper.get("sub_date");
-        author_name = (String) paper.get("author_name");
-        author_id = (String) paper.get("author_id");
-        journal_name = (String) paper.get("journal_name");
-        journal_id = (String) paper.get("journal_id");
-        volume_name = (String) paper.get("volume_name");
-        volume_id = (String) paper.get("volume_id");
-        file_name = (String) paper.get("file_name");
-        latest_date = (String) paper.get("latest_date");
-        deadline = (String) paper.get("deadline");
-        reviewers = Integer.toString(((JSONArray) paper.get("reviewers")).size());
+        paper = p;
+
+        title = (String) p.get("title");
+        paper_id = (String) p.get("paper_id");
+        sub_date = (String) p.get("sub_date");
+        author_name = (String) p.get("author_name");
+        author_id = (String) p.get("author_id");
+        journal_name = (String) p.get("journal_name");
+        journal_id = (String) p.get("journal_id");
+        volume_name = (String) p.get("volume_name");
+        volume_id = (String) p.get("volume_id");
+        file_name = (String) p.get("file_name");
+        latest_date = (String) p.get("latest_date");
+        deadline = (String) p.get("deadline");
+        reviewers = Integer.toString(((JSONArray) p.get("reviewers")).size());
         revisions = "TODO";
-        status = (String) paper.get("status");
+        status = (String) p.get("status");
 
         previous_menu = prev;
 
@@ -68,6 +72,8 @@ public class ReviewerPaper {
         star_cb = new CheckBox();
 
     }
+
+    public JSONObject getPaper () {return paper;}
 
     public void setTitle (String t) {
         title = t;
