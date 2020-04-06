@@ -71,8 +71,7 @@ public class EditorMenuScene {
         bottom_hb.getChildren().addAll(bottom_spacer_r, browser_reviewers_b);
 
         //  'Journal Name' label
-        //todo: journal name
-        //  needs to get the journal associated in with the editor and set the label text
+
         ArrayList<JSONObject> journals = JSONJournalParser.getJournals((String) Globals.getUser().get("uid"));
         String journal_name;
         try {

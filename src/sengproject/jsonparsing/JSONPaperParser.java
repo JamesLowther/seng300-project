@@ -44,7 +44,6 @@ public class JSONPaperParser {
 	
     @SuppressWarnings("unchecked")
 	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vn, String vid, String fn, String ld, String dl, ArrayList<String> pref_rev, String rej) {
-    	// TODO: Might need updating depending on Discord says
     	JSONObject paper = new JSONObject();
 		String rndPaperId = Long.toString((long) (Math.random() * Integer.MAX_VALUE) + 1);
 
