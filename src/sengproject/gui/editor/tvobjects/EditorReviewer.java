@@ -9,6 +9,7 @@ import sengproject.gui.editor.EditorManageReviewerScene;
 import sengproject.gui.editor.EditorReviewersScene;
 import sengproject.gui.researcher.ResearcherReviewersScene;
 import sengproject.jsonparsing.JSONPaperParser;
+import sengproject.jsonparsing.JSONUserParser;
 import sengproject.researcher.ReviewerFunctions;
 
 public class EditorReviewer {
@@ -48,6 +49,7 @@ public class EditorReviewer {
         add_b = new Button("Add");
         add_b.setOnAction(action ->{
             if (ReviewerFunctions.addReviewer(pid, (String) rev.get("uid"), type)) {
+                JSONUserParser.addPaperRev((String) rev.get("uid"));
                 GuiController.changeScene(EditorReviewersScene.getScene(new EditorPaper((JSONObject) JSONPaperParser.findPaper(p))));
             }
             System.out.println("TODO: add reviewer to the paper");

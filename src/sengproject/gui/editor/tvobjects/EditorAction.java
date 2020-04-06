@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import sengproject.gui.GuiController;
 import sengproject.gui.editor.EditorActionsScene;
 import sengproject.jsonparsing.JSONPaperParser;
+import sengproject.jsonparsing.JSONUserParser;
 import sengproject.researcher.ActionFunctions;
 
 public class EditorAction {
@@ -36,6 +37,13 @@ public class EditorAction {
             System.out.println("Accepted action: " + action_details);
 
             ActionFunctions.moveAction(pid, (String) a.get("aid"));
+
+            if (type.equals("minor")){
+                JSONUserParser.addMinorRev(rev_uid);
+            } else {
+                JSONUserParser.addMajorRev(rev_uid);
+            }
+
             GuiController.changeScene(EditorActionsScene.getScene(new EditorPaper(JSONPaperParser.findPaper(pid))));
 
         });
