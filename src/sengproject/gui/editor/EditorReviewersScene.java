@@ -156,7 +156,7 @@ public class EditorReviewersScene {
 
             JSONObject rev = JSONUserParser.getUserUID((String) o);
 
-            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), "pref"));
+            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), null, "pref"));
 
         }
         return reviewers;
@@ -170,9 +170,9 @@ public class EditorReviewersScene {
 
         for (Object o : pref_rev_uid) {
 
-            JSONObject rev = JSONUserParser.getUserUID((String) o);
+            JSONObject rev = JSONUserParser.getUserUID((String) ((JSONObject) o).get("rid"));
 
-            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), "curr"));
+            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), (String) ((JSONObject) o).get("deadline"), "curr"));
 
         }
         return reviewers;
@@ -188,7 +188,7 @@ public class EditorReviewersScene {
 
             JSONObject rev = JSONUserParser.getUserUID((String) o);
 
-            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), "int"));
+            reviewers.add(new EditorReviewer(rev, paper.getPaper_id(), null, "int"));
 
         }
         return reviewers;

@@ -95,7 +95,7 @@ public class EditorBrowseReviewersScene {
 
         for (JSONObject p : all_reviewers) {
 
-            reviewers.add(new EditorReviewer(p, null, null));
+            reviewers.add(new EditorReviewer(p, null, null, null));
         }
 
         return reviewers;

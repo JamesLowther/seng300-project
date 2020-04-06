@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import sengproject.Globals;
 import sengproject.gui.GuiController;
 import sengproject.gui.reviewer.ReviewerActionsScene;
 import sengproject.gui.reviewer.ReviewerDetailsScene;
@@ -52,10 +53,17 @@ public class ReviewerPaper {
         volume_id = (String) p.get("volume_id");
         file_name = (String) p.get("file_name");
         latest_date = (String) p.get("latest_date");
-        deadline = (String) p.get("deadline");
         reviewers = Integer.toString(((JSONArray) p.get("reviewers")).size());
         revisions = "TODO";
         status = (String) p.get("status");
+
+        // get deadline
+        JSONArray revs = (JSONArray) p.get("reviewers");
+        for (Object r : revs) {
+            if (((JSONObject) r).get("rid").equals((String) Globals.getUser().get("uid"))) {
+                deadline = (String) ((JSONObject) r).get("deadline");
+            }
+        }
 
         previous_menu = prev;
 

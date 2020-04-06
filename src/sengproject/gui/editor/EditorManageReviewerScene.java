@@ -10,7 +10,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import sengproject.gui.GuiController;
+import sengproject.gui.editor.tvobjects.EditorPaper;
 import sengproject.gui.editor.tvobjects.EditorReviewer;
+import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.researcher.ReviewerFunctions;
 
 public class EditorManageReviewerScene {
@@ -45,7 +47,7 @@ public class EditorManageReviewerScene {
         remove_b.setPrefSize(150,40);
         remove_b.setOnAction(action ->{
             ReviewerFunctions.removeReviewer(reviewer.getPid(), (String) reviewer.getReviewer().get("uid"));
-            GuiController.changeScene(EditorMenuScene.getScene());
+            GuiController.changeScene(EditorReviewersScene.getScene(new EditorPaper(JSONPaperParser.findPaper(reviewer.getPid()))));
         });
 
         // center vbox
@@ -58,8 +60,8 @@ public class EditorManageReviewerScene {
         Button apply_b = new Button("Apply");
         apply_b.setPrefSize(150,40);
         apply_b.setOnAction(action ->{
-            // todo: apply the changes
-            GuiController.changeScene(EditorMenuScene.getScene());
+            ReviewerFunctions.updateDeadline(reviewer.getPid(), (String) reviewer.getReviewer().get("uid"), deadline_tf.getText());
+            GuiController.changeScene(EditorReviewersScene.getScene(new EditorPaper(JSONPaperParser.findPaper(reviewer.getPid()))));
         });
 
         // cancel button

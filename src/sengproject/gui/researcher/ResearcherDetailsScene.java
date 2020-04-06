@@ -11,7 +11,10 @@ import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import sengproject.gui.GuiController;
+import sengproject.gui.editor.EditorDetailsScene;
+import sengproject.gui.editor.tvobjects.EditorPaper;
 import sengproject.gui.researcher.tvobjects.ResearcherPaper;
+import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.researcher.PaperFunctions;
 
 import java.io.File;
@@ -64,7 +67,7 @@ public class ResearcherDetailsScene {
             File selected_file = file_chooser.showOpenDialog(GuiController.getStage());
             if (PaperFunctions.updatePaperFile(r_paper.getPaper_id(), selected_file)) {
 
-                GuiController.changeScene(ResearcherMenuScene.getScene());
+                GuiController.changeScene(ResearcherDetailsScene.getScene(new ResearcherPaper(JSONPaperParser.findPaper(r_paper.getPaper_id()))));
 
                 error_lb.setText("");
             } else {
@@ -80,7 +83,6 @@ public class ResearcherDetailsScene {
         Button download_b = new Button("Download");
         download_b.setPrefSize(150,40);
         download_b.setOnAction(action ->{
-            // todo: call download
             File selected_path = dir_chooser.showDialog(GuiController.getStage());
             if (PaperFunctions.downloadFile(r_paper.getPaper_id(), selected_path)) {
                 error_lb.setText("");
