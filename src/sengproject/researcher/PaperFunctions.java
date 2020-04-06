@@ -92,6 +92,8 @@ public class PaperFunctions {
             return false;
         }
 
+        JSONPaperParser.updateStatus(pid, "pending");
+
         return true;
 
     }

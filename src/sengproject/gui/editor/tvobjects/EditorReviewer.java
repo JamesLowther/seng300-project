@@ -28,14 +28,14 @@ public class EditorReviewer {
     private Button manage_b;
     private Button add_b;
 
-    public EditorReviewer (JSONObject rev, String p, String t) {
+    public EditorReviewer (JSONObject rev, String p, String d, String t) {
 
         name = (String) rev.get("username");
         num_major_rev = (long) rev.get("major_rev");
         num_minor_rev = (long) rev.get("minor_rev");
         num_pub_rev = (long) rev.get("papers_reviewed");
         avg_rev_time = (double) ((JSONArray) rev.get("avg_time")).get(0);
-        deadline = "TODO";
+        deadline = d;
 
         reviewer = rev;
         pid = p;

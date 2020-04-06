@@ -163,7 +163,7 @@ public class ResearcherReviewersScene {
 
         for (Object o : pref_rev_uid) {
 
-            JSONObject rev = JSONUserParser.getUserUID((String) o);
+            JSONObject rev = JSONUserParser.getUserUID((String) ((JSONObject) o).get("rid"));
 
             reviewers.add(new ResearcherReviewer(
                     (String) rev.get("username"),

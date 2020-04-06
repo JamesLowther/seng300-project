@@ -16,14 +16,18 @@ public class ReviewerFunctions {
         JSONArray pref_rev = (JSONArray) paper.get("pref_rev_uid");
         JSONArray inter_rev = (JSONArray) paper.get("inter_rev_uid");
 
+        JSONObject reviewer_obj = new JSONObject();
+        reviewer_obj.put("rid", rid);
+        reviewer_obj.put("deadline", "not set");
+
         if (type.equals("pref")) {
             pref_rev.remove(rid);
-            curr_rev.add(rid);
+            curr_rev.add(reviewer_obj);
             JSONPaperParser.addPrefRev(pid, pref_rev, curr_rev);
 
         } else if (type.equals("int")) {
             inter_rev.remove(rid);
-            curr_rev.add(rid);
+            curr_rev.add(reviewer_obj);
             JSONPaperParser.addInterRev(pid, inter_rev, curr_rev);
 
         } else {
@@ -40,9 +44,41 @@ public class ReviewerFunctions {
 
         JSONArray curr_rev = (JSONArray) paper.get("reviewers");
 
-        curr_rev.remove(rid);
+        JSONArray new_curr_rev = (JSONArray) curr_rev.clone();
 
-        return JSONPaperParser.removeRev(pid, curr_rev);
+        for (Object r : curr_rev) {
+
+            if (((JSONObject) r).get("rid").equals(rid)) {
+                new_curr_rev.remove(r);
+            }
+
+        }
+
+        return JSONPaperParser.updateRev(pid, new_curr_rev);
+
+    }
+
+    public static boolean updateDeadline (String pid, String rid, String deadline) {
+
+        JSONObject paper = JSONPaperParser.findPaper(pid);
+
+        JSONArray curr_rev = (JSONArray) paper.get("reviewers");
+
+        JSONArray new_curr_rev = (JSONArray) curr_rev.clone();
+
+        for (Object r : curr_rev) {
+
+            if (((JSONObject) r).get("rid").equals(rid)) {
+                new_curr_rev.remove(r);
+                JSONObject temp = new JSONObject();
+                temp.put("rid", rid);
+                temp.put("deadline", deadline);
+                new_curr_rev.add(temp);
+            }
+
+        }
+
+        return JSONPaperParser.updateRev(pid, new_curr_rev);
 
     }
 

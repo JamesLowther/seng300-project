@@ -90,7 +90,7 @@ public class ReviewerMenuScene {
             actions_column.setCellValueFactory(new PropertyValueFactory<ReviewerPaper, Button>("actions_b"));
             actions_column.setSortable(false);
 
-            TableColumn<ReviewerPaper, String> deadline_column = new TableColumn<ReviewerPaper, String>("Deadline");
+            TableColumn<ReviewerPaper, String> deadline_column = new TableColumn<ReviewerPaper, String>("Review Deadline");
             deadline_column.setCellValueFactory(new PropertyValueFactory<ReviewerPaper, String>("deadline"));
 
             papers_tv.getColumns().addAll(title_column, details_column, actions_column, deadline_column);
@@ -124,8 +124,9 @@ public class ReviewerMenuScene {
         for (JSONObject p : all_papers) {
             ArrayList<String> reviewers = (JSONArray) p.get("reviewers");
 
-            for (String s : reviewers) {
-                if(s.equals(Globals.getUser().get("uid"))) {
+            for (Object r : reviewers) {
+                String rid = (String) ((JSONObject) r).get("rid");
+                if(rid.equals(Globals.getUser().get("uid"))) {
                     papers.add(new ReviewerPaper(p, "menu"));
                 }
             }

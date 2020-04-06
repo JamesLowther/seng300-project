@@ -17,6 +17,7 @@ import sengproject.gui.researcher.tvobjects.ResearcherPaper;
 import sengproject.gui.reviewer.ReviewerBrowsePapersScene;
 import sengproject.gui.reviewer.ReviewerMenuScene;
 import sengproject.gui.reviewer.tvobjects.ReviewerPaper;
+import sengproject.jsonparsing.JSONPaperParser;
 import sengproject.researcher.PaperFunctions;
 
 import java.io.File;
@@ -64,16 +65,20 @@ public class EditorDetailsScene {
         Button accept_b = new Button("Accept");
         accept_b.setPrefSize(150,40);
         accept_b.setOnAction(action ->{
-            //todo: accept the paper
-            System.out.println("Todo: Accept the paper");
+            JSONPaperParser.updateStatus(r_paper.getPaper_id(), "accepted");
+            // refresh scene
+            GuiController.changeScene(EditorDetailsScene.getScene(new EditorPaper(JSONPaperParser.findPaper(r_paper.getPaper_id()))));
+            System.out.println("Accepted paper");
         });
 
         // reject button
         Button reject_b = new Button("Reject");
         reject_b.setPrefSize(150,40);
         reject_b.setOnAction(action ->{
-            //todo: reject the paper
-            System.out.println("Todo: Reject the paper");
+            JSONPaperParser.updateStatus(r_paper.getPaper_id(), "rejected");
+            // refresh scene
+            GuiController.changeScene(EditorDetailsScene.getScene(new EditorPaper(JSONPaperParser.findPaper(r_paper.getPaper_id()))));
+            System.out.println("Rejected paper");
         });
 
         // download button
