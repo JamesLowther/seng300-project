@@ -97,7 +97,7 @@ public class JSONPaperParser {
 		} catch (ParseException e) {
 			System.out.println(e.getLocalizedMessage());
         }
-        return null;
+        return papers;
     }
 
     public static ArrayList<JSONObject> getResearcherPapers (String uid) {
