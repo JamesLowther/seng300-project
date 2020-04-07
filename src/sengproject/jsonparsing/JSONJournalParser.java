@@ -145,7 +145,7 @@ public class JSONJournalParser {
         Scanner inFile1;
         JSONParser parser = new JSONParser();
         try {
-            inFile1 = new Scanner(new File("Journals.json")).useDelimiter("\n");
+            inFile1 = new Scanner(new File("Journals.json")).useDelimiter(System.lineSeparator());
             List<String> temps = new ArrayList<String>();
             while (inFile1.hasNext()) {
                 token1 = inFile1.next();

@@ -143,7 +143,7 @@ public class JSONPaperParser {
 		Scanner inFile1;
 		JSONParser parser = new JSONParser();
 		try {
-			inFile1 = new Scanner(new File("Papers.json")).useDelimiter("\n");
+			inFile1 = new Scanner(new File("Papers.json")).useDelimiter(System.lineSeparator());
 			List<String> temps = new ArrayList<String>();
 			while (inFile1.hasNext()) {
 				token1 = inFile1.next();
