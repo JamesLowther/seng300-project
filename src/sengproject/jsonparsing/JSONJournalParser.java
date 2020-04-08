@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import sengproject.Globals;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,7 +53,7 @@ public class JSONJournalParser {
         } catch (ParseException e) {
             System.out.println(e.getLocalizedMessage());
         }
-        return null;
+        return journals;
     }
 
     // returns all journals associated with a specific editor
