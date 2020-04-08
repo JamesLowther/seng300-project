@@ -12,10 +12,16 @@ Andre Staffa - Tut T08
 
 Igor Zayarny - Tut T09
 
+## Requirements
+
+* Java 8
+* JSON.simple library
+* JavaFX (included in Java 8)
+
 ## Getting Started
 
-To run the program, copy the `Journals.json` and `Users.json` files from `test-data/` into the project's root directory.
+To get started, copy the `Journals.json` and `Users.json` files from `test-data/` into the project's root directory.
 It includes a two starter editor accounts with username `editor-1` and `editor-2` each with the password `1234`.
 Each of these accounts has its own journal, and each journal has two volumes.
 
-Other user accounts (researchers and reviewers) need to be generated at runtime.
+Other user accounts (researchers and reviewers) can be generated at runtime.
