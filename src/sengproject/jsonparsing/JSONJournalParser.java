@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 public class JSONJournalParser {
 
+    // adds a new journal to Journals.json
+    // takes the journal title and the uid of the editor
     public static JSONObject addJournal (String t, String eid) {
         JSONObject journal = new JSONObject();
         String rndJournalId = Long.toString((long) (Math.random() * Integer.MAX_VALUE) + 1);
@@ -29,6 +31,7 @@ public class JSONJournalParser {
         }
     }
 
+    // returns all journals in Journals.json
     public static ArrayList<JSONObject> getJournals () {
         ArrayList<JSONObject> journals = new ArrayList<JSONObject>();
         JSONParser parser = new JSONParser();
@@ -52,6 +55,8 @@ public class JSONJournalParser {
         return null;
     }
 
+    // returns all journals associated with a specific editor
+    // takes the editors ID
     public static ArrayList<JSONObject> getJournals (String uid) {
         ArrayList<JSONObject> papers = new ArrayList<JSONObject>();
         JSONParser parser = new JSONParser();
@@ -77,6 +82,8 @@ public class JSONJournalParser {
         return null;
     }
 
+    // adds a volume to a specific journal in Journals.json
+    // takes the journal ID, volume title, and volume deadline
     public static boolean addVolume (String jid, String title, String deadline) {
         JSONObject journal = findJournal(jid);
         JSONObject new_journal = new JSONObject();
@@ -105,6 +112,7 @@ public class JSONJournalParser {
         }
     }
 
+    // returns a journal from Journals.json given its journal ID
     public static JSONObject findJournal(String jid) {
         ArrayList<JSONObject> journals = getJournals();
         if (journals.isEmpty()) {
@@ -118,6 +126,8 @@ public class JSONJournalParser {
         return null;
     }
 
+    // returns the volume associated with a paper
+    // takes the papers ID
     public static JSONObject findVolume(String pid) {
 
         JSONObject p = JSONPaperParser.findPaper(pid);
@@ -140,6 +150,7 @@ public class JSONJournalParser {
 
     }
 
+    // removes a journal from Journals.json
     public static boolean removeJournal(JSONObject journal) {
         String token1 = "";
         Scanner inFile1;
