@@ -27,7 +27,9 @@ public class GuiController extends Application {
 		s.show();
 		
 	}
-	
+
+	// changes the scene being displayed by the GUI's stage
+	// takes in a scene value
 	public static void changeScene (Scene scene) {
 		
 		app_width = s.getWidth();

@@ -6,6 +6,8 @@ import sengproject.jsonparsing.JSONPaperParser;
 
 public class ReviewerFunctions {
 
+    // adds a reviewer to a paper if added by editor
+    // takes the paper ID, reviewer ID, and the type of reviewer being added ("pref" or "int")
     public static boolean addReviewer (String pid, String rid, String type) {
 
         if (type == null) { return false; }
@@ -20,6 +22,7 @@ public class ReviewerFunctions {
         reviewer_obj.put("rid", rid);
         reviewer_obj.put("deadline", "not set");
 
+        // if a preferred reviewer
         if (type.equals("pref")) {
             pref_rev.remove(rid);
             curr_rev.add(reviewer_obj);
@@ -27,6 +30,7 @@ public class ReviewerFunctions {
             JSONPaperParser.addPrefRev(pid, pref_rev, curr_rev);
             JSONPaperParser.updateInterRev(pid, inter_rev);
 
+        // if a interested reviewer
         } else if (type.equals("int")) {
             inter_rev.remove(rid);
             curr_rev.add(reviewer_obj);
@@ -42,6 +46,8 @@ public class ReviewerFunctions {
 
     }
 
+    // adds an interested reviewer to a paper
+    // takes the paper ID and reviewer ID
     public static boolean addInterestedReviewer (String pid, String rid) {
 
         JSONObject paper =  JSONPaperParser.findPaper(pid);
@@ -55,6 +61,8 @@ public class ReviewerFunctions {
 
     }
 
+    // removes a interested reviewer from a paper
+    // takes the paper ID and reviewer ID
     public static boolean removeInterestedReviewer (String pid, String rid) {
 
         JSONObject paper =  JSONPaperParser.findPaper(pid);
@@ -68,6 +76,8 @@ public class ReviewerFunctions {
 
     }
 
+    // removes a reviewer from a paper
+    // takes the paper ID and reviewer ID
     public static boolean removeReviewer (String pid, String rid) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
@@ -88,6 +98,8 @@ public class ReviewerFunctions {
 
     }
 
+    // updates the deadline for a specific reviewer
+    // takes the paper ID, reviewer ID, and new deadline
     public static boolean updateDeadline (String pid, String rid, String deadline) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
@@ -111,7 +123,4 @@ public class ReviewerFunctions {
         return JSONPaperParser.updateRev(pid, new_curr_rev);
 
     }
-
-
-
 }

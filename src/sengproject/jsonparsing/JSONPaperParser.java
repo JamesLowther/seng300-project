@@ -26,22 +26,8 @@ import java.io.File;
 
 public class JSONPaperParser {
 
-//	   title = "title"
-//	   paper_id = "paper_id";
-//     sub_date = "sub_date";
-//     author_name = "author_name";
-//     author_id = "author_id";
-//     journal_name = "journal_name";
-//     journal_id = "journal_id";
-//     volume_id = "volume_id";
-//     file_name = "file_name";
-//     latest_date = "latest_date";
-//     deadline = "deadline";
-//     reviewers = "reviewers";
-//     status = "rejected";
-
-//     File file, String[] pref_rev_uid
-	
+	// adds a new paper to Papers.json
+	// takes a number of important parameters
     @SuppressWarnings("unchecked")
 	public static JSONObject addPaper (String t, String pi, String sd, String jn, String jid, String vn, String vid, String fn, String ld, String dl, ArrayList<String> pref_rev, String rej) {
     	JSONObject paper = new JSONObject();
@@ -77,6 +63,7 @@ public class JSONPaperParser {
     	}
     }
 
+    // returns all JSONObjects for each paper in Papers.json
     public static ArrayList<JSONObject> getResearcherPapers () {
     	ArrayList<JSONObject> papers = new ArrayList<JSONObject>();
     	JSONParser parser = new JSONParser();
@@ -100,6 +87,8 @@ public class JSONPaperParser {
         return papers;
     }
 
+    // returns all JSONObjects for a particular reasearcher
+	// takes the researchers ID
     public static ArrayList<JSONObject> getResearcherPapers (String uid) {
 		ArrayList<JSONObject> papers = new ArrayList<JSONObject>();
 		JSONParser parser = new JSONParser();
@@ -124,7 +113,8 @@ public class JSONPaperParser {
 		}
 		return null;
 	}
-    
+
+	// returns the JSONObject for a particular paper given its paper ID
     public static JSONObject findPaper(String pid) {
     	ArrayList<JSONObject> papers = getResearcherPapers();
     	if (papers.isEmpty()) {
@@ -138,6 +128,7 @@ public class JSONPaperParser {
     	return null;
     }
 
+    // removes a paper from Papers.json given its JSONObject equivalent
 	public static boolean removePaper(JSONObject paper) {
 		String token1 = "";
 		Scanner inFile1;
@@ -178,6 +169,7 @@ public class JSONPaperParser {
 		return false;
 	}
 
+	// updates the file value for a paper in Papers.json
     @SuppressWarnings("unchecked")
 	public static Boolean updatePaperFile (String pid, String file) {
 
@@ -211,6 +203,7 @@ public class JSONPaperParser {
 
     }
 
+	// adds a preferred reviewer a paper in Papers.json
 	public static Boolean addPrefRev (String pid, JSONArray pref_rev, JSONArray rev) {
 
 		JSONObject paper = findPaper(pid);
@@ -242,6 +235,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// adds a interested reviewer for a paper in Papers.json
 	public static Boolean addInterRev (String pid, JSONArray inter_rev, JSONArray rev) {
 
 		JSONObject paper = findPaper(pid);
@@ -274,6 +268,7 @@ public class JSONPaperParser {
 
 	}
 
+	// updates the interested reviewer value for a paper in Papers.json
 	public static Boolean updateInterRev (String pid, JSONArray new_inter_rev) {
 
 		JSONObject paper = findPaper(pid);
@@ -306,6 +301,7 @@ public class JSONPaperParser {
 
 	}
 
+	// updates the preferred reviewer value for a paper in Papers.json
 	public static Boolean updatePrefRev (String pid, JSONArray new_pref_rev) {
 
 		JSONObject paper = findPaper(pid);
@@ -338,6 +334,7 @@ public class JSONPaperParser {
 
 	}
 
+	// updates the reviewer value for a paper in Papers.json
 	public static Boolean updateRev (String pid, JSONArray rev) {
 
 		JSONObject paper = findPaper(pid);
@@ -369,6 +366,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// adds a pending action for a paper in Papers.json
 	public static Boolean addPendingAction (String pid, JSONObject new_action) {
 
 		JSONObject paper = findPaper(pid);
@@ -402,6 +400,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// adds a new action for a paper in Papers.json
 	public static Boolean addAction (String pid, JSONArray new_action, JSONArray new_pending_action) {
 
 		JSONObject paper = findPaper(pid);
@@ -433,6 +432,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// adds a complete action for a paper in Papers.json
 	public static Boolean addCompleteAction (String pid, JSONArray new_complete_actions) {
 
 		JSONObject paper = findPaper(pid);
@@ -464,6 +464,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// updates the actions value for a paper in Papers.json
 	public static Boolean updateActions (String pid, JSONArray new_actions) {
 
 		JSONObject paper = findPaper(pid);
@@ -495,6 +496,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// updates the pending actions value for a paper in Papers.json
 	public static Boolean updatePendingActions (String pid, JSONArray new_pending_actions) {
 
 		JSONObject paper = findPaper(pid);
@@ -526,6 +528,7 @@ public class JSONPaperParser {
 		}
 	}
 
+	// updates the status value for a paper in Papers.json
 	public static Boolean updateStatus (String pid, String status) {
 
 		JSONObject paper = findPaper(pid);

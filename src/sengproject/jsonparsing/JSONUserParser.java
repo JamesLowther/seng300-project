@@ -21,7 +21,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class JSONUserParser {
-	
+
+	// adds a new user to Users.json
+	// takes a username, password, and role for the new user
 	@SuppressWarnings("unchecked")
 	public static boolean addUser(String username, String password, String role) {
 		JSONObject currentUser = findUser(username);
@@ -47,7 +49,9 @@ public class JSONUserParser {
 			return false;
 		}
 	}
-	
+
+	// removes a user from Users.json
+	// takes the user object to remove
 	public static boolean removeUser(JSONObject user) {
 		String token1 = "";
 		Scanner inFile1;
@@ -87,7 +91,8 @@ public class JSONUserParser {
 		}
 		return false;
 	}
-	
+
+	// updates the user's information
 	public static boolean updateUser(JSONObject user, String username, String password, Object messages, Object reviewerDue, int papersReviewed) {
 		if (removeUser(user)) {
 			JSONObject userObj = new JSONObject();
@@ -128,6 +133,7 @@ public class JSONUserParser {
 		}
 	}
 
+	// adds a new major revision to the user (typically a reviewer)
 	public static boolean addMajorRev(String uid) {
 		JSONObject user = findUserUID(uid);
 
@@ -150,6 +156,7 @@ public class JSONUserParser {
 		}
 	}
 
+	// adds a new minor revision to the user (typically a reviewer)
 	public static boolean addMinorRev(String uid) {
 		JSONObject user = findUserUID(uid);
 
@@ -172,6 +179,7 @@ public class JSONUserParser {
 		}
 	}
 
+	// adds a new paper revision to the user (typically a reviewer)
 	public static boolean addPaperRev(String uid) {
 		JSONObject user = findUserUID(uid);
 
@@ -194,6 +202,7 @@ public class JSONUserParser {
 		}
 	}
 
+	// updates the average review time for the user (typically a reviewer)
 	public static boolean addAvgTime(String uid, int days) {
 		JSONObject user = findUserUID(uid);
 
@@ -227,7 +236,8 @@ public class JSONUserParser {
 			return false;
 		}
 	}
-	
+
+	// finds a user based on their username
 	private static JSONObject findUser(String username) {
 		JSONParser parser = new JSONParser();
 		BufferedReader reader;
@@ -254,6 +264,7 @@ public class JSONUserParser {
 		return null;
 	}
 
+	// finds a user based on their user ID
 	private static JSONObject findUserUID(String uid) {
 		JSONParser parser = new JSONParser();
 		BufferedReader reader;
@@ -279,7 +290,8 @@ public class JSONUserParser {
 		}
 		return null;
 	}
-	
+
+	// finds a user based on their username and password
 	private static JSONObject findUser(String username, String password) {
 		JSONParser parser = new JSONParser();
 		BufferedReader reader;
@@ -306,7 +318,9 @@ public class JSONUserParser {
         }
 		return null;
 	}
-	
+
+	// finds a user based on their username and password
+	// true if the user exists and false otherwise
 	public static boolean searchUser(String username, String password) {
 		JSONObject currentUser = findUser(username, password);
 		if (currentUser != null) {
@@ -315,7 +329,8 @@ public class JSONUserParser {
 			return false;
 		}
 	}
-	
+
+	// returns user JSONObject given username and password
 	public static JSONObject getUser(String username, String password) {
 		JSONObject currentUser = findUser(username, password);
 		if (currentUser != null) {
@@ -325,6 +340,7 @@ public class JSONUserParser {
 		}
 	}
 
+	// returns user JSONObject given user UID
 	public static JSONObject getUserUID(String uid) {
 		JSONObject currentUser = findUserUID(uid);
 		if (currentUser != null) {
@@ -334,6 +350,7 @@ public class JSONUserParser {
 		}
 	}
 
+	// returns all user JSONObject given a particular role
 	public static ArrayList<JSONObject> getUsersFromRole(String role) {
 		JSONParser parser = new JSONParser();
 		BufferedReader reader;

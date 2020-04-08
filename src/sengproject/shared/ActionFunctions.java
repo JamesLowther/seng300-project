@@ -9,6 +9,8 @@ import java.time.LocalDate;
 
 public class ActionFunctions {
 
+    // adds a new action to a particular paper given its pid
+    // takes the action details and its type
     public static void addNewAction (String pid, String details, String type) {
 
         String rndActionId = Long.toString((long) (Math.random() * Integer.MAX_VALUE) + 1);
@@ -24,6 +26,8 @@ public class ActionFunctions {
         JSONPaperParser.addPendingAction(pid, new_action);
     }
 
+    // moves an action from pending actions to actions seen by the researcher
+    // takes the paper ID and the action ID
     public static void moveAction (String pid, String aid) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
@@ -47,6 +51,8 @@ public class ActionFunctions {
 
     }
 
+    // moves an action from actions seen by the researcher to complete actions
+    // takes the paper ID and the action ID
     public static void completeAction (String pid, String aid) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
@@ -77,6 +83,8 @@ public class ActionFunctions {
 
     }
 
+    // deletes a pending action (if editor denies it)
+    // takes the paper ID and the action ID
     public static void deletePendingAction (String pid, String aid) {
 
         JSONObject paper = JSONPaperParser.findPaper(pid);
