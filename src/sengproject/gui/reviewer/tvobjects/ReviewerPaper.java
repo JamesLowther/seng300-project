@@ -55,7 +55,7 @@ public class ReviewerPaper {
         latest_date = (String) p.get("latest_date");
         deadline = (String) p.get("deadline");
         reviewers = Integer.toString(((JSONArray) p.get("reviewers")).size());
-        revisions = "TODO";
+        revisions = Integer.toString(((JSONArray) paper.get("actions")).size());
         status = (String) p.get("status");
 
         // get deadline

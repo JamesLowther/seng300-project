@@ -50,7 +50,6 @@ public class EditorReviewer {
                 JSONUserParser.addPaperRev((String) rev.get("uid"));
                 GuiController.changeScene(EditorReviewersScene.getScene(new EditorPaper((JSONObject) JSONPaperParser.findPaper(p))));
             }
-            System.out.println("TODO: add reviewer to the paper");
         });
 
     }
