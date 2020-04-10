@@ -77,7 +77,8 @@ public class RegistrationScene {
 			GuiController.changeScene(LoginScene.getScene());
 			
 		});
-		
+
+		// login vbox
 		VBox login_ui = new VBox(username, password, role, register_button, register_message, return_button);
 		login_ui.setSpacing(8);
 		login_ui.setAlignment(Pos.CENTER);

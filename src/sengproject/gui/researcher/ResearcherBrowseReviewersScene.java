@@ -86,6 +86,7 @@ public class ResearcherBrowseReviewersScene {
 
     }
 
+    // returns an array of ResearcherReviewer objects for every reviewer
     private static ArrayList<ResearcherReviewer> getResearcherReviewers () {
 
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();

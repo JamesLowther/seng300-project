@@ -95,7 +95,7 @@ public class PaperFunctions {
 
     }
 
-    // checks to make sure the file is valid
+    // checks to make sure the file is valid (has correct file type)
     // not null and has a pdf extension
     public static Boolean checkValidity (File file) {
 

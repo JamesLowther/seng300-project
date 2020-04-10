@@ -133,6 +133,7 @@ public class ResearcherReviewersScene {
 
     }
 
+    // returns an array of preferred ResearcherReviewer objects for the selected paper
     private static ArrayList<ResearcherReviewer> getPreferredReviewers (ResearcherPaper paper) {
 
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
@@ -155,6 +156,7 @@ public class ResearcherReviewersScene {
         return reviewers;
     }
 
+    // returns an array of current ResearcherReviewer objects for the selected paper
     private static ArrayList<ResearcherReviewer> getCurrentReviewers (ResearcherPaper paper) {
 
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();
@@ -177,6 +179,7 @@ public class ResearcherReviewersScene {
         return reviewers;
     }
 
+    // returns an array of interested ResearcherReviewer objects for the selected paper
     private static ArrayList<ResearcherReviewer> getInterestedReviewers (ResearcherPaper paper) {
 
         ArrayList<ResearcherReviewer> reviewers = new ArrayList<ResearcherReviewer>();

@@ -128,6 +128,7 @@ public class EditorMenuScene {
 
     }
 
+    // returns an array of EditorPaper objects for the currently signed in editor
     private static ArrayList<EditorPaper> getEditorPapers () {
 
         // get jid
