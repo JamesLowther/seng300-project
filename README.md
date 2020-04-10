@@ -41,3 +41,7 @@ The `shared` package contains code that is used by multiple different classes an
 The actual storing of paper PDF files is handled by saving them in a folder called `submissions` in the project's root directory. Within the `submissions` folder are a bunch of sub-folders which are named corresponding to a researchers unique UID. Within each sub-folder is the PDF file, named after the paper's unique PID. Overall the structure looks like `./submissions/<researcher UID>/<paper PID>.pdf`
 
 Because the project specification didn't say that we needed to implement functionality to actually create new journals, journals and their volumes need to be added manually. That is why test json files are provided in the `test-data` folder. Theoretically, there would be an `admin` account which would manage journals and their editors, however we were told not to implement this functionality.
+
+## Known Issues
+
+* The UI for the project does not display properly on Windows when windows display scaling is greater than 100% (I suspect this is an issue with JavaFX 8)
