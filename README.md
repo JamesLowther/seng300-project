@@ -34,7 +34,7 @@ The code is partitioned into different packages to try and keep things organized
 
 The `jsonparsing` contains code to parse the different json files using JSON.simple. It allows us to query for certain objects in the storage and also update their values. The class used to handle password hashing is included here as well.
 
-The `login` package contains the code to handle the login and registration of users to the system. These methods are generally called from the `LoginScene` and `RegistrationScene` classes from the GUI.
+The `login` package contains the code to handle the login and registration of users to the system. These methods are generally called from the `LoginScene` and `RegistrationScene` classes from the GUI. When a user logs in their information is stored the `Globals` class which is accessed by a number of different methods throughtout the code.
 
 The `shared` package contains code that is used by multiple different classes and therefore is difficult to assign to a single grouping. This code generally includes higher-level methods which call lower-level methods in the `jsonparing` package to handle functions like the addition of a new paper or change of a deadline.
 
