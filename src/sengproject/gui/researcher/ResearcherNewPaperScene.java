@@ -179,6 +179,7 @@ public class ResearcherNewPaperScene {
         return rev_strings;
     }
 
+    // returns an array of ResearcherJournal objects for every journal
     private static ArrayList<ResearcherJournal> getJournals() {
 
         ArrayList<JSONObject> journals = JSONJournalParser.getJournals();

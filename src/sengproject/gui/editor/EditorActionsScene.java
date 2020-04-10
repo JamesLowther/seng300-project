@@ -116,6 +116,7 @@ public class EditorActionsScene {
 
     }
 
+    // returns an array of pending EditorAction objects for the currently signed in editor
     private static ArrayList<EditorAction> getEditorActions (EditorPaper r_paper) {
 
         ArrayList<EditorAction> actions = new ArrayList<EditorAction>();
@@ -129,6 +130,7 @@ public class EditorActionsScene {
         return actions;
     }
 
+    // returns an array of completed EditorAction objects for the currently signed in editor
     private static ArrayList<EditorAction> getCompletedActions (EditorPaper r_paper) {
 
         ArrayList<EditorAction> actions = new ArrayList<EditorAction>();

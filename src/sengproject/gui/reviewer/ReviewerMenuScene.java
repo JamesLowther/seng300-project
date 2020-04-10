@@ -116,6 +116,7 @@ public class ReviewerMenuScene {
 
     }
 
+    // returns an array of ReviewerPaper objects for the currently signed in reviewer
     private static ArrayList<ReviewerPaper> getReviewerPapers () {
 
         ArrayList<ReviewerPaper> papers = new ArrayList<ReviewerPaper>();

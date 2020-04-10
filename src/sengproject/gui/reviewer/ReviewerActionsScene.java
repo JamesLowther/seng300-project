@@ -141,6 +141,7 @@ public class ReviewerActionsScene {
 
     }
 
+    // returns an array of pending ReviewerAction objects for the currently signed in reviewer
     private static ArrayList<ReviewerAction> getReviewerActions(ReviewerPaper r_paper) {
 
         ArrayList<ReviewerAction> actions = new ArrayList<ReviewerAction>();
@@ -155,6 +156,7 @@ public class ReviewerActionsScene {
 
     }
 
+    // returns an array of completed ReviewerAction objects for the currently signed in reviewer
     private static ArrayList<ReviewerAction> getCompletedActions (ReviewerPaper r_paper) {
 
         ArrayList<ReviewerAction> actions = new ArrayList<ReviewerAction>();

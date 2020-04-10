@@ -23,10 +23,13 @@ public class LoginHandler {
 			System.out.println(user_type);
 
 			if (user_type.equals("Researcher")) {
+				// user is a researcher
 				GuiController.changeScene(ResearcherMenuScene.getScene());
 			} else if (user_type.equals("Reviewer")) {
+				// user is a reviewer
 				GuiController.changeScene(ReviewerMenuScene.getScene());
 			} else if (user_type.equals("Editor")) {
+				// user is a editor
 				GuiController.changeScene(EditorMenuScene.getScene());
 			} else {
 				return false; // user type not recognized

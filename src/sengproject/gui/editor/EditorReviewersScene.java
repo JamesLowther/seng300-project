@@ -146,6 +146,7 @@ public class EditorReviewersScene {
 
     }
 
+    // returns an array of preferred EditorReviewer objects for the selected paper
     private static ArrayList<EditorReviewer> getPreferredReviewers (EditorPaper paper) {
 
         ArrayList<EditorReviewer> reviewers = new ArrayList<EditorReviewer>();
@@ -162,6 +163,7 @@ public class EditorReviewersScene {
         return reviewers;
     }
 
+    // returns an array of current EditorReviewer objects for the selected paper
     private static ArrayList<EditorReviewer> getCurrentReviewers (EditorPaper paper) {
 
         ArrayList<EditorReviewer> reviewers = new ArrayList<EditorReviewer>();
@@ -178,6 +180,7 @@ public class EditorReviewersScene {
         return reviewers;
     }
 
+    // returns an array of interested EditorReviewer objects for the selected paper
     private static ArrayList<EditorReviewer> getInterestedReviewers (EditorPaper paper) {
 
         ArrayList<EditorReviewer> reviewers = new ArrayList<EditorReviewer>();

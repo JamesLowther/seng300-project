@@ -88,6 +88,7 @@ public class EditorBrowseReviewersScene {
 
     }
 
+    // returns an array of all reviewers as EditorReviewer objects
     private static ArrayList<EditorReviewer> getEditorReviewers () {
 
         ArrayList<EditorReviewer> reviewers = new ArrayList<EditorReviewer>();

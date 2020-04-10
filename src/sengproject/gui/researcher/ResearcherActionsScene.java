@@ -114,6 +114,7 @@ public class ResearcherActionsScene {
 
     }
 
+    // returns an array of ResearcherAction objects for the currently selected paper
     private static ArrayList<ResearcherAction> getResearcherActions (ResearcherPaper r_paper) {
 
         ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();
@@ -127,6 +128,7 @@ public class ResearcherActionsScene {
         return actions;
     }
 
+    // returns an array of completed ResearcherAction objects for the currently selected paper
     private static ArrayList<ResearcherAction> getCompletedActions (ResearcherPaper r_paper) {
 
         ArrayList<ResearcherAction> actions = new ArrayList<ResearcherAction>();

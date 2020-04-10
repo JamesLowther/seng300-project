@@ -84,6 +84,7 @@ public class ReviewerBrowsePapersScene {
 
     }
 
+    // returns an array of ReviewerPaper objects for every paper
     private static ArrayList<ReviewerPaper> getReviewerPapers () {
 
         ArrayList<ReviewerPaper> papers = new ArrayList<ReviewerPaper>();
@@ -101,6 +102,7 @@ public class ReviewerBrowsePapersScene {
 
     }
 
+    // updates the whether a reviewer is interested in a paper
     private static void updateStatus(ArrayList<ReviewerPaper> arr) {
 
         for (ReviewerPaper r : arr) {
